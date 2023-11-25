@@ -1,0 +1,39 @@
+@import url('https://fonts.cdnfonts.com/css/inter');           
+@import '../assets/style/value.css';
+@import '../assets/style/font-style.css';
+@import './assets/style/header.css';
+
+body {
+    background-color: var(--background-body);
+}
+
+*{
+    box-sizing: border-box;
+    font-family: Inter;
+}
+
+.container{
+    display: flex;
+    width: 1440px;
+    padding: 20px 40px 40px 40px;
+    flex-direction: column;
+    gap: 100px;
+    margin: auto;
+}
+
+.favorite-coffee{
+    background-color: yellow;
+    height: 100px;
+}
+.about{
+    background-color: red;
+    height: 100px;
+}
+.mobile-app{
+    background-color: blue;
+    height: 100px;
+}
+.contacts{
+    background-color: gray;
+    height: 100px;
+}
