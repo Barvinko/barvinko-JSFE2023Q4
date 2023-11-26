@@ -16,6 +16,7 @@
 }
 
 #offer_buttons > .offer_button{
+    width: 200px;
     display: flex;
     padding: 12px 20px;
     border-radius: 100px;

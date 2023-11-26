@@ -1,4 +1,70 @@
-.contacts{
-    background-color: gray;
-    height: 100px;
+#contacts{
+    display: flex;
+    gap: 100px;
+    padding: 100px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    background: var(--background-container);   
+    color: var(--text-light);
+}
+
+#contacts > div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex: 1 0 0;
+}
+.contacts_contacts-info{
+
+}
+.contacts_contacts-info_contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;    
+    gap: 16px;
+}
+
+.contacts_contacts-info_contacts > div{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.contacts_offer_conteiner{
+    display: flex;
+    gap: 12px;
+}
+
+.contacts_offer_button{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 1px solid var(--border-light);
+}
+
+
+.contacts_contacts_link-item{
+    padding-bottom: 4px;
+}
+
+.contacts_contacts_link-item:hover{
+    border-bottom: 2px solid var(--text-light);
+    padding-bottom: 2px;
+}
+
+.contacts_offer_button:hover{
+    background-color: var(--background-body);
+}
+
+.contacts_offer_button:hover svg path{
+    stroke: var(--text-dark);
 }
