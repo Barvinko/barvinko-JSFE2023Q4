@@ -4,6 +4,9 @@
 /* Import part of loyout */
 @import './assets/style/header.css';
 @import './assets/style/favorite-coffee.css';
+@import './assets/style/about.css';
+@import './assets/style/mobile-app.css';
+@import './assets/style/contacts.css';
 
 *{
     box-sizing: border-box;
@@ -21,18 +24,4 @@
 body {
     background-color: var(--background-body);
     color: var(--text-dark);
-}
-
-
-.about{
-    background-color: red;
-    height: 100px;
-}
-.mobile-app{
-    background-color: blue;
-    height: 100px;
-}
-.contacts{
-    background-color: gray;
-    height: 100px;
 }
