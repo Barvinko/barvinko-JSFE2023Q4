@@ -18,9 +18,7 @@
     gap: 40px;
     flex: 1 0 0;
 }
-.contacts_contacts-info{
 
-}
 .contacts_contacts-info_contacts{
     display: flex;
     flex-direction: column;
@@ -52,16 +50,6 @@
     transition: 0.5s;
 }
 
-
-.contacts_contacts_link-item{
-    padding-bottom: 4px;
-}
-
-.contacts_contacts_link-item:hover{
-    border-bottom: 2px solid var(--text-light);
-    padding-bottom: 2px;
-}
-
 .contacts_offer_button:hover{
     background-color: var(--background-body);
     transition: 0.5s;
@@ -69,4 +57,15 @@
 
 .contacts_offer_button:hover svg path{
     stroke: var(--text-dark);
+}
+
+.contacts_contacts_link-item{
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--background-container);
+    transition: 0.5s;
+}
+
+.contacts_contacts_link-item:hover{
+    border-bottom-color: var(--text-light);
+    transition: 0.5s;
 }

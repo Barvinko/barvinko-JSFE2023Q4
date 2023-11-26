@@ -7,12 +7,13 @@
 
 header .header_menu{
     width: 100%;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-header .header_menu > *{
 
+header .header_menu > *{
     display: block;
 }
 
@@ -21,26 +22,38 @@ header .header_menu ul{
     gap: 40px;
     flex: 0 0 auto;
     padding: 0;
+    margin: 0;
 }
-
 
 header .header_menu ul li{
     list-style: none;
 }
 
-.header_menu > span{
+
+/* .header_menu > span{
     padding-bottom: 4px;
     box-sizing: border-box;
+} */
+
+.header .header_menu .link-button{
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--background-body);
+    transition: 0.5s;
 }
 
-.header_menu > span > img{
+.header .header_menu .link-button:hover{
+    border-bottom-color: var(--text-dark);
+    transition: 0.5s;
+}
+
+.header_menu > span  img{
     margin-left: 8px;
 }
 
-.header_menu > span:hover{
+/* .header_menu > span:hover{
     border-bottom: 2px solid var(--text-dark);
     padding-bottom: 2px;
-}
+} */
 
 #enjoy_hero{
     background-image: url(../img/img-hero.jpg);
@@ -66,14 +79,29 @@ header .header_menu ul li{
     padding: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 8px;
     border-radius: 100px;
     background: var(--background-body);
-    color: var(--text-dark);
+    color: var(--text-dark);;
 }
+
+#enjoy_hero_ofer_button-menu > span{
+    transition: 0.5s;
+    margin-left: 28px;
+}
+
+#enjoy_hero_ofer_button-menu:hover > span{
+    transition: 0.5s;
+    margin-left: 0;
+}
+
 #enjoy_hero_ofer_button-menu > img{
-    display: none;
+    height: 20px;
+    opacity: 0;
+    transition: 0.5s;
 }
 #enjoy_hero_ofer_button-menu:hover > img{
-    display: block;
+    opacity: 1;
+    transition: 0.5s;
 }
