@@ -22,12 +22,14 @@
     border-radius: 100px;
     border: 1px solid var(--border-dark);
     gap: 8px;
+    transition: 0.5s;
 }
 
 #offer_buttons > .offer_button:hover{
     border-radius: 100px;
     background: var(--background-container);
     color: var(--text-light);
+    transition: 0.5s;
 }
 .offer_button:hover > svg path{
     fill: var(--text-light);

@@ -49,6 +49,7 @@
     align-items: center;
     border-radius: 100px;
     border: 1px solid var(--border-light);
+    transition: 0.5s;
 }
 
 
@@ -63,6 +64,7 @@
 
 .contacts_offer_button:hover{
     background-color: var(--background-body);
+    transition: 0.5s;
 }
 
 .contacts_offer_button:hover svg path{

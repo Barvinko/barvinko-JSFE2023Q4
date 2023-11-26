@@ -19,10 +19,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.5s;
 }
 
 .slider_arrow:hover{
     background: var(--background-container);
+    transition: 0.5s;
 }
 
 .slider_arrow:hover > svg path{
