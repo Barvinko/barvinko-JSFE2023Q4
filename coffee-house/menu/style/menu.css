@@ -8,6 +8,7 @@
 
 #menu > h2{
     width: 800px;
+    text-align: center;
 }
 
 #menu_tab{
@@ -51,9 +52,21 @@
     transition: 0.5s;
 }
 
+.menu_tab_tab-item.active .menu_tab_around-img{
+    background: var(--background-body, #E1D4C9);
+    transition: 0.5s;
+}
+
 #menu_tab img{
     width: 16px;
     height: 24px;
+}
+
+#menu_grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
 }
 
 .menu_grid_priview{
@@ -72,6 +85,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: calc(100% - 310px);
+    width: 100%;
 }
 
 .menu_grid_priview-about-img{
