@@ -1,0 +1,28 @@
+@import url('https://fonts.cdnfonts.com/css/inter');           
+@import './value.css';
+@import './font-style.css';
+
+*{
+    box-sizing: border-box;
+    font-family: Inter;
+    scroll-behavior: smooth;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.container{
+    display: flex;
+    width: 1440px;
+    padding: 20px 40px 40px 40px;
+    flex-direction: column;
+    gap: 100px;
+    margin: auto;
+}
+body {
+    background-color: var(--background-body);
+    color: var(--text-dark);
+    margin: 0;
+}

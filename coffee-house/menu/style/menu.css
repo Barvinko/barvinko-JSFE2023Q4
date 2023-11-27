@@ -1,0 +1,30 @@
+#menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+#menu > h2{
+    width: 800px;
+}
+
+#menu_tab{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.menu_tab_around-img{
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background: var(--border-light);
+}
+
+#menu_tab img{
+    width: 16px;
+    height: 24px;
+}
