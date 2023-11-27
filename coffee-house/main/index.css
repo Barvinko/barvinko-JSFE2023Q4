@@ -1,0 +1,8 @@
+@import '../assets/style/basic.css';
+/* Import part of loyout */
+@import '../assets/style/layouts/header.css';
+@import './assets/style/enjoy.css';
+@import './assets/style/favorite-coffee.css';
+@import './assets/style/about.css';
+@import './assets/style/mobile-app.css';
+@import '../assets/style/layouts/contacts.css';

@@ -1,0 +1,43 @@
+#about{
+    display: flex;
+    flex-direction: column; 
+    gap: 40px; 
+}
+
+#about > h2{
+    width: 1363px;
+}
+
+.images{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 1060px;
+    gap: 40px;
+}
+
+.about-1, .about-2{
+    width: 660px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+.about-1{
+    height: 590px;
+}
+
+.about-2{
+    height: 430px;
+}
+
+.about_img{
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.about_img:hover{
+    transform: scale(0.9);
+}

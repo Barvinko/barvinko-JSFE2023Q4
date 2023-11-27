@@ -1,0 +1,54 @@
+/* Heding */
+.heading-1{
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 105%;
+    margin: 0;
+}
+
+.heading-1.accent{
+    font-style: italic;
+    color: var(--text-accent);
+}
+
+.heading-2{
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 125%;
+    margin: 0;
+}
+
+.heading-2.acent{
+    font-style: italic;
+    color: var(--text-accent);
+}
+
+.heading-3{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 125%;
+    margin: 0;
+}
+/* Body */
+.medium{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}
+.caption{
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 140%;
+}
+/* Action */
+.link-button{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.burger-link{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 125%;
+}

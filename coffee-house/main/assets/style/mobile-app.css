@@ -1,0 +1,36 @@
+#mobile-app{
+    display: flex;
+    gap: 100px;
+    align-items: center;
+}
+
+#offer{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#offer_buttons{
+    display: flex;
+    gap: 20px;
+}
+
+#offer_buttons > .offer_button{
+    width: 200px;
+    display: flex;
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border-dark);
+    gap: 8px;
+    transition: 0.5s;
+}
+
+#offer_buttons > .offer_button:hover{
+    border-radius: 100px;
+    background: var(--background-container);
+    color: var(--text-light);
+    transition: 0.5s;
+}
+.offer_button:hover > svg path{
+    fill: var(--text-light);
+}

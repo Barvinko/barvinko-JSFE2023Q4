@@ -1,0 +1,70 @@
+.favorite-coffee{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#slider_slider{
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+}
+.slider_arrow{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    border: 1px solid var(--border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.slider_arrow:hover{
+    background: var(--background-container);
+    transition: 0.5s;
+}
+
+.slider_arrow:hover > svg path{
+    stroke: var(--text-light);
+}
+
+.slider_slide{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.slider_slide > img{
+    width: 480px;
+    height: 480px;
+}
+
+.slider_description{
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#controls{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+#controls > .control{
+    width: 40px;
+    height: 4px;
+    border-radius: 100px;
+    background: var(--border-light);
+}
+
+#controls .control_active{
+    background: var(--border-dark);
+}
