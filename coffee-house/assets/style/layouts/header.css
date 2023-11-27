@@ -33,7 +33,7 @@ header .header_menu ul li{
     list-style: none;
 }
 
-.header_menu > span{
+.header_menu > span, .header_menu > span a{
     display: flex;
     justify-content: center;
     align-items: flex-start;
