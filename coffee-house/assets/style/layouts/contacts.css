@@ -27,7 +27,7 @@
     gap: 16px;
 }
 
-.contacts_contacts-info_contacts > div,a{
+.contacts_contacts-info_contacts > div,.contacts_contacts-info_contacts > a{
     display: block;
     display: flex;
     justify-content: center;
