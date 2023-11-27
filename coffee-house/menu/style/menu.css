@@ -6,6 +6,10 @@
     gap: 40px;
 }
 
+#menu > h1{
+    display: none;
+}
+
 #menu > h2{
     width: 800px;
     text-align: center;
@@ -60,11 +64,6 @@
     transition: 0.5s;
 }
 
-#menu_tab img{
-    /* width: 16px;
-    height: 24px; */
-}
-
 #menu_grid{
     display: flex;
     flex-wrap: wrap;
@@ -117,6 +116,6 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.reduce-img:hover{
-    transform: scale(0.9);
+.menu_grid_priview:hover .reduce-img{
+    transform: scale(0.912);
 }
