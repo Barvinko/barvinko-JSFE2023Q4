@@ -3,3 +3,10 @@
 @import '../assets/style/layouts/header.css';
 @import '../assets/style/layouts/contacts.css';
 @import './style/menu.css';
+
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}

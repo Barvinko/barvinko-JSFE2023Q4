@@ -17,6 +17,10 @@ header .header_menu > *{
     display: block;
 }
 
+header .header_menu > a img{
+    height: 60px;
+}
+
 header .header_menu ul{
     display: flex;
     gap: 40px;
