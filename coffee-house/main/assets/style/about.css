@@ -5,10 +5,11 @@
 }
 
 #about > h2{
-    width: 1363px;
+    width: calc(100% + 3px);
 }
 
 .images{
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -40,4 +41,22 @@
 
 .about_img:hover{
     transform: scale(0.9);
+}
+
+@media (max-width: 1439px) {
+    .about-1{
+        width: 100%;
+    }
+    .about-2{
+        display: none;
+    }
+
+    .images{
+        height: min-content;
+        margin: auto;
+    }
+
+    .about_img:hover{
+        transform:  unset;
+    }
 }

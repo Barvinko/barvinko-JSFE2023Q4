@@ -70,3 +70,14 @@
     border-bottom-color: var(--text-light);
     transition: 0.5s;
 }
+
+@media (max-width: 1439px) {
+    #contacts{
+        flex-direction: column;
+        padding: 100px 60px;
+    }
+
+    #contacts > div {
+        width: 100%;
+    }
+}

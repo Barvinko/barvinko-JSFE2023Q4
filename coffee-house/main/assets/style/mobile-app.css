@@ -34,3 +34,9 @@
 .offer_button:hover > svg path{
     fill: var(--text-light);
 }
+
+@media (max-width: 1439px) {
+    #mobile-app{
+        flex-direction: column;
+    }
+}
