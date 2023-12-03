@@ -69,6 +69,23 @@
     background: var(--border-dark);
 }
 
+@media (hover: none) {
+    .slider_arrow:hover{
+        background: inherit;
+        transition: none;
+    }
+    
+    .slider_arrow:hover > svg path{
+        stroke: var(--text-dark);
+    }
+}
+
+@media (max-width: 992px){
+    #slider_slider{
+        padding: 0;
+    }
+}
+
 @media (max-width: 767px) {
     .slider_arrow{
         display: none;

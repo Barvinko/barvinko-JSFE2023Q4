@@ -59,6 +59,13 @@ header .header_menu ul li{
     padding-bottom: 2px;
 } */
 
+@media (hover: none) {
+    .header .header_menu .link-button:hover{
+        border-bottom-color: var(--background-body);
+        transition: none;
+    }
+}
+
 @media (max-width: 768px) {
     header .header_menu{
         flex-direction: column;
