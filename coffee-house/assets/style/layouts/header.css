@@ -15,7 +15,7 @@ header .header_menu > *{
 }
 
 .header_menu_head_open{
-    /* display: none; */
+    display: none;
 }
 
 header .header_menu ul{
