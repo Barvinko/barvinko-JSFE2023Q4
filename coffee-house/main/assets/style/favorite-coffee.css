@@ -68,3 +68,23 @@
 #controls .control_active{
     background: var(--border-dark);
 }
+
+@media (max-width: 767px) {
+    .slider_arrow{
+        display: none;
+    }
+
+    .slider_slide{
+        max-width: 480px;
+        min-width: 348px;
+    }
+
+    #slider_slider{
+        justify-content: center;
+    }
+
+    #slider .slider_slide > *{
+        width: 100%;
+        height: 100%;
+    }
+}

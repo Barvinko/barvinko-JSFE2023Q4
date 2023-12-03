@@ -81,3 +81,10 @@
         width: 100%;
     }
 }
+
+@media (max-width: 767px) {
+    #contacts{
+        padding: 60px 16px;
+        gap: 40px;
+    }
+}

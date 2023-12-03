@@ -40,3 +40,19 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 767px) {
+    #offer_buttons{
+        flex-direction: column;
+    }
+
+    .mobile-app_img{
+        width: 100%;
+        max-width: 480px;
+        min-width: 348px;
+    }
+
+    #mobile-app{
+        gap: 40px;
+    }
+}
