@@ -15,7 +15,7 @@ header .header_menu > *{
 }
 
 .header_menu_head_open{
-    display: none;
+    /* display: none; */
 }
 
 header .header_menu ul{
@@ -86,13 +86,15 @@ header .header_menu ul li{
     }
 
     .header_menu_head_open{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: block;
         height: 44px;
         width: 44px;
-        border-radius: 100px;
-        border: 1px solid var(--border-dark, #665F55);
+        background-image: url(../../img/header/State=default.png);
+        /* src: url(../../img/header/State=default.png); */
+    }
+
+    .header_menu_head_open:active{
+        background-image: url(../../img/header/State=active.png);
     }
 
     .header .header_menu .link-button{

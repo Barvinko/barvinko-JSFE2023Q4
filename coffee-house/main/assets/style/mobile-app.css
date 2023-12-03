@@ -45,19 +45,6 @@
     
 }
 
-@media (hover: none) {
-    #offer_buttons > .offer_button:hover{
-        background: inherit;
-        color: inherit;
-        transition: none;
-    }
-
-    .offer_button:hover > svg path{
-        fill: var(--text-dark);
-        transition: none;
-    }
-}
-
 @media (max-width: 767px) {
     #offer_buttons{
         flex-direction: column;
@@ -71,5 +58,18 @@
 
     #mobile-app{
         gap: 40px;
+    }
+}
+
+@media (hover: none) {
+    #offer_buttons > .offer_button:hover{
+        background: inherit;
+        color: inherit;
+        transition: none;
+    }
+
+    .offer_button:hover > svg path{
+        fill: var(--text-dark);
+        transition: none;
     }
 }

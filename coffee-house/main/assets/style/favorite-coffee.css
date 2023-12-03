@@ -30,6 +30,7 @@
 
 .slider_arrow:hover > svg path{
     stroke: var(--text-light);
+    transition: 0.5s;
 }
 
 .slider_slide{

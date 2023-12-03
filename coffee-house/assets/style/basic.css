@@ -37,6 +37,20 @@ body {
     gap: 20px;
 }
 
+.button-icon-dark{
+    transition: 0.5s;
+}
+
+.button-icon-dark:hover{
+    background: var(--background-container);
+    transition: 0.5s;
+}
+
+.button-icon-dark:hover > svg path{
+    stroke: var(--text-light);
+    transition: 0.5s;
+}
+
 @media (max-width: 1439px) {
     .container{
         width: 100vw;
