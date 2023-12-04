@@ -12,14 +12,26 @@
         <main>
             <header class="header">
                 <div class="header_menu">
-                    <a href="../"><img src="../assets/img/logo.svg" alt="Coffee House"></a>
+                    <div class="header_menu_head">
+                        <a href="../" class="header_menu_head_logo"><img src="../assets/img/logo.svg" alt="Coffee House"></a>
+                        <div class="header_menu_head_open">
+                            <svg class="header_menu_head_open_default" width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 9H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> 
+                            <svg class="header_menu_head_open_active" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.34375 1.34314L12.6575 12.6568" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1.34375 12.6568L12.6575 1.34314" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>                       
+                        </div>
+                    </div>
                     <ul class="nav">
                         <li class="link-button"><a href="../#favorite-coffee">Favorite coffee</a></li>
                         <li class="link-button"><a href="../#about">About</a></li>
                         <li class="link-button"><a href="../#mobile-app">Mobile app</a></li>
                         <li class="link-button"><a href="#contacts">Contact us</a></li>
                     </ul>
-                    <span class="link-button active">Menu<img src="../assets/img/coffee-cup.svg" alt="coffee-cup"></span>
+                    <span class="link-button active" id="header_menu_span-menu">Menu<img src="../assets/img/coffee-cup.svg" alt="coffee-cup"></span>
                 </div>
             </header>
             <div id="menu">
@@ -143,6 +155,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="menu_open-all-priviews button-icon-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             </div>
         </main>
         <footer id="contacts">
@@ -171,7 +189,7 @@
             <div id="contacts_contacts-info">
                 <h3 class="heading-3">Contact us</h3>
                 <div class="contacts_contacts-info_contacts link-button">
-                    <a href="https://www.google.com/maps?q=Los%20Angeles" class="contacts_contacts_link-item"><img src="../assets/img/contacts/pin-alt.svg" alt="">8558 Green Rd.,  <span>LA</span></a>
+                    <a href="https://www.google.com/maps?q=Los%20Angeles" target="_blank" class="contacts_contacts_link-item"><img src="../assets/img/contacts/pin-alt.svg" alt="">8558 Green Rd.,  <span>LA</span></a>
                     <a href="tel:+16035550123" class="contacts_contacts_link-item"><img src="../assets/img/contacts/phone.svg" alt="">+1 (603) 555-0123</a>
                     <div><img src="../assets/img/contacts/clock.svg" alt="">Mon-Sat: 9:00 AM – 23:00 PM</div>
                 </div>

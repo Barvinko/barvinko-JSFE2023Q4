@@ -70,3 +70,45 @@
     border-bottom-color: var(--text-light);
     transition: 0.5s;
 }
+
+@media (max-width: 1439px) {
+    #contacts > div {
+        width: 100%;
+    }
+}
+
+@media (hover: none) {
+    .contacts_offer_button:hover{
+        background-color: inherit;
+        transition: none;
+    }
+    
+    .contacts_offer_button:hover svg path{
+        stroke: var(--text-light);
+    }
+
+    .contacts_contacts_link-item:hover{
+        border-bottom-color: var(--background-container);
+        transition: none;
+    }
+}
+
+@media (max-width: 992px) {
+    #contacts{
+        flex-direction: column;
+        padding: 100px 60px;
+    }
+
+    #contacts_contacts-info{
+        padding-bottom: 4px;
+    }
+}
+
+
+
+@media (max-width: 767px) {
+    #contacts{
+        padding: 60px 16px;
+        gap: 40px;
+    }
+}
