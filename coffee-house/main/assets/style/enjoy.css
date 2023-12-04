@@ -48,3 +48,29 @@
     opacity: 1;
     transition: 0.5s;
 }
+
+@media (max-width: 992px) {
+    #enjoy_hero{
+        padding: 100px 60px;
+    }
+
+    #enjoy_hero_ofer_button-menu > span{
+        margin-left: 0;
+    }
+
+    #enjoy_hero_ofer_button-menu > img{
+        opacity: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    #enjoy_hero{
+        padding: 60px 16px;
+        height: min-content;
+    }
+
+    #enjoy_hero_ofer{
+        width: 100%;
+        height: min-content;
+    }
+}

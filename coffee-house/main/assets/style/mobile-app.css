@@ -34,3 +34,42 @@
 .offer_button:hover > svg path{
     fill: var(--text-light);
 }
+
+@media (max-width: 1439px) {
+    #mobile-app{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 992px) {
+    
+}
+
+@media (max-width: 767px) {
+    #offer_buttons{
+        flex-direction: column;
+    }
+
+    .mobile-app_img{
+        width: 100%;
+        max-width: 480px;
+        min-width: 348px;
+    }
+
+    #mobile-app{
+        gap: 40px;
+    }
+}
+
+@media (hover: none) {
+    #offer_buttons > .offer_button:hover{
+        background: inherit;
+        color: inherit;
+        transition: none;
+    }
+
+    .offer_button:hover > svg path{
+        fill: var(--text-dark);
+        transition: none;
+    }
+}

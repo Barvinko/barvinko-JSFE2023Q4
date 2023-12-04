@@ -1,10 +1,3 @@
-.header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
 header .header_menu{
     width: 100%;
     height: 60px;
@@ -17,8 +10,12 @@ header .header_menu > *{
     display: block;
 }
 
-header .header_menu > a img{
+.header_menu_head_logo img{
     height: 60px;
+}
+
+.header_menu_head_open, .header_menu_head_open > *{
+    display: none;
 }
 
 header .header_menu ul{
@@ -33,7 +30,7 @@ header .header_menu ul li{
     list-style: none;
 }
 
-.header_menu > span, .header_menu > span a{
+#header_menu_span-menu, #header_menu_span-menu > a{
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -57,7 +54,83 @@ header .header_menu ul li{
     border-bottom-color: var(--text-dark);
 }
 
-/* .header_menu > span:hover{
-    border-bottom: 2px solid var(--text-dark);
-    padding-bottom: 2px;
-} */
+@media (hover: none) {
+    .header .header_menu .link-button:hover{
+        border-bottom-color: var(--background-body);
+        transition: none;
+    }
+}
+
+@media (max-width: 768px) {
+    header .header_menu{
+        flex-direction: column;
+        justify-content: start;
+        text-align: center;
+    }
+
+    .header_menu .header_menu_head{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+    }
+
+    .header_menu .inactive{
+        display: none;
+    }
+
+    .header_menu_head_open{
+        display: flex;
+        height: 44px;
+        width: 44px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        border: 1px solid var(--border-dark, #665F55);
+    }
+
+    .header_menu_head_open > .header_menu_head_open_default, .header_menu_head_open:active > .header_menu_head_open_active{
+        display: block;
+    }
+
+    .header_menu_head_open:active > .header_menu_head_open_default{
+        display: none;
+    }
+
+    .header .header_menu .link-button{
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    header .header_menu ul{
+        flex-direction: column;
+        padding-top: 60px;
+        gap: 60px;
+
+        display: none;
+    }
+
+    header .header_menu ul li{
+        list-style: none;
+    }
+
+    #header_menu_span-menu{
+        padding-top: 100px;
+
+        display: none;
+    }
+
+    .header_menu .link-button{
+        font-size: 32px;
+        line-height: 125%;
+    }
+
+    .header_menu > #header_menu_span-menu img{
+        height: 40px;
+        width: 40px;
+        margin-left: 16px;
+        margin-top: -3px;
+    }
+
+}
