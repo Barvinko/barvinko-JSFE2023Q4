@@ -20,14 +20,13 @@ a{
     flex-direction: column;
     gap: 100px;
     margin: auto;
+    overflow-x: hidden;
 }
 
 body {
     background-color: var(--background-body);
     color: var(--text-dark);
     margin: 0;
-    /* display: flex;
-    justify-content: center; */
 }
 
 .header{
@@ -51,15 +50,17 @@ body {
     transition: 0.5s;
 }
 
-@media (max-width: 1439px) {
+@media (max-width: 1456px) {
     .container{
         width: 100vw;
+
         min-width: 768px;
         max-width: 1440px;
     }
 
     body{
         overflow-x: hidden;
+        height: 100vh;
     }
  }
 
@@ -70,4 +71,20 @@ body {
         max-width: 767px;
         padding: 20px 16px 40px 16px;
     }
- }
+}
+
+@media (hover: none) {
+    .button-icon-dark{
+        transition: none;
+    }
+    
+    .button-icon-dark:hover{
+        background: inherit;
+        transition: none;
+    }
+    
+    .button-icon-dark:hover > svg path{
+        stroke: var(--text-dark);
+        transition: none;
+    }
+}

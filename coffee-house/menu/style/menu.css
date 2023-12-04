@@ -60,7 +60,7 @@
     transition: 0.5s;
 }
 
-.menu_tab_tab-item.active .menu_tab_around-img{
+#menu .menu_tab_tab-item.active .menu_tab_around-img{
     background: var(--background-body, #E1D4C9);
     transition: 0.5s;
 }
@@ -123,16 +123,6 @@
 
 .menu_open-all-priviews{
     display: none;
-}
-
-.menu_open-all-priviews:hover{
-    background: var(--background-container);
-    transition: 0.5s;
-}
-
-.menu_open-all-priviews:hover > svg path{
-    stroke: var(--text-light);
-    transition: 0.5s;
 }
 
 @media (min-width: 1089px) and (max-width: 1439px)  {

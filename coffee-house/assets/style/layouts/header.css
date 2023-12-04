@@ -14,7 +14,7 @@ header .header_menu > *{
     height: 60px;
 }
 
-.header_menu_head_open{
+.header_menu_head_open, .header_menu_head_open > *{
     display: none;
 }
 
@@ -54,11 +54,6 @@ header .header_menu ul li{
     border-bottom-color: var(--text-dark);
 }
 
-/* .header_menu > span:hover{
-    border-bottom: 2px solid var(--text-dark);
-    padding-bottom: 2px;
-} */
-
 @media (hover: none) {
     .header .header_menu .link-button:hover{
         border-bottom-color: var(--background-body);
@@ -86,15 +81,21 @@ header .header_menu ul li{
     }
 
     .header_menu_head_open{
-        display: block;
+        display: flex;
         height: 44px;
         width: 44px;
-        background-image: url(../../img/header/State=default.png);
-        /* src: url(../../img/header/State=default.png); */
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        border: 1px solid var(--border-dark, #665F55);
     }
 
-    .header_menu_head_open:active{
-        background-image: url(../../img/header/State=active.png);
+    .header_menu_head_open > .header_menu_head_open_default, .header_menu_head_open:active > .header_menu_head_open_active{
+        display: block;
+    }
+
+    .header_menu_head_open:active > .header_menu_head_open_default{
+        display: none;
     }
 
     .header .header_menu .link-button{
