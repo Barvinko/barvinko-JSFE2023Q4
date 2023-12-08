@@ -82,12 +82,60 @@ header .header_menu ul li{
 
     .header_menu_head_open{
         display: flex;
+        position: relative;
         height: 44px;
         width: 44px;
         justify-content: center;
         align-items: center;
         border-radius: 100px;
         border: 1px solid var(--border-dark, #665F55);
+        background-color: inherit;
+    }
+
+    .header_menu_head_open:not(.active).header_menu_head_open::before{
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 2px;
+        left: 13px;
+        top: 16px;
+        background-color: var(--text-dark);
+        transition: 0.5s;
+    }
+
+    .header_menu_head_open:not(.active).header_menu_head_open::after {
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 2px;
+        left: 13px;
+        top: 24px;
+        background-color: var(--text-dark);
+        transition: 0.5s;
+    }
+
+    .active.header_menu_head_open::before {
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 2px;
+        left: 13px;
+        top: 20px;
+        transform: rotate(45deg);
+        background-color: var(--text-dark);
+        transition: 0.5s;
+    }
+
+    .active.header_menu_head_open::after {
+        position: absolute;
+        content: '';
+        width: 16px;
+        height: 2px;
+        left: 13px;
+        top: 20px;
+        transform: rotate(-45deg);
+        background-color: var(--text-dark);
+        transition: 0.5s;
     }
 
     .header_menu_head_open > .header_menu_head_open_default, .header_menu_head_open:active > .header_menu_head_open_active{
