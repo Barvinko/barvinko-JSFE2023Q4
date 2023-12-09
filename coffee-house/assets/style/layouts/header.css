@@ -159,6 +159,7 @@ header .header_menu .header_menu_burger{
 
     header .header_menu .header_menu_burger{
         position: absolute;
+        z-index: 1;
         top: 100px;
         left: 100vw;
         width: 100vw;
@@ -190,7 +191,7 @@ header .header_menu .header_menu_burger{
     }
 
     #header_menu_span-menu{
-        padding-top: 100px;
+        padding-top: 98px;
     }
 
     .header_menu .link-button{
