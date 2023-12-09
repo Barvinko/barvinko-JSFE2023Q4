@@ -104,7 +104,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 40px;
-    position: relative;
+    /* position: relative; */
 }
 
 #menu .menu_grid_priview-about-img{
