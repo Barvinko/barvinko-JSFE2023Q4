@@ -2,9 +2,21 @@ const carouselSwap = document.querySelector('#slider_slider_carousel > .slider_s
 const controls = document.querySelectorAll('#controls > .control');
 const arrows = document.querySelectorAll('.slider_arrow');
 
-console.log(carouselSwap.style);
 arrows[0].addEventListener('click', () => {swap('left')});
 arrows[1].addEventListener('click', () => {swap('right')});
+arrows.forEach((arow)=>{
+    arow.addEventListener('click', startInterval);
+})
+console.log(arrows[1])
+
+let interval;
+function startInterval() {
+    clearTimeout(interval);
+
+    interval = setInterval(() =>{
+        swap()
+    }, 5000);
+}
 
 function swap(direction = 'right') {
     let key;
@@ -38,3 +50,5 @@ function swap(direction = 'right') {
     controls[key].classList.remove('control_active');
     controls[fromEnd + switchDirection].classList.add('control_active');
 }
+
+startInterval()
