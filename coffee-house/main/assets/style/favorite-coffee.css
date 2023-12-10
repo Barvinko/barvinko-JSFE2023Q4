@@ -80,10 +80,23 @@
     height: 4px;
     border-radius: 100px;
     background: var(--border-light);
+    position: relative;
+    overflow: hidden;
 }
 
-#controls .control_active{
+#controls > .control::before{
+    content: '';
+    width: inherit;
+    height: inherit;
     background: var(--border-dark);
+    position: absolute;
+    top: 0;
+    left: -100%;
+}
+
+#controls .control_active.control::before{
+    left: 0;
+    transition: left 5s linear;
 }
 
 @media (hover: none) {

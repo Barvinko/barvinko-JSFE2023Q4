@@ -33,11 +33,11 @@ function swap(direction = 'right') {
     //fromEnd for swap form start to end, or end to start
     switch (switchDirection) {
         case 1:
-            fromEnd = key === 2 ? -1 : key;
+            fromEnd = key === controls.length - 1 ? -1 : key;
             break;
 
         case -1:
-            fromEnd = key === 0 ? 3 : key;
+            fromEnd = key === 0 ? controls.length : key;
             break;
 
         default:
@@ -51,4 +51,5 @@ function swap(direction = 'right') {
     controls[fromEnd + switchDirection].classList.add('control_active');
 }
 
+controls[0].classList.add('control_active')
 startInterval()
