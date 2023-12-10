@@ -1,24 +1,26 @@
+const carousel = document.querySelector('#slider_slider_carousel');
 const carouselSwap = document.querySelector('#slider_slider_carousel > .slider_slider_carousel_swap')
 const controls = document.querySelectorAll('#controls > .control');
 const arrows = document.querySelectorAll('.slider_arrow');
 
 arrows[0].addEventListener('click', () => {swap('left')});
 arrows[1].addEventListener('click', () => {swap('right')});
-arrows.forEach((arow)=>{
-    arow.addEventListener('click', startInterval);
-})
-console.log(arrows[1])
 
 let interval;
-function startInterval() {
+let startIntervalTime;
+let timeLeft = 5000;
+function startInterval(time = 5000) {
     clearTimeout(interval);
-
-    interval = setInterval(() =>{
+    startIntervalTime = Date.now()
+    interval = setTimeout(() =>{
+        console.log(time)
         swap()
-    }, 5000);
+
+    }, time);
 }
 
 function swap(direction = 'right') {
+    clearTimeout(interval);
     let key;
     let fromEnd;
     // value for switch direction swap
@@ -47,9 +49,53 @@ function swap(direction = 'right') {
     //set rifht for carousel-swap
     carouselSwap.style.right = `${100 * (fromEnd + switchDirection)}%`
     //switch control
+    console.log( carouselSwap.style.right)
     controls[key].classList.remove('control_active');
     controls[fromEnd + switchDirection].classList.add('control_active');
+    timeLeft = 5000;
+    startInterval()
 }
+
+carousel.addEventListener("mouseenter", () => {
+    let controlElement = document.querySelector('.control_active.control');
+    controlElement.classList.add("pause");
+
+    timeLeft = timeLeft - (Date.now() - startIntervalTime);
+    console.log("Date-SI",Date.now() - startIntervalTime)
+    console.log("TL",timeLeft)
+    clearTimeout(interval);
+})
+carousel.addEventListener("mouseleave", () => {
+    let controlElement = document.querySelector('.control_active.control');
+    controlElement.classList.remove("pause");
+    startInterval(timeLeft);
+    // startIntervalTime = Date.now();
+})
+
+
+let isDragging = false;
+let startPosX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+
+// carousel.addEventListener('touchstart', () => {
+//     startPosX = Event.touches[0].clientX;
+//     isDragging = true;
+//     let controlElement = document.querySelector('.control_active.control::before');
+
+//     console.log(startPosX)
+// });
+// carousel.addEventListener('touchmove', () => {
+    
+// });
+// carousel.addEventListener('touchend', () =>{
+
+// });
+
+// touchStart(){
+//     startPosX = Event.touches[0].clientX;
+//     isDragging = true;
+// }
 
 controls[0].classList.add('control_active')
 startInterval()

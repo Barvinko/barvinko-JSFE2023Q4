@@ -27,18 +27,25 @@
     background: var(--background-container);
     transition: 0.5s;
 }
-
 .slider_arrow:hover > svg path{
     stroke: var(--text-light);
+    transition: 0.5s;
+}
+
+.slider_arrow:active{
+    background: inherit;
+    border-color: var(--border-light, #C1B6AD);
+    transition: 0.5s;
+}
+
+.slider_arrow:active > svg path{
+    stroke: var(--border-light);
     transition: 0.5s;
 }
 
 #slider_slider_carousel{
     width: 480px;
     overflow: hidden;
-    display: flex;
-    /* justify-content: start; */
-    transition: justify-content 0.5s ease;
 }
 
 .slider_slider_carousel_swap{
@@ -95,8 +102,19 @@
 }
 
 #controls .control_active.control::before{
-    left: 0;
-    transition: left 5s linear;
+    /* left: 0; */
+    animation: slideAnimation 5s linear; 
+    /* transition: left 5s linear; */
+}
+
+#controls .control_active.pause.control::before {
+    animation-play-state: paused;
+  }
+
+@keyframes slideAnimation {
+    to {
+        left: 0;
+    }
 }
 
 @media (hover: none) {
@@ -106,6 +124,14 @@
     }
     
     .slider_arrow:hover > svg path{
+        stroke: var(--text-dark);
+    }
+
+    .slider_arrow:active{
+        border-color: var(--border-dark);
+    }
+    
+    .slider_arrow:active > svg path{
         stroke: var(--text-dark);
     }
 }
@@ -133,5 +159,9 @@
     #slider .slider_slide > *{
         width: 100%;
         height: 100%;
+    }
+
+    #slider_slider_carousel{
+        width: 348px;
     }
 }
