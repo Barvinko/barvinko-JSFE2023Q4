@@ -82,10 +82,10 @@ function openModel(category, index) {
                     <h3 class = "heading-3">${dataCard.name}</h3>
                     <span>${dataCard.description}</span>
                 </div>
-                <div class = "menu_dialog_priview-value_info_choose-component">
+                <div class = "menu_dialog_priview-value_info_choose-component" id="menu_dialog_priview-value_info_choose-size">
                     <span>Size</span>
                     <div class = "menu_dialog_priview-value_info_tabs link-button">
-                        <div class = "tab-item">
+                        <div class = "tab-item active">
                             <span class = "icon">S</span>${dataCard.sizes.s.size}
                         </div>
                         <div class = "tab-item">
@@ -96,7 +96,7 @@ function openModel(category, index) {
                         </div>
                     </div>
                 </div>
-                <div class = "menu_dialog_priview-value_info_choose-component">
+                <div class = "menu_dialog_priview-value_info_choose-component" id = "menu_dialog_priview-value_info_choose-additives">
                     <span>Additives</span>
                     <div class = "menu_dialog_priview-value_info_tabs link-button">
                         <div class = "tab-item">
@@ -112,7 +112,7 @@ function openModel(category, index) {
                 </div>
                 <div class = "menu_dialog_priview-value_info_price">
                     <h3 class = "heading-3">Total:</h3>
-                    <h3 class = "heading-3">$${dataCard.price}</h3>
+                    <h3 class = "heading-3">$<span id = "fullPrice">${dataCard.price}</span></h3>
                 </div>
                 <div class = "menu_dialog_priview-value_info_warning">
                     <img src="./img/info-empty.png" alt="info-empty">
@@ -130,7 +130,100 @@ function openModel(category, index) {
         document.body.classList.remove('hidden');
         menuDialog.close();
     })
+
+    const menuDialogSizeTabs = menuDialog.querySelectorAll('#menu_dialog_priview-value_info_choose-size .tab-item');
+    menuDialogSizeTabs.forEach((tabSize, indexTab) => {
+        tabSize.addEventListener('click',() => changeSize(tabSize, indexTab, index, category))
+        console.log(tabSize)
+    })
+    const menuDialogAdditivesTabs = menuDialog.querySelectorAll('#menu_dialog_priview-value_info_choose-additives .tab-item');
+    console.log(menuDialogAdditivesTabs)
+    menuDialogAdditivesTabs.forEach((tabAdditives, indexTab) => {
+        tabAdditives.addEventListener('click',() => changeAdditives(tabAdditives, indexTab, index, category))
+    })
     menuDialog.show()
+}
+
+function changeAdditives(block, indexTab, index, category) {
+    console.log(block, index, category);
+
+    const dataCard = dataUse[category][index];
+    const fullPrice = document.querySelector('#fullPrice');
+    let price = Number(fullPrice.innerText);
+
+    console.log(dataCard.additives[indexTab])
+
+    if (block.classList.contains("active")) {
+        block.classList.remove('active');
+        price -= Number(dataCard.additives[indexTab]['add-price']);
+    }else{
+        block.classList.add('active');
+        price += Number(dataCard.additives[indexTab]['add-price']);
+    }
+
+    fullPrice.innerText = price.toFixed(2);
+}
+
+
+function changeSize (block, indexTab, index, category) {
+    console.log(block, index, category)
+    if (block.classList.contains("active")) {
+        console.log("change no need")
+        return;
+    }
+    const dataCard = dataUse[category][index];
+    const fullPrice = document.querySelector('#fullPrice');
+    const activeTab = document.querySelectorAll('#menu_dialog_priview-value_info_choose-size .tab-item');
+    // console.log(activeTab)
+    let indexTabOld
+    for (let i = 0; i < activeTab.length; i++) {
+        if (activeTab[i].classList.contains("active")) {
+            activeTab[i].classList.remove('active');
+
+            switch (i) {
+                case 0:
+                    indexTabOld = 's'
+                    break;
+                case 1:
+                    indexTabOld = 'm'
+                    break;
+                case 2:
+                    indexTabOld = 'l'
+                    break;
+            
+                default:
+                    break;
+            }
+            break
+        }
+    }
+
+    switch (indexTab) {
+        case 0:
+            indexTab = 's'
+            break;
+        case 1:
+            indexTab = 'm'
+            break;
+        case 2:
+            indexTab = 'l'
+            break;
+    
+        default:
+            break;
+    }
+
+    let price = Number(fullPrice.innerText);
+
+    // console.log(price)
+
+    price -= Number(dataCard.sizes[indexTabOld]['add-price']);
+
+    price += Number(dataCard.sizes[indexTab]['add-price']);
+
+    fullPrice.innerText = price.toFixed(2);
+
+    block.classList.add('active');
 }
 
 function openAllProducts() {
