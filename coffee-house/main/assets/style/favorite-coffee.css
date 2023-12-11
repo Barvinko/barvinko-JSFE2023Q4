@@ -27,16 +27,39 @@
     background: var(--background-container);
     transition: 0.5s;
 }
-
 .slider_arrow:hover > svg path{
     stroke: var(--text-light);
     transition: 0.5s;
+}
+
+.slider_arrow:active{
+    background: inherit;
+    border-color: var(--border-light, #C1B6AD);
+    transition: 0.5s;
+}
+
+.slider_arrow:active > svg path{
+    stroke: var(--border-light);
+    transition: 0.5s;
+}
+
+#slider_slider_carousel{
+    width: 480px;
+    overflow: hidden;
+}
+
+.slider_slider_carousel_swap{
+    display: flex;
+    position: relative;
+    right: 0;
+    transition: right 0.5s;
 }
 
 .slider_slide{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    transition: 0.5s;
 }
 
 .slider_slide > img{
@@ -64,10 +87,34 @@
     height: 4px;
     border-radius: 100px;
     background: var(--border-light);
+    position: relative;
+    overflow: hidden;
 }
 
-#controls .control_active{
+#controls > .control::before{
+    content: '';
+    width: inherit;
+    height: inherit;
     background: var(--border-dark);
+    position: absolute;
+    top: 0;
+    left: -100%;
+}
+
+#controls .control_active.control::before{
+    /* left: 0; */
+    animation: slideAnimation 5s linear; 
+    /* transition: left 5s linear; */
+}
+
+#controls .control_active.pause.control::before {
+    animation-play-state: paused;
+  }
+
+@keyframes slideAnimation {
+    to {
+        left: 0;
+    }
 }
 
 @media (hover: none) {
@@ -77,6 +124,14 @@
     }
     
     .slider_arrow:hover > svg path{
+        stroke: var(--text-dark);
+    }
+
+    .slider_arrow:active{
+        border-color: var(--border-dark);
+    }
+    
+    .slider_arrow:active > svg path{
         stroke: var(--text-dark);
     }
 }
@@ -104,5 +159,9 @@
     #slider .slider_slide > *{
         width: 100%;
         height: 100%;
+    }
+
+    #slider_slider_carousel{
+        width: 348px;
     }
 }
