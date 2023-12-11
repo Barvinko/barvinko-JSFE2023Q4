@@ -18,7 +18,11 @@ for (let i = 0; i < dataKey.length; i++) {
 
 
 const menuGrid = document.querySelector('#menu_grid');
+const buttonOpen = document.querySelector('.menu_open-all-priviews');
+buttonOpen.addEventListener('click', openAllProducts)
+
 const buttonsCategory = document.querySelectorAll('#menu_tab > .menu_tab_tab-item');
+
 buttonsCategory.forEach((tab) => {
     tab.addEventListener('click', () =>{ showProducts(tab)})
 })
@@ -47,6 +51,19 @@ function showProducts(block = buttonsCategory[0]) {
             </div>
         </div>`
     ).join('');
+    
+    if (dataUse[nameCategoryClick].length > 4) {
+        console.log(dataUse[nameCategoryClick].length)
+        buttonOpen.classList.add('active');
+        menuGrid.classList.add('active');
+    }else{
+        buttonOpen.classList.remove('active');
+    }
+}
+
+function openAllProducts() {
+    menuGrid.classList.remove('active');
+    buttonOpen.classList.remove('active');
 }
 
 showProducts()
