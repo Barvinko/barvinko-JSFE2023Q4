@@ -107,7 +107,7 @@
     /* position: relative; */
 }
 
-#menu .menu_grid_priview-about-img{
+#menu .menu_grid_priview-about-img, #menu_dialog .menu_grid_priview-about-img{
     height: 310px;
 }
 
@@ -125,13 +125,108 @@
     display: none;
 }
 
+/* DIALOG */
+
+body.hidden{
+    overflow-y: hidden;
+}
+
+#menu_dialog{
+    position: fixed;
+    top: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.249);
+    color: var(--text-dark);
+}
+
+#menu_dialog > .menu_dialog_around{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_dialog_priview-value{
+    width: 800px;
+    height: 504px;
+    padding: 16px;
+    border-radius: 40px;
+    background: var(--background-body, #E1D4C9);
+    display: flex;
+    gap: 20px
+}
+
+.menu_dialog_priview-value_info{
+    width: calc(100% - (310px + 20px));
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#menu_dialog .dialogClose{
+    padding: 10px 78px;
+    border-radius: 100px;
+    border: 1px solid var(--border-dark, #665F55);
+    background-color: inherit;
+    outline: none;
+}
+
+#menu_dialog .menu_grid_priview-about-img{
+    width: 310px;
+}
+
+.menu_dialog_priview-value_info_head{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu_dialog_priview-value_info_tabs{
+    padding-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+.menu_dialog_priview-value_info_tabs >.tab-item{
+    display: flex;
+    height: 46px;
+    padding: 8px 16px 8px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 100px;
+    border: 1px solid var(--border-light, #C1B6AD);
+}
+
+.menu_dialog_priview-value_info_tabs >.tab-item > .icon{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    /* padding: 3px 7px 3px 8px; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: var(--border-light, #C1B6AD);
+}
+
+.menu_dialog_priview-value_info_price{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu_dialog_priview-value_info_warning{
+    display: flex;
+    padding: 12px 0px;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 8px;
+    border-top: 1px solid var(--border-light, #C1B6AD);
+}
+
 @media (min-width: 1089px) and (max-width: 1439px)  {
     #menu_grid{
         width: 1000px;
     }
-    /* #menu_grid > :last-child {
-        margin-right: calc((310px * 3 + 40px * 2) - (310px * 2 + 40px));
-    } */
 }
 @media (max-width: 1439px)  {
     #menu_grid{

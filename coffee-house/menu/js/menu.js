@@ -37,7 +37,7 @@ function showProducts(block = buttonsCategory[0]) {
 
     block.classList.add('active');
 
-    menuGrid.innerHTML = dataUse[nameCategoryClick].map((product,i) =>
+    menuGrid.innerHTML = dataUse[nameCategoryClick].map((product, i) =>
         `<div class="menu_grid_priview">
             <div class="menu_grid_priview-about-img">
                 <img class="reduce-img" src="./img/${product.category}/${product.category}-${i + 1}.jpg" alt="${product.name}">
@@ -51,6 +51,11 @@ function showProducts(block = buttonsCategory[0]) {
             </div>
         </div>`
     ).join('');
+
+    const previewItems = menuGrid.querySelectorAll('.menu_grid_priview');
+    previewItems.forEach((product, index) => {
+        product.addEventListener('click', () => openModel(nameCategoryClick, index));
+    });
     
     if (dataUse[nameCategoryClick].length > 4) {
         console.log(dataUse[nameCategoryClick].length)
@@ -61,9 +66,77 @@ function showProducts(block = buttonsCategory[0]) {
     }
 }
 
+const menuDialog = document.querySelector('#menu_dialog')
+
+function openModel(category, index) {
+    document.body.classList.add('hidden');
+    console.log(category, index);
+    let dataCard = dataUse[category][index];
+    menuDialog.innerHTML = `<div class="menu_dialog_around medium">
+        <div class="menu_dialog_priview-value">
+            <div class="menu_grid_priview-about-img">
+                <img class="reduce-img" src="./img/${category}/${category}-${index + 1}.jpg" alt="${dataCard.name}">
+            </div>
+            <div class="menu_dialog_priview-value_info">
+                <div class = "menu_dialog_priview-value_info_head">
+                    <h3 class = "heading-3">${dataCard.name}</h3>
+                    <span>${dataCard.description}</span>
+                </div>
+                <div class = "menu_dialog_priview-value_info_choose-component">
+                    <span>Size</span>
+                    <div class = "menu_dialog_priview-value_info_tabs link-button">
+                        <div class = "tab-item">
+                            <span class = "icon">S</span>${dataCard.sizes.s.size}
+                        </div>
+                        <div class = "tab-item">
+                            <span class = "icon">M</span>${dataCard.sizes.m.size}
+                        </div>
+                        <div class = "tab-item">
+                            <span class = "icon">L</span>${dataCard.sizes.l.size}
+                        </div>
+                    </div>
+                </div>
+                <div class = "menu_dialog_priview-value_info_choose-component">
+                    <span>Additives</span>
+                    <div class = "menu_dialog_priview-value_info_tabs link-button">
+                        <div class = "tab-item">
+                            <span class = "icon">1</span>${dataCard.additives[0].name}
+                        </div>
+                        <div class = "tab-item">
+                            <span class = "icon">2</span>${dataCard.additives[1].name}
+                        </div>
+                        <div class = "tab-item">
+                            <span class = "icon">3</span>${dataCard.additives[2].name}
+                        </div>
+                    </div>
+                </div>
+                <div class = "menu_dialog_priview-value_info_price">
+                    <h3 class = "heading-3">Total:</h3>
+                    <h3 class = "heading-3">$${dataCard.price}</h3>
+                </div>
+                <div class = "menu_dialog_priview-value_info_warning">
+                    <img src="./img/info-empty.png" alt="info-empty">
+                    <span class = "caption">
+                        The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.
+                    </span>
+                </div>
+                <button class = "dialogClose link-button">Close</button>
+            </div>
+        </div>
+    </div>`;
+
+    const buttonDialogClose = menuDialog.querySelector('.dialogClose');
+    buttonDialogClose.addEventListener('click', () => {
+        document.body.classList.remove('hidden');
+        menuDialog.close();
+    })
+    menuDialog.show()
+}
+
 function openAllProducts() {
     menuGrid.classList.remove('active');
     buttonOpen.classList.remove('active');
 }
 
+menuDialog.close()
 showProducts()
