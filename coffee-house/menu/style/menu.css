@@ -131,7 +131,7 @@
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     #menu_grid > :nth-child(n + 5) {
         display: none;
     }

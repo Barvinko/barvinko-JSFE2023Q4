@@ -104,6 +104,11 @@ header .header_menu .header_menu_burger{
         background-color: inherit;
     }
 
+
+    .header_menu_head_open:focus-visible{
+        outline: none;
+    }
+
     .header_menu_head_open:not(.active).header_menu_head_open::before{
         position: absolute;
         content: '';
@@ -169,7 +174,7 @@ header .header_menu .header_menu_burger{
         justify-content: start;
         align-items: center;
         background-color: var(--background-body);
-        transition: 0.5s;
+        transition: left 0.5s;
     }
     
     header .header_menu .nav{
@@ -181,7 +186,7 @@ header .header_menu .header_menu_burger{
 
     header .header_menu .header_menu_burger.active{
         left: 0;
-        transition: 0.5s;
+        transition: left 0.5s;
     }
 
     header .header_menu .nav li, #header_menu_span-menu{
