@@ -135,8 +135,9 @@ body.hidden{
     position: fixed;
     top: 0;
     border: none;
-    background-color: rgba(0, 0, 0, 0.249);
+    background-color: rgba(0, 0, 0, 0.6);
     color: var(--text-dark);
+    padding: 0;
 }
 
 #menu_dialog > .menu_dialog_around{
@@ -149,7 +150,7 @@ body.hidden{
 
 .menu_dialog_priview-value{
     width: 800px;
-    height: 504px;
+    height: min-content;
     padding: 16px;
     border-radius: 40px;
     background: var(--background-body, #E1D4C9);
@@ -170,6 +171,7 @@ body.hidden{
     border: 1px solid var(--border-dark, #665F55);
     background-color: inherit;
     outline: none;
+    height: 44px;
 }
 
 #menu_dialog .menu_grid_priview-about-img{
@@ -186,6 +188,7 @@ body.hidden{
     padding-top: 8px;
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
 }
 .menu_dialog_priview-value_info_tabs >.tab-item{
     display: flex;
@@ -216,6 +219,7 @@ body.hidden{
 
 .menu_dialog_priview-value_info_warning{
     display: flex;
+    height: 52px;
     padding: 12px 0px;
     align-items: flex-start;
     align-self: stretch;
@@ -246,6 +250,12 @@ body.hidden{
         border-radius: 100px;
         border: 1px solid var(--border-dark, #665F55);
     }
+
+    .menu_dialog_priview-value{
+        width: 688px;
+        height: min-content;
+    }
+    
 }
 
 @media (max-width: 768px) {
@@ -254,6 +264,26 @@ body.hidden{
 @media (max-width: 767px) {
     #menu_tab{
         gap: 8px;
+    }
+
+    #menu_grid{
+        width: 100%;
+    }
+
+    .menu_dialog_priview-value{
+        width: 342px;
+    }
+
+    #menu_dialog .menu_grid_priview-about-img{
+        display: none;
+    }
+
+    .menu_dialog_priview-value_info{
+        width: 100%;
+    }
+
+    .menu_dialog_priview-value_info_warning{
+        height: min-content;
     }
 }
 
