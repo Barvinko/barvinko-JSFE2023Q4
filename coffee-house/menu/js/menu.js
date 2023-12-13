@@ -66,7 +66,7 @@ function showProducts(block = buttonsCategory[0]) {
     }
 }
 
-const menuDialog = document.querySelector('#menu_dialog')
+const menuDialog = document.querySelector('#menu_dialog');
 
 function openModel(category, index) {
     document.body.classList.add('hidden');
@@ -130,6 +130,15 @@ function openModel(category, index) {
         document.body.classList.remove('hidden');
         menuDialog.close();
     })
+
+    const dialogAround = menuDialog.querySelector('.menu_dialog_around');
+    dialogAround.addEventListener('click', (event) => {
+        if (event.target.classList.contains('menu_dialog_around')) {
+            document.body.classList.remove('hidden');
+            menuDialog.close();
+        }
+    })
+    
 
     const menuDialogSizeTabs = menuDialog.querySelectorAll('#menu_dialog_priview-value_info_choose-size .tab-item');
     menuDialogSizeTabs.forEach((tabSize, indexTab) => {
