@@ -1,0 +1,49 @@
+body{
+  margin: 0;
+}
+body *{
+  box-sizing: border-box;
+}
+
+.hangman__gallows{
+  width: 353px;
+  height: 581px;
+
+  background-image: url(./img/gallows.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+.hangman__man{
+  position: absolute;
+  display: none;
+}
+.hangman__man_active{
+  display: block;
+}
+.hangman__head{
+  left: 252px;
+  top: 150px;
+}
+.hangman__body{
+  left: 300px;
+  top: 250px;
+}
+.hangman__hand-one{
+  left: 237px;
+  top: 275px;
+}
+.hangman__hand-two{
+  left: 300px;
+  top: 275px;
+}
+.hangman__leg-one{
+  left: 237px;
+  top: 375px;
+}
+.hangman__leg-two{
+  left: 300px;
+  top: 375px;
+}
