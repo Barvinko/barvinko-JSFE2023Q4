@@ -1,3 +1,6 @@
+import dataQuestions from "./js/questions.js"
+
+console.log(dataQuestions)
 document.body.innerHTML = `
   <main class="container">
     <section class="hangman">
@@ -10,7 +13,7 @@ document.body.innerHTML = `
 
       </section>
       <section class="question">
-      
+
       </section>
       <section class="keyboard">
 
@@ -19,6 +22,8 @@ document.body.innerHTML = `
   </main>
 `
 function create() {
+  const numberQustion = Math.floor(Math.random() * 48);
+
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
 
@@ -32,9 +37,15 @@ function create() {
   `
 
   question.innerHTML = `
-    <span class="question__hint"></span>
-    <span class="question__question"></span>
-    <span class="question__count"></span>
+    <div class="question__hint">Hint:
+      <span class="question__question">${dataQuestions[numberQustion].question}</span>
+    </div>
+    <div class="question__incorrect-guesses">
+      Incorrect guesses:
+      <span class="question__attempts">
+        <span class="question__count">0</span>/6
+      </span>
+    </div>
   `
 }
 
