@@ -1,64 +1,6 @@
 import dataQuestions from "./js/questions.js"
 import alphabet from "./js/alphabet.js";
 
-(() => {
-  const main = document.createElement("main");
-  main.className = "container";
-
-  const hangman = document.createElement("section");
-  hangman.className = "hangman";
-
-  const hangmanGallows = document.createElement("div");
-  hangmanGallows.className = "hangman__gallows";
-
-  const questionAnswer = document.createElement("article");
-  questionAnswer.className = "question-answer";
-
-  const answer = document.createElement("section");
-  answer.className = "answer";
-
-  const question = document.createElement("section");
-  question.className = "question";
-
-  const keyboard = document.createElement("section");
-  keyboard.className = "keyboard";
-
-  const dialog = document.createElement("dialog");
-  dialog.className = "dialog dialog_hide";
-
-  const dialogContainer = document.createElement("div");
-  dialogContainer.className = "dialog__container";
-
-  const dialogResult = document.createElement("div");
-  dialogResult.className = "dialog__result";
-
-  const dialogAnswer = document.createElement("div");
-  dialogAnswer.className = "dialog__answer";
-
-  const dialogButton = document.createElement("button");
-  dialogButton.className = "dialog__button";
-
-  hangman.appendChild(hangmanGallows);
-
-  questionAnswer.appendChild(answer);
-  questionAnswer.appendChild(question);
-  questionAnswer.appendChild(keyboard);
-
-  dialogContainer.appendChild(dialogResult);
-  dialogContainer.appendChild(dialogAnswer);
-  dialogContainer.appendChild(dialogButton);
-
-  dialog.appendChild(dialogContainer);
-  dialog.addEventListener("click", dialogHide)
-
-  
-  main.appendChild(hangman);
-  main.appendChild(questionAnswer);
-  main.appendChild(dialog);
-
-  document.body.appendChild(main);
-})();
-
 let numberQustion;
 let dataQuestion;
 let dataAnswer;
@@ -214,4 +156,62 @@ function dialogShow() {
  dialog.classList.remove("dialog_hide");
 }
 
-create() 
+(() => {
+  const main = document.createElement("main");
+  main.className = "container";
+
+  const hangman = document.createElement("section");
+  hangman.className = "hangman";
+
+  const hangmanGallows = document.createElement("div");
+  hangmanGallows.className = "hangman__gallows";
+
+  const questionAnswer = document.createElement("article");
+  questionAnswer.className = "question-answer";
+
+  const answer = document.createElement("section");
+  answer.className = "answer";
+
+  const question = document.createElement("section");
+  question.className = "question";
+
+  const keyboard = document.createElement("section");
+  keyboard.className = "keyboard";
+
+  const dialog = document.createElement("dialog");
+  dialog.className = "dialog dialog_hide";
+
+  const dialogContainer = document.createElement("div");
+  dialogContainer.className = "dialog__container";
+
+  const dialogResult = document.createElement("div");
+  dialogResult.className = "dialog__result";
+
+  const dialogAnswer = document.createElement("div");
+  dialogAnswer.className = "dialog__answer";
+
+  const dialogButton = document.createElement("button");
+  dialogButton.className = "dialog__button";
+
+  hangman.appendChild(hangmanGallows);
+
+  questionAnswer.appendChild(answer);
+  questionAnswer.appendChild(question);
+  questionAnswer.appendChild(keyboard);
+
+  dialogContainer.appendChild(dialogResult);
+  dialogContainer.appendChild(dialogAnswer);
+  dialogContainer.appendChild(dialogButton);
+
+  dialog.appendChild(dialogContainer);
+  dialog.addEventListener("click", dialogHide)
+
+  
+  main.appendChild(hangman);
+  main.appendChild(questionAnswer);
+  main.appendChild(dialog);
+
+  document.body.appendChild(main);
+
+  create() 
+})();
