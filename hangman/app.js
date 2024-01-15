@@ -40,15 +40,6 @@ function create() {
     hangman.appendChild(elementMan[i]);
   }
 
-  // hangman.innerHTML = `
-  //   <img class="hangman__man hangman__head" src="./img/man/head.svg" alt="head">
-  //   <img class="hangman__man hangman__body" src="./img/man/body.svg" alt="body">
-  //   <img class="hangman__man hangman__hand-one" src="./img/man/hand-one.svg" alt="hand-one">
-  //   <img class="hangman__man hangman__hand-two" src="./img/man/hand-two.svg" alt="hand-two">
-  //   <img class="hangman__man hangman__leg-one" src="./img/man/leg-one.svg" alt="leg-one">
-  //   <img class="hangman__man hangman__leg-two" src="./img/man/leg-two.svg" alt="leg-two">
-  // `
-
   question.innerHTML = `
     <div class="question__hint">Hint:
       <span class="question__question">${dataQuestions[numberQustion].question}</span>
