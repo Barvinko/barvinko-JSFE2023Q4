@@ -23,14 +23,38 @@ import alphabet from "./js/alphabet.js";
   const keyboard = document.createElement("section");
   keyboard.className = "keyboard";
 
-  main.appendChild(hangman);
-  main.appendChild(questionAnswer);
+  const dialog = document.createElement("dialog");
+  dialog.className = "dialog dialog_hide";
+
+  const dialogContainer = document.createElement("div");
+  dialogContainer.className = "dialog__container";
+
+  const dialogResult = document.createElement("div");
+  dialogResult.className = "dialog__result";
+
+  const dialogAnswer = document.createElement("div");
+  dialogAnswer.className = "dialog__answer";
+
+  const dialogButton = document.createElement("button");
+  dialogButton.className = "dialog__button";
 
   hangman.appendChild(hangmanGallows);
 
   questionAnswer.appendChild(answer);
   questionAnswer.appendChild(question);
   questionAnswer.appendChild(keyboard);
+
+  dialogContainer.appendChild(dialogResult);
+  dialogContainer.appendChild(dialogAnswer);
+  dialogContainer.appendChild(dialogButton);
+
+  dialog.appendChild(dialogContainer);
+  dialog.addEventListener("click", dialogHide)
+
+  
+  main.appendChild(hangman);
+  main.appendChild(questionAnswer);
+  main.appendChild(dialog);
 
   document.body.appendChild(main);
 })();
@@ -80,7 +104,7 @@ function create() {
       </span>
     </div>
   `
-  
+
   const keyboardContainer = document.createElement("div");
   keyboardContainer.className = "keyboard__container";
 
@@ -118,17 +142,32 @@ function enterLetter(event) {
   console.log("work enterLetter");
 
   // GAME
-
   let arrDataAnswer = dataAnswer.split('');
   console.log(arrDataAnswer);
 
   let haveLeter = false;
+  let fullWord = true;
 
   for (let i = 0; i < arrElemntAnswer.length; i++) {
     if (letter.innerText == arrDataAnswer[i]) {
       arrElemntAnswer[i].innerText = letter.innerText;
       haveLeter = true;
     }
+    if (arrElemntAnswer[i].innerText == "_") {
+      fullWord = false;
+    }
+  }
+
+  const dialogResult = document.querySelector(".dialog__result");    
+  const dialogAnswer = document.querySelector(".dialog__answer"); 
+  const dialogButton = document.querySelector(".dialog__button");
+
+  if (fullWord) {
+    dialogResult.innerText = "YOU WIN!!! Answer:"
+    dialogAnswer.innerText = `${dataAnswer}`;
+    dialogButton.innerText = "Restart";
+
+    dialogShow();
   }
 
   if (!haveLeter) {
@@ -136,10 +175,25 @@ function enterLetter(event) {
     const count = Number(questionCount.innerText);
     elementsMan[count].classList.add("hangman__man_active")
     if (count == 5) {
-      console.log("END");
+      dialogResult.innerText = "Unfortunately you lost. Сorrect answer:"
+      dialogAnswer.innerText = `${dataAnswer}`;
+      dialogButton.innerText = "Restart";
+
+      dialogShow();
     }
     questionCount.innerText = 1 + count; 
   }
+}
+
+function dialogHide() {
+ const dialog = document.querySelector(".dialog");
+ dialog.classList.add("dialog_hide");
+ create();
+}
+
+function dialogShow() {
+ const dialog = document.querySelector(".dialog");
+ dialog.classList.remove("dialog_hide");
 }
 
 create() 

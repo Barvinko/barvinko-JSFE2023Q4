@@ -136,6 +136,43 @@ body *{
   background-color: blue;
 }
 
+/* DIALOG */
+.dialog{
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+
+
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+}
+.dialog__container{
+  width: 300px;
+  height: 150px;
+
+  color: white;
+  background-color: rgba(49, 49, 255, 0.9);
+
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+}
+.dialog_hide{
+  display: none;
+}
+
 /* 768-1440 */
 @media (max-width: 1440px) {
   .container{
