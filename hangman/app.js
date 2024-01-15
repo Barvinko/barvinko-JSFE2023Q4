@@ -31,7 +31,7 @@ import alphabet from "./js/alphabet.js";
   questionAnswer.appendChild(answer);
   questionAnswer.appendChild(question);
   questionAnswer.appendChild(keyboard);
-  
+
   document.body.appendChild(main);
 })();
 
@@ -48,7 +48,7 @@ function create() {
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
   const keyboard = document.querySelector(".keyboard");
-  const answer =document.querySelector('.answer')
+  const answer = document.querySelector('.answer');
 
   const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
 
@@ -80,7 +80,7 @@ function create() {
       </span>
     </div>
   `
-
+  
   const keyboardContainer = document.createElement("div");
   keyboardContainer.className = "keyboard__container";
 
@@ -97,7 +97,10 @@ function create() {
 }
 
 function enterLetter(event) {
-  const answerLetter = document.querySelectorAll(".answer__letter");
+  const arrElemntAnswer = document.querySelectorAll(".answer__letter");
+  const questionCount = document.querySelector(".question__count");
+
+  // BUTTON
   let letter
   if (event.target) {
     letter = event.target;
@@ -105,9 +108,38 @@ function enterLetter(event) {
     letter = event;
   }
   console.log(letter)
+
+  if (letter.classList.contains("keyboard__letter_visited")) {
+    return;
+  }
+
   letter.classList.add("keyboard__letter_visited");
   letter.removeEventListener('click', enterLetter);
   console.log("work enterLetter");
+
+  // GAME
+
+  let arrDataAnswer = dataAnswer.split('');
+  console.log(arrDataAnswer);
+
+  let haveLeter = false;
+
+  for (let i = 0; i < arrElemntAnswer.length; i++) {
+    if (letter.innerText == arrDataAnswer[i]) {
+      arrElemntAnswer[i].innerText = letter.innerText;
+      haveLeter = true;
+    }
+  }
+
+  if (!haveLeter) {
+    const elementsMan = document.querySelectorAll(".hangman__man");
+    const count = Number(questionCount.innerText);
+    elementsMan[count].classList.add("hangman__man_active")
+    if (count == 5) {
+      console.log("END");
+    }
+    questionCount.innerText = 1 + count; 
+  }
 }
 
 create() 
