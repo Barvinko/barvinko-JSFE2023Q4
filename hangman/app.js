@@ -28,6 +28,7 @@ function create() {
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
   const keyboard = document.querySelector(".keyboard");
+  const amswer =document.querySelector('.answer')
 
   const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
 
@@ -38,6 +39,14 @@ function create() {
     elementMan[i].src = `./img/man/${man[i]}.svg`;
     elementMan[i].alt = `${man[i]}`;
     hangman.appendChild(elementMan[i]);
+  }
+
+  const letterCell = [];
+  for (let i = 0; i < dataQuestions[numberQustion].answer.length; i++) {
+    letterCell[i] = document.createElement("div");
+    letterCell[i].className = "answer__letter";
+    letterCell[i].innerText = "_";
+    amswer.appendChild(letterCell[i]);
   }
 
   question.innerHTML = `
@@ -55,12 +64,12 @@ function create() {
   const keyboardContainer = document.createElement("div");
   keyboardContainer.className = "keyboard__container";
 
-  const letters = [];
+  const letterKeyBoard = [];
   for (let i = 0; i < alphabet.length; i++) {
-    letters[i] = document.createElement("div");
-    letters[i].className = "keyboard__letter";
-    letters[i].innerText = `${alphabet[i]}`;
-    keyboardContainer.appendChild(letters[i]);
+    letterKeyBoard[i] = document.createElement("div");
+    letterKeyBoard[i].className = "keyboard__letter";
+    letterKeyBoard[i].innerText = `${alphabet[i]}`;
+    keyboardContainer.appendChild(letterKeyBoard[i]);
   }
 
   keyboard.appendChild(keyboardContainer);
