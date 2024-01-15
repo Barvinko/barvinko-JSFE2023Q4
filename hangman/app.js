@@ -6,10 +6,20 @@ let dataQuestion;
 let dataAnswer;
 
 function create() {
-  numberQustion = Math.floor(Math.random() * 48);
-  dataQuestion = dataQuestions[numberQustion].question;
+  const getStorage = sessionStorage.getItem("question");
+
+  do {
+    numberQustion = Math.floor(Math.random() * 48);
+    dataQuestion = dataQuestions[numberQustion].question;
+  } while (getStorage == dataQuestion);
+
+  console.log(getStorage," != ",dataQuestion)
+
   dataAnswer = dataQuestions[numberQustion].answer;
-  console.log("answer:", dataAnswer)
+  sessionStorage.setItem('question', `${dataQuestion}`);
+
+  console.log("answer:", dataAnswer);
+
 
   const elementMan = document.querySelectorAll(".hangman__man");
   const letterBoardVisited = document.querySelectorAll(".keyboard__letter_visited");
