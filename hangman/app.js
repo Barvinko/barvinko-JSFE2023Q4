@@ -11,21 +11,19 @@ function create() {
   dataAnswer = dataQuestions[numberQustion].answer;
   console.log("answer:", dataAnswer)
 
-  const hangman = document.querySelector(".hangman__gallows");
-  const question = document.querySelector(".question");
-  const keyboard = document.querySelector(".keyboard");
-  const answer = document.querySelector('.answer');
+  const elementMan = document.querySelectorAll(".hangman__man");
+  const letterBoardVisited = document.querySelectorAll(".keyboard__letter_visited");
+  const questionAnswer = document.querySelector('.question-answer');
+  const oldAnswer = document.querySelector('.answer');
 
-  const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
-
-  const elementMan = [];
-  for (let i = 0; i < man.length; i++) {
-    elementMan[i] = document.createElement("img");
-    elementMan[i].className = `hangman__man hangman__${man[i]}`;
-    elementMan[i].src = `./img/man/${man[i]}.svg`;
-    elementMan[i].alt = `${man[i]}`;
-    hangman.appendChild(elementMan[i]);
+  // UPDATE ELEMENT OF "GALLOWS"
+  for (let i = 0; i < elementMan.length; i++) {
+    elementMan[i].classList.remove("hangman__man_active");
   }
+
+  // UPDATE LAYOUT "ANSWER"
+  const answer = oldAnswer.cloneNode(false);
+  questionAnswer.replaceChild(answer, oldAnswer);
 
   const letterCell = [];
   for (let i = 0; i < dataAnswer.length; i++) {
@@ -35,49 +33,18 @@ function create() {
     answer.appendChild(letterCell[i]);
   }
 
-  const questionHint = document.createElement("div");
-  questionHint.className = "question__hint";
-  questionHint.innerText = "Hint: "
-
-  const questionQuestion = document.createElement("span");
-  questionQuestion.className = "question__question";
+  // UPDATE LAYOUT "QUESTION"
+  const questionQuestion = document.querySelector(".question__question");
   questionQuestion.innerText = dataQuestion;
 
-  questionHint.appendChild(questionQuestion);
-
-  const questionIncorrectGuesse = document.createElement("div");
-  questionIncorrectGuesse.className = "question__incorrect-guesse";
-  questionIncorrectGuesse.innerText = "Incorrect guesses: "
-
-  const questionAttempts = document.createElement("span");
-  questionAttempts.className = "question__attempts";
-
-  const questionCount = document.createElement("span");
-  questionCount.className = "question__count";
+  const questionCount = document.querySelector(".question__count");
   questionCount.innerText = 0;
-
-  questionAttempts.appendChild(questionCount);
-  const textNode = document.createTextNode("/6")
-  questionAttempts.appendChild(textNode)
-  questionIncorrectGuesse.appendChild(questionAttempts);
-
-  question.appendChild(questionHint);
-  question.appendChild(questionIncorrectGuesse);
-
-
-  const keyboardContainer = document.createElement("div");
-  keyboardContainer.className = "keyboard__container";
-
-  const letterKeyBoard = [];
-  for (let i = 0; i < alphabet.length; i++) {
-    letterKeyBoard[i] = document.createElement("div");
-    letterKeyBoard[i].className = "keyboard__letter";
-    letterKeyBoard[i].innerText = `${alphabet[i]}`;
-    letterKeyBoard[i].addEventListener("click", enterLetter)
-    keyboardContainer.appendChild(letterKeyBoard[i]);
+  
+  // UPDATE LAYOUT "KEY-BOARD"
+  for (let i = 0; i < letterBoardVisited.length; i++) {
+    letterBoardVisited[i].classList.remove("keyboard__letter_visited");
+    letterBoardVisited[i].addEventListener("click", enterLetter);
   }
-
-  keyboard.appendChild(keyboardContainer);
 }
 
 function enterLetter(event) {
@@ -91,7 +58,7 @@ function enterLetter(event) {
   }else{
     letter = event;
   }
-  console.log(letter)
+  // console.log(letter)
 
   if (letter.classList.contains("keyboard__letter_visited")) {
     return;
@@ -99,12 +66,9 @@ function enterLetter(event) {
 
   letter.classList.add("keyboard__letter_visited");
   letter.removeEventListener('click', enterLetter);
-  console.log("work enterLetter");
 
   // GAME
   let arrDataAnswer = dataAnswer.split('');
-  console.log(arrDataAnswer);
-
   let haveLeter = false;
   let fullWord = true;
 
@@ -193,10 +157,68 @@ function dialogShow() {
   const dialogButton = document.createElement("button");
   dialogButton.className = "dialog__button";
 
+  // CREATE ELEMENT OF "GALLOWS"
+  const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
+
+  const elementMan = [];
+  for (let i = 0; i < man.length; i++) {
+    elementMan[i] = document.createElement("img");
+    elementMan[i].className = `hangman__man hangman__${man[i]}`;
+    elementMan[i].src = `./img/man/${man[i]}.svg`;
+    elementMan[i].alt = `${man[i]}`;
+    hangmanGallows.appendChild(elementMan[i]);
+  }
+
   hangman.appendChild(hangmanGallows);
 
   questionAnswer.appendChild(answer);
+
+  // CREATE ELEMENT OF "QUESTION"
+  const questionHint = document.createElement("div");
+  questionHint.className = "question__hint";
+  questionHint.innerText = "Hint: "
+
+  const questionQuestion = document.createElement("span");
+  questionQuestion.className = "question__question";
+
+  questionHint.appendChild(questionQuestion);
+
+  const questionIncorrectGuesse = document.createElement("div");
+  questionIncorrectGuesse.className = "question__incorrect-guesse";
+  questionIncorrectGuesse.innerText = "Incorrect guesses: "
+
+  const questionAttempts = document.createElement("span");
+  questionAttempts.className = "question__attempts";
+
+  const questionCount = document.createElement("span");
+  questionCount.className = "question__count";
+  questionCount.innerText = 0;
+
+  questionAttempts.appendChild(questionCount);
+  const textNode = document.createTextNode("/6")
+  questionAttempts.appendChild(textNode)
+  questionIncorrectGuesse.appendChild(questionAttempts);
+
+  question.appendChild(questionHint);
+  question.appendChild(questionIncorrectGuesse);
+
   questionAnswer.appendChild(question);
+
+  // CREATE ELEMENT OF "KEY-BOARD"
+  const keyboardContainer = document.createElement("div");
+  keyboardContainer.className = "keyboard__container";
+
+  const letterKeyBoard = [];
+  for (let i = 0; i < alphabet.length; i++) {
+    letterKeyBoard[i] = document.createElement("div");
+    letterKeyBoard[i].className = "keyboard__letter";
+    letterKeyBoard[i].innerText = `${alphabet[i]}`;
+    letterKeyBoard[i].addEventListener("click", enterLetter)
+    keyboardContainer.appendChild(letterKeyBoard[i]);
+  }
+
+  keyboard.appendChild(keyboardContainer);
+
   questionAnswer.appendChild(keyboard);
 
   dialogContainer.appendChild(dialogResult);
