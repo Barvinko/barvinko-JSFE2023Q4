@@ -68,7 +68,6 @@ function enterLetter(event) {
   }else{
     letter = event;
   }
-  console.log(letter)
 
   if (letter.classList.contains("keyboard__letter_visited")) {
     return;
@@ -132,9 +131,7 @@ function dialogShow() {
 
 function keydownHandler(event) {
   const keyCode = event.code[event.code.length - 1];
-  console.log(keyCode);
   const keyElement = document.querySelector(`.keyboard__${keyCode}`);
-  console.log(keyElement)
   if (keyElement && !keyElement.classList.contains("keyboard__letter_visited")) {
     enterLetter(keyElement);
   }
