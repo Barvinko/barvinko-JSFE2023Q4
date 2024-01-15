@@ -87,6 +87,7 @@ body *{
 /* QUESTION */
 .question{
   font-size: 32px;
+  text-align: center;
 
   display: flex;
   justify-content: center;
@@ -128,6 +129,39 @@ body *{
 
   color: white;
   background-color: rgba(0, 0, 255, 0.7);
+}
+
+/* 768-1440 */
+@media (max-width: 1440px) {
+  .container{
+    gap: 40px;
+  }
+
+  .answer__letter{
+    width: 35px;
+    height: 54px;
+  
+    font-size: 54px;
+  }
+
+  .question{
+    font-size: 21px;
+    gap: 20px;
+  }
+
+  .keyboard__container{
+    width: 400px;
+    gap: 10px
+  }
+
+  .keyboard__letter{
+    width: 35px;
+    height: 33px;
+  
+    font-size: 21px;
+  
+    border-radius: 5px;
+  }
 }
 
 /* 360-768 */
