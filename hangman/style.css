@@ -1,10 +1,24 @@
+/* BASIC */
 body{
   margin: 0;
 }
 body *{
   box-sizing: border-box;
 }
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.question-answer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px
+}
 
+/* HANGMAN */
 .hangman__gallows{
   width: 353px;
   height: 581px;
@@ -55,4 +69,31 @@ body *{
 }
 .question__attempts{
   color: red;
+}
+
+/* KEYBOARD */
+.keyboard{
+  display: flex;
+  justify-content: center;
+}
+.keyboard__container{
+  width: 320px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px
+}
+.keyboard__letter{
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+
+  color: white;
+  background-color: rgba(0, 0, 255, 0.7);
 }

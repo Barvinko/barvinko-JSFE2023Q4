@@ -1,4 +1,5 @@
 import dataQuestions from "./js/questions.js"
+import alphabet from "./js/alphabet.js";
 
 console.log(dataQuestions)
 document.body.innerHTML = `
@@ -26,6 +27,7 @@ function create() {
 
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
+  const keyboard = document.querySelector(".keyboard");
 
   hangman.innerHTML = `
     <img class="hangman__man hangman__head" src="./img/man/head.svg" alt="head">
@@ -47,6 +49,19 @@ function create() {
       </span>
     </div>
   `
+
+  const keyboardContainer = document.createElement("div");
+  keyboardContainer.className = "keyboard__container";
+
+  const letters = [];
+  for (let i = 0; i < alphabet.length; i++) {
+    letters[i] = document.createElement("div");
+    letters[i].className = "keyboard__letter";
+    letters[i].innerText = `${alphabet[i]}`;
+    keyboardContainer.appendChild(letters[i]);
+  }
+
+  keyboard.appendChild(keyboardContainer);
 }
 
 
