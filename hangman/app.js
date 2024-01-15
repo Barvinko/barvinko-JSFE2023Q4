@@ -29,14 +29,25 @@ function create() {
   const question = document.querySelector(".question");
   const keyboard = document.querySelector(".keyboard");
 
-  hangman.innerHTML = `
-    <img class="hangman__man hangman__head" src="./img/man/head.svg" alt="head">
-    <img class="hangman__man hangman__body" src="./img/man/body.svg" alt="body">
-    <img class="hangman__man hangman__hand-one" src="./img/man/hand-one.svg" alt="hand-one">
-    <img class="hangman__man hangman__hand-two" src="./img/man/hand-two.svg" alt="hand-two">
-    <img class="hangman__man hangman__leg-one" src="./img/man/leg-one.svg" alt="leg-one">
-    <img class="hangman__man hangman__leg-two" src="./img/man/leg-two.svg" alt="leg-two">
-  `
+  const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
+
+  const elementMan = [];
+  for (let i = 0; i < man.length; i++) {
+    elementMan[i] = document.createElement("img");
+    elementMan[i].className = `hangman__man hangman__${man[i]} hangman__man_active`;
+    elementMan[i].src = `./img/man/${man[i]}.svg`;
+    elementMan[i].alt = `${man[i]}`;
+    hangman.appendChild(elementMan[i]);
+  }
+
+  // hangman.innerHTML = `
+  //   <img class="hangman__man hangman__head" src="./img/man/head.svg" alt="head">
+  //   <img class="hangman__man hangman__body" src="./img/man/body.svg" alt="body">
+  //   <img class="hangman__man hangman__hand-one" src="./img/man/hand-one.svg" alt="hand-one">
+  //   <img class="hangman__man hangman__hand-two" src="./img/man/hand-two.svg" alt="hand-two">
+  //   <img class="hangman__man hangman__leg-one" src="./img/man/leg-one.svg" alt="leg-one">
+  //   <img class="hangman__man hangman__leg-two" src="./img/man/leg-two.svg" alt="leg-two">
+  // `
 
   question.innerHTML = `
     <div class="question__hint">Hint:

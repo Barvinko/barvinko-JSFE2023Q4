@@ -7,9 +7,9 @@ body *{
 }
 .container{
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  gap: 100px;
+  padding: 10px;
 }
 .question-answer{
   display: flex;
@@ -22,6 +22,7 @@ body *{
 .hangman__gallows{
   width: 353px;
   height: 581px;
+  margin-right: 14px;
 
   background-image: url(./img/gallows.svg);
   background-position: center;
