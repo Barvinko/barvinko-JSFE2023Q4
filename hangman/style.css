@@ -152,8 +152,8 @@ body *{
   border: 0;
 }
 .dialog__container{
-  width: 300px;
-  height: 150px;
+  width: 600px;
+  height: 400px;
 
   color: white;
   background-color: rgba(49, 49, 255, 0.9);
@@ -168,9 +168,25 @@ body *{
   flex-direction: column;
   gap: 10px;
 
+  font-size: 54px;
+
 }
 .dialog_hide{
   display: none;
+}
+.dialog__button{
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+
+  color: rgb(255, 255, 255);
+  background-color: rgb(147, 140, 252);
+
+  border: 0;
+  box-shadow: 1px 1px rgba(0, 0, 255, 0.7);
+  border-radius: 5px;
+
+  font-size: 32px;
 }
 
 /* 768-1440 */
@@ -208,11 +224,11 @@ body *{
     font-size: 21px;
   
     border-radius: 5px;
-  }
+  }  
 }
 
 /* 360-768 */
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   /* BASIC */
   .container{
     flex-direction: column;
@@ -286,5 +302,28 @@ body *{
   /* DIALOG */
   .dialog{
     padding-top: 20vh;
+  }
+  .dialog__container{
+    width: 300px;
+    height: 150px;
+  
+    border-radius: 20px;
+    padding: 10px;
+  
+    font-size: 18px;
+  }
+  .dialog__button{
+    width: 100px;
+    height: 40px;
+    margin-top: 0;
+  
+    color: rgb(255, 255, 255);
+    background-color: rgb(147, 140, 252);
+  
+    border: 0;
+    box-shadow: 1px 1px rgba(0, 0, 255, 0.7);
+    border-radius: 5px;
+  
+    font-size: 18px;
   }
 }
