@@ -22,8 +22,15 @@ document.body.innerHTML = `
     </article>
   </main>
 `
+let numberQustion;
+let dataQuestion;
+let dataAnswer;
+
 function create() {
-  const numberQustion = Math.floor(Math.random() * 48);
+  numberQustion = Math.floor(Math.random() * 48);
+  dataQuestion = dataQuestions[numberQustion].question;
+  dataAnswer = dataQuestions[numberQustion].answer;
+  console.log("answer:", dataAnswer)
 
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
@@ -35,14 +42,14 @@ function create() {
   const elementMan = [];
   for (let i = 0; i < man.length; i++) {
     elementMan[i] = document.createElement("img");
-    elementMan[i].className = `hangman__man hangman__${man[i]} hangman__man_active`;
+    elementMan[i].className = `hangman__man hangman__${man[i]}`;
     elementMan[i].src = `./img/man/${man[i]}.svg`;
     elementMan[i].alt = `${man[i]}`;
     hangman.appendChild(elementMan[i]);
   }
 
   const letterCell = [];
-  for (let i = 0; i < dataQuestions[numberQustion].answer.length; i++) {
+  for (let i = 0; i < dataAnswer.length; i++) {
     letterCell[i] = document.createElement("div");
     letterCell[i].className = "answer__letter";
     letterCell[i].innerText = "_";
@@ -51,7 +58,7 @@ function create() {
 
   question.innerHTML = `
     <div class="question__hint">Hint:
-      <span class="question__question">${dataQuestions[numberQustion].question}</span>
+      <span class="question__question">${dataQuestion}</span>
     </div>
     <div class="question__incorrect-guesses">
       Incorrect guesses:
@@ -69,10 +76,25 @@ function create() {
     letterKeyBoard[i] = document.createElement("div");
     letterKeyBoard[i].className = "keyboard__letter";
     letterKeyBoard[i].innerText = `${alphabet[i]}`;
+    letterKeyBoard[i].addEventListener("click", enterLetter)
     keyboardContainer.appendChild(letterKeyBoard[i]);
   }
 
   keyboard.appendChild(keyboardContainer);
+}
+
+function enterLetter(event) {
+  const answerLetter = document.querySelectorAll(".answer__letter");
+  let letter
+  if (event.target) {
+    letter = event.target;
+  }else{
+    letter = event;
+  }
+  console.log(letter)
+  letter.classList.add("keyboard__letter_visited");
+  letter.removeEventListener('click', enterLetter);
+  console.log("work enterLetter");
 }
 
 

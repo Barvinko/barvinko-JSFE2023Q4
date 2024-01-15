@@ -120,6 +120,7 @@ body *{
   height: 50px;
 
   font-size: 32px;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
@@ -129,6 +130,10 @@ body *{
 
   color: white;
   background-color: rgba(0, 0, 255, 0.7);
+}
+
+.keyboard__letter_visited{
+  background-color: blue;
 }
 
 /* 768-1440 */
