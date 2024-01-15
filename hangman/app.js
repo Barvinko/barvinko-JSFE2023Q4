@@ -93,17 +93,35 @@ function create() {
     answer.appendChild(letterCell[i]);
   }
 
-  question.innerHTML = `
-    <div class="question__hint">Hint:
-      <span class="question__question">${dataQuestion}</span>
-    </div>
-    <div class="question__incorrect-guesses">
-      Incorrect guesses:
-      <span class="question__attempts">
-        <span class="question__count">0</span>/6
-      </span>
-    </div>
-  `
+  const questionHint = document.createElement("div");
+  questionHint.className = "question__hint";
+  questionHint.innerText = "Hint: "
+
+  const questionQuestion = document.createElement("span");
+  questionQuestion.className = "question__question";
+  questionQuestion.innerText = dataQuestion;
+
+  questionHint.appendChild(questionQuestion);
+
+  const questionIncorrectGuesse = document.createElement("div");
+  questionIncorrectGuesse.className = "question__incorrect-guesse";
+  questionIncorrectGuesse.innerText = "Incorrect guesses: "
+
+  const questionAttempts = document.createElement("span");
+  questionAttempts.className = "question__attempts";
+
+  const questionCount = document.createElement("span");
+  questionCount.className = "question__count";
+  questionCount.innerText = 0;
+
+  questionAttempts.appendChild(questionCount);
+  const textNode = document.createTextNode("/6")
+  questionAttempts.appendChild(textNode)
+  questionIncorrectGuesse.appendChild(questionAttempts);
+
+  question.appendChild(questionHint);
+  question.appendChild(questionIncorrectGuesse);
+
 
   const keyboardContainer = document.createElement("div");
   keyboardContainer.className = "keyboard__container";
