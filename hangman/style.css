@@ -137,11 +137,17 @@ body *{
     gap: 40px;
   }
 
+  .question-answer{
+    gap: 20px
+  }
+
   .answer__letter{
-    width: 35px;
-    height: 54px;
+    width: 28px;
+    height: 48px;
   
-    font-size: 54px;
+    margin: 0 3px;
+
+    font-size: 48px;
   }
 
   .question{
@@ -153,7 +159,6 @@ body *{
     width: 400px;
     gap: 10px
   }
-
   .keyboard__letter{
     width: 35px;
     height: 33px;
@@ -170,7 +175,7 @@ body *{
   .container{
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
   }
 
   /* HANGMAN */
@@ -208,8 +213,32 @@ body *{
     top: 345px;
   }
 
+  .answer__letter{
+    width: 24px;
+    height: 32px;
+
+    margin: 0 2px;
+  
+    font-size: 32px;
+  }
+
   /* QUESTION */
   .question{
-    font-size: 20px;
+    font-size: 18px;
+    gap: 10px;
+  }
+
+  .keyboard__container{
+    width: 340px;
+    gap: 10px
+  }
+
+  .keyboard__letter{
+    width: 28px;
+    height: 25px;
+  
+    font-size: 16px;
+  
+    border-radius: 5px;
   }
 }
