@@ -1,0 +1,286 @@
+/* BASIC */
+body{
+  margin: 0;
+}
+body *{
+  box-sizing: border-box;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  gap: 150px;
+  padding: 10px;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+.question-answer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px
+}
+
+/* HANGMAN */
+.hangman__gallows{
+  width: 353px;
+  height: 581px;
+  margin-right: 14px;
+
+  background-image: url(./img/gallows.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+.hangman__man{
+  position: absolute;
+  display: none;
+}
+.hangman__man_active{
+  display: block;
+}
+.hangman__head{
+  left: 252px;
+  top: 150px;
+}
+.hangman__body{
+  left: 300px;
+  top: 250px;
+}
+.hangman__hand-one{
+  left: 237px;
+  top: 275px;
+}
+.hangman__hand-two{
+  left: 300px;
+  top: 275px;
+}
+.hangman__leg-one{
+  left: 237px;
+  top: 375px;
+}
+.hangman__leg-two{
+  left: 300px;
+  top: 375px;
+}
+
+/* ANSWER */
+.answer{
+  display: flex;
+  justify-content: center;
+}
+.answer__letter{
+  width: 50px;
+  height: 80px;
+  margin: 0 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 80px;
+  font-weight: 600;
+}
+
+
+/* QUESTION */
+.question{
+  font-size: 32px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.question__question{
+  font-weight: 600;
+}
+.question__attempts{
+  color: red;
+}
+
+/* KEYBOARD */
+.keyboard{
+  display: flex;
+  justify-content: center;
+}
+.keyboard__container{
+  width: 650px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px
+}
+.keyboard__letter{
+  width: 60px;
+  height: 50px;
+
+  font-size: 32px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+
+  color: white;
+  background-color: rgba(0, 0, 255, 0.7);
+}
+
+.keyboard__letter_visited{
+  background-color: blue;
+}
+
+/* DIALOG */
+.dialog{
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+
+
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+}
+.dialog__container{
+  width: 300px;
+  height: 150px;
+
+  color: white;
+  background-color: rgba(49, 49, 255, 0.9);
+
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+}
+.dialog_hide{
+  display: none;
+}
+
+/* 768-1440 */
+@media (max-width: 1440px) {
+  .container{
+    gap: 40px;
+  }
+
+  .question-answer{
+    gap: 20px
+  }
+
+  .answer__letter{
+    width: 28px;
+    height: 48px;
+  
+    margin: 0 3px;
+
+    font-size: 48px;
+  }
+
+  .question{
+    font-size: 21px;
+    gap: 20px;
+  }
+
+  .keyboard__container{
+    width: 400px;
+    gap: 10px
+  }
+  .keyboard__letter{
+    width: 35px;
+    height: 33px;
+  
+    font-size: 21px;
+  
+    border-radius: 5px;
+  }
+}
+
+/* 360-768 */
+@media (max-width: 768px) {
+  /* BASIC */
+  .container{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* HANGMAN */
+  .hangman__gallows{
+    width: 280px;
+    height: 480px;
+    margin-right: 29px;
+  }
+  
+  .hangman__man_active{
+    display: block;
+  }
+  .hangman__head{
+    left: 194px;
+    top: 120px;
+  }
+  .hangman__body{
+    left: 242px;
+    top: 220px;
+  }
+  .hangman__hand-one{
+    left: 179px;
+    top: 245px;
+  }
+  .hangman__hand-two{
+    left: 242px;
+    top: 245px;
+  }
+  .hangman__leg-one{
+    left: 179px;
+    top: 345px;
+  }
+  .hangman__leg-two{
+    left: 242px;
+    top: 345px;
+  }
+
+  .answer__letter{
+    width: 24px;
+    height: 32px;
+
+    margin: 0 2px;
+  
+    font-size: 32px;
+  }
+
+  /* QUESTION */
+  .question{
+    font-size: 18px;
+    gap: 10px;
+  }
+
+  .keyboard__container{
+    width: 340px;
+    gap: 10px
+  }
+
+  .keyboard__letter{
+    width: 28px;
+    height: 25px;
+  
+    font-size: 16px;
+  
+    border-radius: 5px;
+  }
+}
