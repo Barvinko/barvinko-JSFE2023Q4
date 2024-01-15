@@ -1,27 +1,40 @@
 import dataQuestions from "./js/questions.js"
 import alphabet from "./js/alphabet.js";
 
-console.log(dataQuestions)
-document.body.innerHTML = `
-  <main class="container">
-    <section class="hangman">
-      <div class="hangman__gallows">
+(() => {
+  const main = document.createElement("main");
+  main.className = "container";
 
-      </div>
-    </section>
-    <article class="question-answer">
-      <section class="answer">
+  const hangman = document.createElement("section");
+  hangman.className = "hangman";
 
-      </section>
-      <section class="question">
+  const hangmanGallows = document.createElement("div");
+  hangmanGallows.className = "hangman__gallows";
 
-      </section>
-      <section class="keyboard">
+  const questionAnswer = document.createElement("article");
+  questionAnswer.className = "question-answer";
 
-      </section>
-    </article>
-  </main>
-`
+  const answer = document.createElement("section");
+  answer.className = "answer";
+
+  const question = document.createElement("section");
+  question.className = "question";
+
+  const keyboard = document.createElement("section");
+  keyboard.className = "keyboard";
+
+  main.appendChild(hangman);
+  main.appendChild(questionAnswer);
+
+  hangman.appendChild(hangmanGallows);
+
+  questionAnswer.appendChild(answer);
+  questionAnswer.appendChild(question);
+  questionAnswer.appendChild(keyboard);
+  
+  document.body.appendChild(main);
+})();
+
 let numberQustion;
 let dataQuestion;
 let dataAnswer;
@@ -35,7 +48,7 @@ function create() {
   const hangman = document.querySelector(".hangman__gallows");
   const question = document.querySelector(".question");
   const keyboard = document.querySelector(".keyboard");
-  const amswer =document.querySelector('.answer')
+  const answer =document.querySelector('.answer')
 
   const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
 
@@ -53,7 +66,7 @@ function create() {
     letterCell[i] = document.createElement("div");
     letterCell[i].className = "answer__letter";
     letterCell[i].innerText = "_";
-    amswer.appendChild(letterCell[i]);
+    answer.appendChild(letterCell[i]);
   }
 
   question.innerHTML = `
@@ -97,5 +110,4 @@ function enterLetter(event) {
   console.log("work enterLetter");
 }
 
-
-create();
+create() 
