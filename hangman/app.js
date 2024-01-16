@@ -173,6 +173,7 @@ function keydownHandler(event) {
 
   const dialogButton = document.createElement("button");
   dialogButton.className = "dialog__button";
+  dialogButton.addEventListener("click", dialogHide)
 
   // CREATE ELEMENT OF "GALLOWS"
   const man = ["head", "body", "hand-one", "hand-two", "leg-one", "leg-two"];
@@ -243,8 +244,6 @@ function keydownHandler(event) {
   dialogContainer.appendChild(dialogButton);
 
   dialog.appendChild(dialogContainer);
-  dialog.addEventListener("click", dialogHide)
-
   
   main.appendChild(hangman);
   main.appendChild(questionAnswer);
