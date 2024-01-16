@@ -68,7 +68,6 @@ function enterLetter(event) {
   }else{
     letter = event;
   }
-  // console.log(letter)
 
   if (letter.classList.contains("keyboard__letter_visited")) {
     return;
@@ -128,6 +127,14 @@ function dialogHide() {
 function dialogShow() {
  const dialog = document.querySelector(".dialog");
  dialog.classList.remove("dialog_hide");
+}
+
+function keydownHandler(event) {
+  const keyCode = event.code[event.code.length - 1];
+  const keyElement = document.querySelector(`.keyboard__${keyCode}`);
+  if (keyElement && !keyElement.classList.contains("keyboard__letter_visited")) {
+    enterLetter(keyElement);
+  }
 }
 
 (() => {
@@ -221,7 +228,7 @@ function dialogShow() {
   const letterKeyBoard = [];
   for (let i = 0; i < alphabet.length; i++) {
     letterKeyBoard[i] = document.createElement("div");
-    letterKeyBoard[i].className = "keyboard__letter";
+    letterKeyBoard[i].className = `keyboard__letter keyboard__${alphabet[i]}`;
     letterKeyBoard[i].innerText = `${alphabet[i]}`;
     letterKeyBoard[i].addEventListener("click", enterLetter)
     keyboardContainer.appendChild(letterKeyBoard[i]);
@@ -244,6 +251,8 @@ function dialogShow() {
   main.appendChild(dialog);
 
   document.body.appendChild(main);
-
-  create() 
 })();
+
+document.addEventListener('keydown', keydownHandler);
+
+create() 
