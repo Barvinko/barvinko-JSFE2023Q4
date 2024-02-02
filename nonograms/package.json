@@ -7,7 +7,8 @@
     "start": "webpack serve",
     "build-dev": "webpack --node-env=development",
     "build-prod": "webpack --node-env=production",
-    "clear": "rd /s /q dist"
+    "clear": "rd /s /q dist",
+    "format": "prettier --write \"./src/**/*.scss\" \"./src/**/*.js\" \"./src/**/*.html\""
   },
   "dependencies": {
     "core-js": "^3.32.0",
@@ -25,6 +26,7 @@
     "postcss": "^8.4.27",
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.1.1",
+    "prettier": "^3.2.4",
     "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",

@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 
-.nonogram__cell{
+.nonogram__cell {
   width: 22px;
   height: 22px;
   border: 1px solid black;
 
   position: relative;
 
-  .nonogram__img{
+  .nonogram__img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,11 +17,11 @@
   }
 }
 
-.nonogram__side-help{
+.nonogram__side-help {
   text-align: end;
 }
 
-.nonogram__head-help{
+.nonogram__head-help {
   writing-mode: vertical-lr;
   text-orientation: upright;
   text-align: end;
