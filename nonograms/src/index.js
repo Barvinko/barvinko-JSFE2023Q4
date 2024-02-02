@@ -18,11 +18,11 @@ container.appendChild(main);
 
 const nonogram1 = {
   picture: [
-    ['X', 'O', 'X', 'O', 'X'],
-    ['O', 'X', 'O', 'X', 'O'],
-    ['X', 'O', 'X', 'O', 'X'],
-    ['O', 'X', 'O', 'X', 'O'],
-    ['X', 'O', 'X', 'O', 'X'],
+    ['T', 'F', 'T', 'F', 'T'],
+    ['F', 'T', 'F', 'T', 'F'],
+    ['T', 'F', 'T', 'F', 'T'],
+    ['F', 'T', 'F', 'T', 'F'],
+    ['T', 'F', 'T', 'F', 'T'],
   ],
   helpHead: [[2], [1, 1], [3], [1, 1], [2]],
   helpSied: [[1, 1], [1, 1], [3], [1, 1], [2]],
@@ -50,6 +50,7 @@ function createNonogram(nonogram) {
         cell.innerText = nonogram.helpSied[i - 1].join(' ');
       } else {
         cell.className = 'nonogram__cell';
+        cell.addEventListener("click", clickCell.bind(null, nonogram.picture, cell));
         const cellImg = new Image();
         cellImg.className = 'nonogram__img';
         cell.appendChild(cellImg);
@@ -57,6 +58,24 @@ function createNonogram(nonogram) {
       row.appendChild(cell);
     }
   }
+}
+
+function clickCell(nonogramPicture, element) {
+  const elementImg = element.children[0];
+  elementImg.src = elementImg.src != squareImg ? squareImg : "";
+  checkNonogram(nonogramPicture);
+}
+
+function checkNonogram(nonogramPicture) {
+  const cellArr = document.querySelectorAll(".nonogram__img");
+  const nonogramAnswer = nonogramPicture.flat();
+  let flagWin = true;
+  for (let i = 0; i < nonogramAnswer.length; i++) {
+    if (nonogramAnswer[i] == "T" && cellArr[i].src != squareImg || nonogramAnswer[i] == "F" && cellArr[i].src == squareImg) {
+      flagWin = false;
+    }
+  }
+  console.log(flagWin)
 }
 
 createNonogram(nonogram1);
