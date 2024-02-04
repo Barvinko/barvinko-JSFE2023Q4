@@ -133,10 +133,12 @@ body{
     transform: translate(-50%, -50%);
   }
 }
-.nonogram__side-help {
+.nonogram__side-help, .nonogram__head-help:first-of-type {
   text-align: end;
+  border-right: 2px solid $tableColor;
 }
 .nonogram__head-help {
   text-align: center;
   vertical-align: bottom;
+  border-bottom: 2px solid $tableColor;
 }
