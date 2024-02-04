@@ -25,7 +25,7 @@ function createNonogram(nonogram) {
   console.log(nonogram);
   const nonogramTable = document.createElement('table');
   nonogramTable.className = 'nonogram';
-  const containerOfNonogram = document.querySelector(".main");
+  const containerOfNonogram = document.querySelector(".article-nonogram");
   containerOfNonogram.appendChild(nonogramTable);
 
   //Create helpSied and helpHead
@@ -107,11 +107,63 @@ function checkNonogram(nonogramPicture) {
 
   const header = document.createElement('header');
   header.className = 'header';
+  container.appendChild(header);
+
   const main = document.createElement('main');
   main.className = 'main';
-
-  container.appendChild(header);
   container.appendChild(main);
+
+  const sideBar = document.createElement('aside');
+  sideBar.className = 'switch-nonogram';
+  main.appendChild(sideBar);
+
+  const nonogramAeticle = document.createElement('article');
+  nonogramAeticle.className = 'article-nonogram';
+  main.appendChild(nonogramAeticle);
+
+  //fill switch-nonogram
+  nonogramPaterns.forEach((size, index) => {
+    const sizeSector = document.createElement('section');
+    sizeSector.className = 'switch-nonogram__section';
+    sideBar.appendChild(sizeSector);
+
+    const sizeName = document.createElement('h2');
+    sizeName.className = 'switch-nonogram__title';
+    sizeName.innerText = `${(index + 1) * 5}x${(index + 1) * 5}`
+    sizeSector.appendChild(sizeName);
+
+    size.forEach(nonogram => {
+      const containerCanvas = document.createElement('div');
+      containerCanvas.className = 'switch-nonogram__container';
+      sizeSector.appendChild(containerCanvas);
+
+      const nonogramCanvas = document.createElement('canvas');
+      nonogramCanvas.width = 100;
+      nonogramCanvas.height = 100;
+      nonogramCanvas.className = 'switch-nonogram__canvas';
+      containerCanvas.appendChild(nonogramCanvas);
+
+      const nonogramName = document.createElement('h4');
+      nonogramName.className = 'switch-nonogram__name';
+      nonogramName.innerText = nonogram.name;
+      containerCanvas.appendChild(nonogramName);
+
+      //Paint nonogram
+      const ctx = nonogramCanvas.getContext('2d');
+    
+      const cellSize = 20 / (index + 1);
+    
+      for (let i = 0; i < nonogram.picture.length; i++) {
+        for (let j = 0; j < nonogram.picture[i].length; j++) {
+          const x = j * cellSize;
+          const y = i * cellSize;
+    
+          ctx.fillStyle = nonogram.picture[i][j] === 'X' ? 'black' : 'white';
+          ctx.fillRect(x, y, cellSize, cellSize);
+        }
+      }
+    });
+  });
 
   //Output first nonogram
   const startPicture = Math.floor(Math.random() * 5);

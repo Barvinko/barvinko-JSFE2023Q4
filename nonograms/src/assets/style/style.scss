@@ -1,7 +1,68 @@
 * {
   box-sizing: border-box;
 }
+body{
+  margin: 0;
+}
 
+.container{
+  height: 100vh;
+  width: 100vw;
+}
+.main{
+  display: flex;
+
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .container{
+    min-width: 500px;
+  }
+  .switch-nonogram{
+    display: none;
+  }
+}
+
+//Switch Nonogram
+.switch-nonogram{
+  height: 100%;
+  width: 200px;
+  padding-top: 20px;
+  overflow-y: scroll;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.switch-nonogram__title{
+  border-bottom: 2px solid black;
+}
+.switch-nonogram__title, .switch-nonogram__name{
+  margin: 0;
+}
+.switch-nonogram__container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-top: 20px;
+}
+.switch-nonogram__canvas{
+  width: 100px;
+  height: 100px;
+}
+
+//Table nonogram
+.article-nonogram{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nonogram__cell {
   width: 22px;
   height: 22px;
@@ -16,11 +77,9 @@
     transform: translate(-50%, -50%);
   }
 }
-
 .nonogram__side-help {
   text-align: end;
 }
-
 .nonogram__head-help {
   text-align: center;
   vertical-align: bottom;
