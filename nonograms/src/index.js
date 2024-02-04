@@ -6,19 +6,6 @@ console.log(nonogramPaterns);
 import squareImg from './assets/img/cell/square.svg';
 import crossImg from './assets/img/cell/cross.svg';
 
-const container = document.createElement('div');
-container.className = 'container';
-
-document.body.appendChild(container);
-
-const header = document.createElement('header');
-header.className = 'header';
-const main = document.createElement('main');
-main.className = 'main';
-
-container.appendChild(header);
-container.appendChild(main);
-
 function createHelps(nonogram) {
   const help = [];
   for (let i = 0; i < nonogram.length; i++) {
@@ -35,10 +22,11 @@ function createHelps(nonogram) {
 }
 
 function createNonogram(nonogram) {
-  console.log(nonogram.picture);
+  console.log(nonogram);
   const nonogramTable = document.createElement('table');
   nonogramTable.className = 'nonogram';
-  main.appendChild(nonogramTable);
+  const containerOfNonogram = document.querySelector(".main");
+  containerOfNonogram.appendChild(nonogramTable);
 
   //Create helpSied and helpHead
   nonogram.helpSied = createHelps(nonogram.picture);
@@ -111,4 +99,21 @@ function checkNonogram(nonogramPicture) {
   console.log(flagWin);
 }
 
-createNonogram(nonogramPaterns[2][4]);
+(() => {
+  const container = document.createElement('div');
+  container.className = 'container';
+
+  document.body.appendChild(container);
+
+  const header = document.createElement('header');
+  header.className = 'header';
+  const main = document.createElement('main');
+  main.className = 'main';
+
+  container.appendChild(header);
+  container.appendChild(main);
+
+  //Output first nonogram
+  const startPicture = Math.floor(Math.random() * 5);
+  createNonogram(nonogramPaterns[0][startPicture]);
+})()

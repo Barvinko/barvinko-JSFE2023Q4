@@ -47,7 +47,19 @@ export default [
       ],
       helpHead: [],
       helpSied: [],
-    }
+    },
+    {
+      name: "Cross",
+      picture: [
+        [' ', 'X', 'X', 'X', ' '],
+        ['X', 'X', ' ', 'X', 'X'],
+        ['X', ' ', ' ', ' ', 'X'],
+        ['X', 'X', ' ', 'X', 'X'],
+        [' ', 'X', 'X', 'X', ' '],
+      ],
+      helpHead: [],
+      helpSied: [],
+    },
   ],
   [
     {
