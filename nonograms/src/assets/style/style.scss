@@ -107,6 +107,18 @@ body{
   justify-content: center;
   align-items: center;
 }
+.nonogram{
+  border-collapse: collapse;
+}
+.nonogram__border{
+  width: 0;
+  padding: 0;
+  background-color: $tableColor;
+  border: 1px solid $tableColor;
+}
+.nonogram__border-head{
+  border: 2px solid $tableColor;
+}
 .nonogram__cell {
   width: 22px;
   height: 22px;

@@ -46,16 +46,24 @@ function createNonogram(nonogram) {
   nonogram.helpHead = createHelps(nonagramInvert);
 
   //Create layout of nonogram
-  for (let i = 0; i < nonogram.picture.length + 1; i++) {
+  let countBorderHead = 1;
+  for (let i = 0; i < nonogram.picture.length + (nonogram.picture.length / 5); i++) {
     const row = document.createElement('tr');
+    if (i == 5 * countBorderHead + countBorderHead && countBorderHead < nonogram.picture.length / 5) {
+      row.className = 'nonogram__border-head';
+      nonogramTable.appendChild(row);
+      countBorderHead++;
+      continue;
+    }
     const helprRowClass = i == 0 ? ' nonogram__row-help' : '';
     row.className = 'nonogram__row' + helprRowClass;
     nonogramTable.appendChild(row);
 
-    for (let j = 0; j < nonogram.picture[0].length + 1; j++) {
+    let countBorder = 1;
+    for (let j = 0; j < nonogram.picture[0].length + (nonogram.picture.length / 5); j++) {
       const cell = document.createElement('td');
       //Filling row head-help
-      if (i == 0) {
+      if (i == 0 && j != 5 * countBorder + countBorder) {
         cell.className = 'nonogram__head-help';
         const headHelpContainer = document.createElement('div');
         headHelpContainer.className = 'nonogram__head-help-container';
@@ -63,10 +71,14 @@ function createNonogram(nonogram) {
         cell.appendChild(headHelpContainer);
 
         headHelpContainer.innerHTML =
-          j > 0 ? nonogram.helpHead[j - 1].join('<br>') : '';
+          j > 0 ? nonogram.helpHead[j - countBorder].join('<br>') : '';
       } else if (j == 0 && i > 0) {
         cell.className = 'nonogram__side-help';
-        cell.innerText = nonogram.helpSied[i - 1].join(' ');
+        cell.innerText = nonogram.helpSied[i - countBorderHead].join(' ');
+      } else if (j == 5 * countBorder + countBorder && countBorder < nonogram.picture.length / 5) {
+        console.log(5 * countBorder + countBorder)
+        countBorder++;
+        cell.className = 'nonogram__border';
       } else {
         cell.className = 'nonogram__cell';
         cell.addEventListener(
