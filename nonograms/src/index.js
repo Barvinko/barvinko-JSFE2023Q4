@@ -26,7 +26,11 @@ function createNonogram(nonogram) {
   const nonogramTable = document.createElement('table');
   nonogramTable.className = 'nonogram';
   const containerOfNonogram = document.querySelector(".article-nonogram");
-  containerOfNonogram.appendChild(nonogramTable);
+  if (document.querySelector(".nonogram")) {
+    containerOfNonogram.replaceChild(nonogramTable, document.querySelector(".nonogram"));
+  }else{
+    containerOfNonogram.appendChild(nonogramTable);
+  }
 
   //Create helpSied and helpHead
   nonogram.helpSied = createHelps(nonogram.picture);
@@ -99,6 +103,10 @@ function checkNonogram(nonogramPicture) {
   console.log(flagWin);
 }
 
+// function switchNonogram(nonogram) {
+  
+// }
+
 (() => {
   const container = document.createElement('div');
   container.className = 'container';
@@ -135,6 +143,7 @@ function checkNonogram(nonogramPicture) {
     size.forEach(nonogram => {
       const containerCanvas = document.createElement('div');
       containerCanvas.className = 'switch-nonogram__container';
+      containerCanvas.addEventListener("click", () => createNonogram(nonogram))
       sizeSector.appendChild(containerCanvas);
 
       const nonogramCanvas = document.createElement('canvas');
