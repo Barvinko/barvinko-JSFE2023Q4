@@ -85,6 +85,7 @@ function createNonogram(nonogram) {
           'click',
           clickCell.bind(null, nonogram.picture, cell),
         );
+        cell.addEventListener('contextmenu', cellRightClick)
         const cellImg = new Image();
         cellImg.className = 'nonogram__img';
         cell.appendChild(cellImg);
@@ -98,6 +99,12 @@ function clickCell(nonogramPicture, element) {
   const elementImg = element.children[0];
   elementImg.src = elementImg.src != squareImg ? squareImg : '';
   checkNonogram(nonogramPicture);
+}
+
+function cellRightClick(event) {
+  event.preventDefault();
+  const elementImg = event.currentTarget.children[0];
+  elementImg.src = elementImg.src != crossImg ? crossImg : '';
 }
 
 function checkNonogram(nonogramPicture) {
