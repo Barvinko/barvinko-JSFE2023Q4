@@ -103,9 +103,16 @@ function checkNonogram(nonogramPicture) {
   console.log(flagWin);
 }
 
-// function switchNonogram(nonogram) {
-  
-// }
+function displaySwitch(button) {
+  const aside = document.querySelector(".switch-nonogram");
+  if (button.classList.contains("header__button-aside_active")) {
+    button.classList.remove("header__button-aside_active");
+    aside.classList.remove("switch-nonogram_active");
+    return;
+  }
+  button.classList.add("header__button-aside_active");
+  aside.classList.add("switch-nonogram_active");
+}
 
 (() => {
   const container = document.createElement('div');
@@ -113,10 +120,18 @@ function checkNonogram(nonogramPicture) {
 
   document.body.appendChild(container);
 
+  //HEADER
   const header = document.createElement('header');
   header.className = 'header';
   container.appendChild(header);
 
+  const buttonAside = document.createElement('button');
+  buttonAside.className = 'header__button-aside';
+  buttonAside.innerText = "Choose Nonogram";
+  buttonAside.addEventListener("click", () => displaySwitch(buttonAside))
+  header.appendChild(buttonAside);
+
+  //MAIN
   const main = document.createElement('main');
   main.className = 'main';
   container.appendChild(main);
@@ -144,6 +159,7 @@ function checkNonogram(nonogramPicture) {
       const containerCanvas = document.createElement('div');
       containerCanvas.className = 'switch-nonogram__container';
       containerCanvas.addEventListener("click", () => createNonogram(nonogram))
+      containerCanvas.addEventListener("click", () => displaySwitch(buttonAside))
       sizeSector.appendChild(containerCanvas);
 
       const nonogramCanvas = document.createElement('canvas');

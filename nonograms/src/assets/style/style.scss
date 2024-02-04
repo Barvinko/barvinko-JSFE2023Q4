@@ -3,40 +3,70 @@
 }
 body{
   margin: 0;
+  min-height: 100vh;
+  height: 100vh;
 }
 
 .container{
-  height: 100vh;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .main{
   display: flex;
-
-  height: 100%;
+  position: relative;
+  height: calc(100vh - $headerHight);
 }
 
 @media (max-width: 768px) {
   .container{
     min-width: 500px;
   }
-  .switch-nonogram{
-    display: none;
-  }
+}
+
+//HEADER
+.header{
+  height: $headerHight;
+  padding: 10px 15px;
+
+  background-color: $switchNonogramBackColor;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header__button-aside{
+  width: min-content;
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: $buttonColor;
+  background-color: $buttonBackColor;
+
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 //Switch Nonogram
 .switch-nonogram{
   height: 100%;
-  width: 200px;
+  width: 250px;
   padding-top: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  color: $switchNonogramColor;
+  background-color: $switchNonogramBackColor;
 
   text-align: center;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  
+  z-index: 1;
+}
+.switch-nonogram_active{
+  display: flex;
 }
 .switch-nonogram__title{
   border-bottom: 2px solid black;
@@ -56,6 +86,20 @@ body{
   height: 100px;
 }
 
+@media (max-width: 768px) {
+  .switch-nonogram{
+    position: absolute;
+    width: 100%;
+    
+    flex-direction: row;
+    justify-content: center;
+    gap: 15vw;
+  }
+  .switch-nonogram__section{
+    height: inherit;
+  }
+}
+
 //Table nonogram
 .article-nonogram{
   width: 100%;
@@ -66,7 +110,7 @@ body{
 .nonogram__cell {
   width: 22px;
   height: 22px;
-  border: 1px solid black;
+  border: 1px solid $tableColor;
 
   position: relative;
 
