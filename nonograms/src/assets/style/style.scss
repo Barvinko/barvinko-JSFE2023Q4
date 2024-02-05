@@ -157,6 +157,24 @@ body{
   color: $buttonBackColor;
 }
 
+//ContainerButtons
+.nonogram__container-buttons{
+  width: 230px;
+  
+  display: flex;
+  justify-content: space-between;
+}
+.nonogram__button{
+  font-size: 18px;
+
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 15px;
+
+  background-color: $buttonBackColor;
+  color: $buttonColor;
+}
+
 //DIALOG
 .dialog-win{
   position: fixed;

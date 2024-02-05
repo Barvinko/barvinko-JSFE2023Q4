@@ -98,6 +98,10 @@ function createNonogram(nonogram) {
       row.appendChild(cell);
     }
   }
+
+  //add function to button
+  const nonogramButtonRestart = document.querySelector('.nonogram__restart');
+  nonogramButtonRestart.addEventListener("click", () => createNonogram(nonogram));
 }
 
 function clickCell(nonogramPicture, element) {
@@ -185,6 +189,7 @@ function startTimer() {
     nonogramTimer.innerText = `${padZero(minutes)}:${padZero(seconds)}`;
   }
 }
+
 (() => {
   const container = document.createElement('div');
   container.className = 'container';
@@ -268,6 +273,21 @@ function startTimer() {
   const nonogramTimer = document.createElement('div');
   nonogramTimer.className = 'nonogram__timer';
   nonogramAeticle.appendChild(nonogramTimer);
+  
+  //Container of buttons
+  const nonogramConBut = document.createElement('section');
+  nonogramConBut.className = 'nonogram__container-buttons';
+  nonogramAeticle.appendChild(nonogramConBut);
+
+  const nonogramButonsSave = document.createElement('button');
+  nonogramButonsSave.className = 'nonogram__button nonogram__random-game';
+  nonogramButonsSave.innerText = "Random Game";
+  nonogramConBut.appendChild(nonogramButonsSave);
+
+  const nonogramButonsRestart = document.createElement('button');
+  nonogramButonsRestart.className = 'nonogram__button nonogram__restart';
+  nonogramButonsRestart.innerText = "Restart";
+  nonogramConBut.appendChild(nonogramButonsRestart);
 
   //DIALOG
   const dialogWin = document.createElement('dialog');
