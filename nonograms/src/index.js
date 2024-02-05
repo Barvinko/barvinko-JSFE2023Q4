@@ -24,15 +24,17 @@ function createHelps(nonogram) {
 }
 
 function createNonogram(nonogram) {
+  clearInterval(timer);
+  const nonogramTimer = document.querySelector(".nonogram__timer");
+  nonogramTimer.innerText = "00:00";
+  startTime = false;
+
   console.log(nonogram);
   const nonogramTable = document.createElement('table');
   nonogramTable.className = 'nonogram';
   const containerOfNonogram = document.querySelector(".article-nonogram");
-  if (document.querySelector(".nonogram")) {
-    containerOfNonogram.replaceChild(nonogramTable, document.querySelector(".nonogram"));
-  }else{
-    containerOfNonogram.appendChild(nonogramTable);
-  }
+  containerOfNonogram.replaceChild(nonogramTable, document.querySelector(".nonogram"));
+
 
   //Create helpSied and helpHead
   nonogram.helpSied = createHelps(nonogram.picture);
@@ -99,6 +101,8 @@ function createNonogram(nonogram) {
 }
 
 function clickCell(nonogramPicture, element) {
+  startTimer();
+  
   if (!flagClick) {
     return;
   }
@@ -108,6 +112,7 @@ function clickCell(nonogramPicture, element) {
 }
 
 function cellRightClick(event) {
+  startTimer();
   event.preventDefault();
   const elementImg = event.currentTarget.children[0];
   elementImg.src = elementImg.src != crossImg ? crossImg : '';
@@ -125,11 +130,16 @@ function checkNonogram(nonogramPicture, element) {
       flagWin = false;
     }
   }
-  console.log(cellArr[0].parentNode)
+
   if(flagWin){
     const dialogWin = document.querySelector('.dialog-win');
+    const nonogramTimer = document.querySelector(".nonogram__timer");
+    const dialogWinAnswer = document.querySelector(".dialog-win__answer")
     dialogWin.showModal();
 
+    dialogWinAnswer.innerText = `Great! You have solved the nonogram in ${nonogramTimer.innerText} seconds!`
+
+    clearInterval(timer);
     flagClick = false;
 
     cellArr.forEach(img => {
@@ -149,6 +159,32 @@ function displaySwitch(button) {
   aside.classList.add("switch-nonogram_active");
 }
 
+let timer;
+let startTime = false;
+
+function startTimer() {
+  const nonogramTimer = document.querySelector(".nonogram__timer");
+    
+  if (!startTime) {
+    startTime = new Date().getTime();
+    timer = setInterval(updateTimer, 1000);
+  }
+
+  function updateTimer() {
+    function padZero(num) {
+      return num < 10 ? `0${num}` : num;
+    }
+    
+    let currentTime = new Date().getTime();
+    let elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+  
+    let minutes = Math.floor(elapsedSeconds / 60);
+    let seconds = elapsedSeconds % 60;
+  
+    // Форматирование времени в XX:XX
+    nonogramTimer.innerText = `${padZero(minutes)}:${padZero(seconds)}`;
+  }
+}
 (() => {
   const container = document.createElement('div');
   container.className = 'container';
@@ -174,10 +210,6 @@ function displaySwitch(button) {
   const sideBar = document.createElement('aside');
   sideBar.className = 'switch-nonogram';
   main.appendChild(sideBar);
-
-  const nonogramAeticle = document.createElement('article');
-  nonogramAeticle.className = 'article-nonogram';
-  main.appendChild(nonogramAeticle);
 
   //fill switch-nonogram
   nonogramPaterns.forEach((size, index) => {
@@ -224,6 +256,18 @@ function displaySwitch(button) {
       }
     });
   });
+
+  const nonogramAeticle = document.createElement('article');
+  nonogramAeticle.className = 'article-nonogram';
+  main.appendChild(nonogramAeticle);
+
+  const nonogramTable = document.createElement('table');
+  nonogramTable.className = 'nonogram';
+  nonogramAeticle.appendChild(nonogramTable);
+
+  const nonogramTimer = document.createElement('div');
+  nonogramTimer.className = 'nonogram__timer';
+  nonogramAeticle.appendChild(nonogramTimer);
 
   //DIALOG
   const dialogWin = document.createElement('dialog');
