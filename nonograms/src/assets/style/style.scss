@@ -29,7 +29,7 @@ body{
   height: $headerHight;
   padding: 10px 15px;
 
-  background-color: $switchNonogramBackColor;
+  background-color: $buttonBackColor;
 
   display: flex;
   flex-direction: column;
@@ -185,6 +185,9 @@ body{
   border: 0;
   border-radius: 15px;
   padding: 5px 10px;
+
+  font-size: 20px;
+  font-weight: 600;
 
   width: min-content;
 }
