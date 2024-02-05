@@ -159,7 +159,7 @@ body{
 
 //ContainerButtons
 .nonogram__container-buttons{
-  width: 230px;
+  width: 200px;
   
   display: flex;
   justify-content: space-between;
@@ -193,7 +193,7 @@ body{
   transform: translate(-50%, -50%);
 }
 .dialog-win__container{
-  width: 300px;
+  width: 400px;
   height: 250px;
 
   color: $buttonColor;
@@ -216,4 +216,10 @@ body{
   font-weight: 600;
 
   width: min-content;
+}
+
+@media (max-width: 768px) {
+  .dialog-win__container{
+    width: 300px;
+  }
 }
