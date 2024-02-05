@@ -6,6 +6,8 @@ console.log(nonogramPaterns);
 import squareImg from './assets/img/cell/square.svg';
 import crossImg from './assets/img/cell/cross.svg';
 
+let flagClick;
+
 function createHelps(nonogram) {
   const help = [];
   for (let i = 0; i < nonogram.length; i++) {
@@ -81,11 +83,12 @@ function createNonogram(nonogram) {
         cell.className = 'nonogram__border';
       } else {
         cell.className = 'nonogram__cell';
+        flagClick = true;
         cell.addEventListener(
           'click',
           clickCell.bind(null, nonogram.picture, cell),
         );
-        cell.addEventListener('contextmenu', cellRightClick)
+        cell.addEventListener('contextmenu', cellRightClick);
         const cellImg = new Image();
         cellImg.className = 'nonogram__img';
         cell.appendChild(cellImg);
@@ -96,9 +99,12 @@ function createNonogram(nonogram) {
 }
 
 function clickCell(nonogramPicture, element) {
+  if (!flagClick) {
+    return;
+  }
   const elementImg = element.children[0];
   elementImg.src = elementImg.src != squareImg ? squareImg : '';
-  checkNonogram(nonogramPicture);
+  checkNonogram(nonogramPicture, element);
 }
 
 function cellRightClick(event) {
@@ -107,7 +113,7 @@ function cellRightClick(event) {
   elementImg.src = elementImg.src != crossImg ? crossImg : '';
 }
 
-function checkNonogram(nonogramPicture) {
+function checkNonogram(nonogramPicture, element) {
   const cellArr = document.querySelectorAll('.nonogram__img');
   const nonogramAnswer = nonogramPicture.flat();
   let flagWin = true;
@@ -119,7 +125,17 @@ function checkNonogram(nonogramPicture) {
       flagWin = false;
     }
   }
-  console.log(flagWin);
+  console.log(cellArr[0].parentNode)
+  if(flagWin){
+    const dialogWin = document.querySelector('.dialog-win');
+    dialogWin.showModal();
+
+    flagClick = false;
+
+    cellArr.forEach(img => {
+      img.parentNode.removeEventListener('contextmenu', cellRightClick);
+    })
+  }
 }
 
 function displaySwitch(button) {
@@ -208,6 +224,31 @@ function displaySwitch(button) {
       }
     });
   });
+
+  //DIALOG
+  const dialogWin = document.createElement('dialog');
+  dialogWin.className = 'dialog-win';
+  container.appendChild(dialogWin);
+
+  const dialogWinCasing = document.createElement('div');
+  dialogWinCasing.className = 'dialog-win__casing';
+  dialogWin.appendChild(dialogWinCasing);
+
+  const dialogWinContainer = document.createElement('div');
+  dialogWinContainer.className = 'dialog-win__container';
+  dialogWinCasing.appendChild(dialogWinContainer);
+
+  const dialogWinAnswe = document.createElement('h1');
+  dialogWinAnswe.className = 'dialog-win__answer';
+  dialogWinAnswe.innerHTML = "Great! You have solved the nonogram!"
+  dialogWinContainer.appendChild(dialogWinAnswe);
+
+  const dialogWinButton = document.createElement('button');
+  dialogWinButton.className = 'dialog-win__button';
+  dialogWinButton.innerText = 'OK'
+  dialogWinContainer.appendChild(dialogWinButton);
+  dialogWinButton.addEventListener("click", () => dialogWin.close())
+
 
   //Output first nonogram
   const startPicture = Math.floor(Math.random() * 5);
