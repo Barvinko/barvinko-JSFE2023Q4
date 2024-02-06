@@ -1,16 +1,16 @@
 * {
   box-sizing: border-box;
 }
-body{
+body {
   margin: 0;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   min-height: 700px;
 }
-.main{
+.main {
   display: flex;
   position: relative;
 
@@ -19,13 +19,13 @@ body{
 }
 
 @media (max-width: 768px) {
-  .container{
+  .container {
     min-width: 500px;
   }
 }
 
 //HEADER
-.header{
+.header {
   height: $headerHight;
   padding: 10px 15px;
 
@@ -34,7 +34,7 @@ body{
   display: flex;
   justify-content: space-between;
 }
-.header__button{
+.header__button {
   width: min-content;
   color: $buttonColor;
   background-color: $buttonBackColor;
@@ -43,44 +43,47 @@ body{
   font-size: 16px;
   white-space: nowrap;
 }
-.header_style-active{
+.header_style-active {
   border-bottom: 1px solid black;
 }
-.header_style-active, .header_style-active *{
+.header_style-active,
+.header_style-active * {
   background-color: $activeButoon;
   color: $switchNonogramColor;
 }
 
-.header__button-aside, .header__history{
+.header__button-aside,
+.header__history {
   font-weight: 600;
   height: 33px;
   width: min-content;
   padding: 0 5px;
   border-radius: 15px;
 }
-.header__button-background:focus-visible{
+.header__button-background:focus-visible {
   border: 0;
 }
-.header__history{
+.header__history {
   padding: 0 10px;
   margin-left: 15px;
 }
-.header__button-top_active, .header__button-aside_active{
+.header__button-top_active,
+.header__button-aside_active {
   background-color: $activeButoon;
 }
-.header_style-active .header__button-top_active, .header_style-active .header__button-aside_active{
+.header_style-active .header__button-top_active,
+.header_style-active .header__button-aside_active {
   color: $buttonColor;
   background-color: $buttonBackColor;
 }
-.header__button-background{
+.header__button-background {
   padding-bottom: 10px;
   border-radius: 5px;
   font-size: 25px;
 }
 
-
 //Switch Nonogram
-.switch-nonogram{
+.switch-nonogram {
   height: 100%;
   width: 250px;
   padding-top: 20px;
@@ -95,49 +98,50 @@ body{
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  
+
   z-index: 1;
 }
-.switch-nonogram_style-active{
+.switch-nonogram_style-active {
   background-color: $activeButoon;
 }
-.switch-nonogram_active{
+.switch-nonogram_active {
   display: flex;
 }
-.switch-nonogram__title{
+.switch-nonogram__title {
   border-bottom: 2px solid black;
 }
-.switch-nonogram__title, .switch-nonogram__name{
+.switch-nonogram__title,
+.switch-nonogram__name {
   margin: 0;
 }
-.switch-nonogram__container{
+.switch-nonogram__container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 
   padding: 20px 0;
 }
-.switch-nonogram__canvas{
+.switch-nonogram__canvas {
   width: 100px;
   height: 100px;
 }
 
 @media (max-width: 768px) {
-  .switch-nonogram{
+  .switch-nonogram {
     position: absolute;
     width: 100%;
-    
+
     flex-direction: row;
     justify-content: center;
     gap: 15vw;
   }
-  .switch-nonogram__section{
+  .switch-nonogram__section {
     height: inherit;
   }
 }
 
 //Top/History
-.top-nonogram{
+.top-nonogram {
   width: 200px;
   padding: 20px;
 
@@ -156,18 +160,18 @@ body{
   color: $switchNonogramBackColor;
   background-color: $buttonBackColor;
 }
-.main_style-active .top-nonogram{
+.main_style-active .top-nonogram {
   background-color: $activeButoon;
 }
-.top-nonogram_active{
+.top-nonogram_active {
   display: flex;
 }
-.top-nonogram__title{
+.top-nonogram__title {
   margin: 0;
 }
 
 //Table nonogram
-.article-nonogram{
+.article-nonogram {
   width: 100%;
   height: 100%;
 
@@ -179,27 +183,27 @@ body{
 
   background-color: rgb(217, 221, 206);
 }
-.article-nonogram_style-active{
+.article-nonogram_style-active {
   background-color: $buttonBackColor;
   color: white;
 }
 
-main .article-nonogram.article-nonogram_style-active *{
+main .article-nonogram.article-nonogram_style-active * {
   border-color: white;
 }
-.nonogram{
+.nonogram {
   border-collapse: collapse;
 }
-.nonogram_style-active *{
+.nonogram_style-active * {
   border: $tableColorActive;
 }
-.nonogram__border{
+.nonogram__border {
   width: 0;
   padding: 0;
   background-color: $tableColor;
   border: 1px solid $tableColor;
 }
-.nonogram__border-head{
+.nonogram__border-head {
   border: 2px solid $tableColor;
 }
 .nonogram__cell {
@@ -216,7 +220,8 @@ main .article-nonogram.article-nonogram_style-active *{
     transform: translate(-50%, -50%);
   }
 }
-.nonogram__side-help, .nonogram__head-help:first-of-type {
+.nonogram__side-help,
+.nonogram__head-help:first-of-type {
   text-align: end;
   border-right: 2px solid $tableColor;
 }
@@ -225,26 +230,26 @@ main .article-nonogram.article-nonogram_style-active *{
   vertical-align: bottom;
   border-bottom: 2px solid $tableColor;
 }
-.nonogram__timer{
+.nonogram__timer {
   font-size: 42px;
   font-weight: 600;
 
   color: $buttonBackColor;
 }
-.article-nonogram_style-active .nonogram__timer{
+.article-nonogram_style-active .nonogram__timer {
   color: white;
 }
 
 //ContainerButtons
-.nonogram__container-buttons{
+.nonogram__container-buttons {
   width: 220px;
-  
+
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 15px;
 }
-.nonogram__button{
+.nonogram__button {
   font-size: 18px;
 
   width: 100px;
@@ -255,16 +260,16 @@ main .article-nonogram.article-nonogram_style-active *{
   background-color: $buttonBackColor;
   color: $buttonColor;
 }
-.article-nonogram_style-active img{
+.article-nonogram_style-active img {
   stroke: white;
 }
-.article-nonogram_style-active .nonogram__button{
+.article-nonogram_style-active .nonogram__button {
   background-color: $buttonBackColorActive;
   color: $buttonColorActive;
 }
 
 //DIALOG
-.dialog-win{
+.dialog-win {
   position: fixed;
   min-width: 100vw;
   min-height: 100vh;
@@ -274,13 +279,13 @@ main .article-nonogram.article-nonogram_style-active *{
 
   background-color: $dialogBackColor;
 }
-.dialog-win__casing{
+.dialog-win__casing {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.dialog-win__container{
+.dialog-win__container {
   width: 400px;
   height: 250px;
 
@@ -292,10 +297,10 @@ main .article-nonogram.article-nonogram_style-active *{
   justify-content: center;
   align-items: center;
 }
-.dialog-win__button{
+.dialog-win__button {
   background-color: $activeButoon;
   color: $buttonColor;
-  
+
   border: 0;
   border-radius: 15px;
   padding: 5px 10px;
@@ -307,7 +312,7 @@ main .article-nonogram.article-nonogram_style-active *{
 }
 
 @media (max-width: 768px) {
-  .dialog-win__container{
+  .dialog-win__container {
     width: 300px;
   }
 }
