@@ -3,8 +3,6 @@
 }
 body{
   margin: 0;
-  // min-height: 100vh;
-  // height: 100vh;
 }
 
 .container{
@@ -34,24 +32,42 @@ body{
   background-color: $buttonBackColor;
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
-.header__button-aside{
+.header__button{
   width: min-content;
-  padding: 5px 10px;
-  border-radius: 15px;
-  border: 0;
-
   color: $buttonColor;
   background-color: $buttonBackColor;
+  border: 0;
 
-  font-size: 14px;
+  font-size: 16px;
   white-space: nowrap;
+}
+.header_style-active{
+  border-bottom: 1px solid black;
+}
+.header_style-active, .header_style-active > *{
+  background-color: $activeButoon;
+  color: $switchNonogramColor;
+}
+.header__button-aside{
+  height: 33px;
+  width: min-content;
+  padding: 0 5px;
+  border-radius: 15px;
+}
+.header__button-background:focus-visible{
+  border: 0;
+}
+.header__button-background{
+  padding-bottom: 10px;
+  border-radius: 5px;
+  font-size: 25px;
 }
 .header__button-aside_active{
   background-color: $activeButoon;
 }
+
 
 //Switch Nonogram
 .switch-nonogram{
@@ -71,6 +87,9 @@ body{
   gap: 20px;
   
   z-index: 1;
+}
+.switch-nonogram_style-active{
+  background-color: $activeButoon;
 }
 .switch-nonogram_active{
   display: flex;
@@ -118,8 +137,19 @@ body{
   align-items: center;
   gap: 20px;
 }
+.article-nonogram_style-active{
+  background-color: $buttonBackColor;
+  color: white;
+}
+
+main .article-nonogram.article-nonogram_style-active *{
+  border-color: white;
+}
 .nonogram{
   border-collapse: collapse;
+}
+.nonogram_style-active *{
+  border: $tableColorActive;
 }
 .nonogram__border{
   width: 0;
@@ -159,6 +189,9 @@ body{
 
   color: $buttonBackColor;
 }
+.article-nonogram_style-active .nonogram__timer{
+  color: white;
+}
 
 //ContainerButtons
 .nonogram__container-buttons{
@@ -179,6 +212,13 @@ body{
 
   background-color: $buttonBackColor;
   color: $buttonColor;
+}
+.article-nonogram_style-active img{
+  stroke: white;
+}
+.article-nonogram_style-active .nonogram__button{
+  background-color: $buttonBackColorActive;
+  color: $buttonColorActive;
 }
 
 //DIALOG

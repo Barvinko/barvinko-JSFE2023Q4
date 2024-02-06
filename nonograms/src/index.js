@@ -4,8 +4,10 @@ import './index.html';
 import nonogramPaterns from './assets/js/nonogram-paterns';
 console.log(nonogramPaterns);
 import squareImg from './assets/img/cell/square.svg';
+import squareImgWhite from './assets/img/cell/square-white.svg';
 import crossImg from './assets/img/cell/cross.svg';
 
+const squareImgCopy = squareImg;
 let flagClick;
 let flagSave;
 
@@ -283,6 +285,41 @@ function randomNonogram(nonogram) {
   createNonogram(nonogramPaterns[randomLevel][randomNonogram]);
 }
 
+function changeBackground(event) {
+  const check = document.createElement("div");
+  check.innerHTML = "&#9728";
+  event.target.innerHTML = event.target.innerHTML == check.innerHTML ? "&#9789" : "&#9728";
+
+  const header = document.querySelector(".header");
+  const articleNonogram = document.querySelector(".article-nonogram");
+  const switchNonogram = document.querySelector(".switch-nonogram");
+  const nonogram = document.querySelector(".nonogram");
+  const nonogramButton = document.querySelector(".nonogram__button");
+
+  const cellArr = document.querySelectorAll('.nonogram__img');
+  if (event.target.innerHTML != check.innerHTML) {
+    squareImg = squareImgWhite;
+    header.classList.add("header_style-active");
+    articleNonogram.classList.add("article-nonogram_style-active");
+    switchNonogram.classList.add("switch-nonogram_style-active");
+    nonogram.classList.add("nonogram_style-active");
+    nonogramButton.classList.add("nonogram__button_style-active");
+  }else{
+    console.log(squareImgCopy)
+    squareImg = squareImgCopy;
+    header.classList.remove("header_style-active");
+    articleNonogram.classList.remove("article-nonogram_style-active");
+    switchNonogram.classList.remove("switch-nonogram_style-active");
+    nonogram.classList.remove("nonogram_style-active");
+    nonogramButton.classList.remove("nonogram__button_style-active");
+  }
+  cellArr.forEach((img) => {
+    if (img.src != '' && img.src != crossImg ) {
+      img.src = squareImg;
+    }
+  })
+}
+
 (() => {
   const container = document.createElement('div');
   container.className = 'container';
@@ -295,10 +332,16 @@ function randomNonogram(nonogram) {
   container.appendChild(header);
 
   const buttonAside = document.createElement('button');
-  buttonAside.className = 'header__button-aside';
+  buttonAside.className = 'header__button header__button-aside';
   buttonAside.innerText = "Choose Nonogram";
   buttonAside.addEventListener("click", () => displaySwitch(buttonAside))
   header.appendChild(buttonAside);
+
+  const buttonBackground = document.createElement('button');
+  buttonBackground.className = 'header__button header__button-background';
+  buttonBackground.innerHTML = "&#9728";
+  buttonBackground.addEventListener("click", changeBackground)
+  header.appendChild(buttonBackground);
 
   //MAIN
   const main = document.createElement('main');
@@ -348,7 +391,7 @@ function randomNonogram(nonogram) {
           const x = j * cellSize;
           const y = i * cellSize;
     
-          ctx.fillStyle = nonogram.picture[i][j] === 'X' ? 'black' : 'white';
+          ctx.fillStyle = nonogram.picture[i][j] === 'X' ? 'black' : 'rgba(0, 0, 0, 0)';
           ctx.fillRect(x, y, cellSize, cellSize);
         }
       }
