@@ -3,13 +3,24 @@ import './index.html';
 
 import nonogramPaterns from './assets/js/nonogram-paterns';
 console.log(nonogramPaterns);
+
 import squareImg from './assets/img/cell/square.svg';
 import squareImgWhite from './assets/img/cell/square-white.svg';
 import crossImg from './assets/img/cell/cross.svg';
+import soundImg from './assets/img/header/sound.svg';
+import soundBlackImg from './assets/img/header/sound-black.svg';
+
+import clickMp from './assets/mp3/click.mp3';
+import winMp from './assets/mp3/win.mp3';
 
 const squareImgCopy = squareImg;
 let flagClick;
 let flagSave;
+
+let flagSoundSquare = true;
+let flagSoundCross = true;
+let flagSoundVoid = true;
+let flagSoundWin = true;
 
 function createHelps(nonogram) {
   const help = [];
@@ -219,6 +230,15 @@ function clickCell(nonogramPicture, element, name) {
   const elementImg = element.children[0];
   elementImg.src = elementImg.src != squareImg ? squareImg : '';
   checkNonogram(nonogramPicture, name);
+
+  if (elementImg.src == squareImg && flagSoundSquare) {
+    const audio = new Audio(clickMp);
+    audio.play();
+  }
+  if (elementImg.src != squareImg && flagSoundVoid) {
+    const audio = new Audio(clickMp);
+    audio.play();
+  }
 }
 
 function cellRightClick(event) {
@@ -226,6 +246,11 @@ function cellRightClick(event) {
   event.preventDefault();
   const elementImg = event.currentTarget.children[0];
   elementImg.src = elementImg.src != crossImg ? crossImg : '';
+
+  if (flagSoundCross) {
+    const audio = new Audio(clickMp);
+    audio.play();
+  }
 }
 
 function checkNonogram(nonogramPicture, nonogram) {
@@ -266,6 +291,11 @@ function checkNonogram(nonogramPicture, nonogram) {
     });
     localStorage.setItem('@Barvinko-Nonograms__wins', JSON.stringify(winArr));
     showHistory();
+
+    if (flagSoundWin) {
+      const audio = new Audio(winMp);
+      audio.play();
+    }
   }
 }
 
@@ -466,7 +496,7 @@ function showTop(event) {
   header.className = 'header';
   container.appendChild(header);
 
-  const buttonHeadConLeft = document.createElement('div');
+  const buttonHeadConLeft = document.createElement('section');
   buttonHeadConLeft.className = 'header__head-left';
   header.appendChild(buttonHeadConLeft);
 
@@ -482,11 +512,96 @@ function showTop(event) {
   buttonAsideTop.addEventListener('click', showTop);
   buttonHeadConLeft.appendChild(buttonAsideTop);
 
+  //Sound
+  const buttonHeadConRight = document.createElement('section');
+  buttonHeadConRight.className = 'header__head-right';
+  header.appendChild(buttonHeadConRight);
+
+  const buttonSound = document.createElement('button');
+  buttonSound.className = 'header__button header__button-sound';
+  buttonHeadConRight.appendChild(buttonSound);
+
+  const buttonsSounds = document.createElement('div');
+  buttonsSounds.className = 'header__buttons-sounds';
+  buttonSound.appendChild(buttonsSounds);
+
+
+  const imgSound = document.createElement('img');
+  imgSound.className = 'header__img-sound';
+  imgSound.addEventListener('click', () => {
+    if (imgSound.parentElement.classList.contains("header__button-sound_active")) {
+      imgSound.src = soundImg;
+      imgSound.parentElement.classList.remove("header__button-sound_active");
+      imgSound.parentElement.children[0].classList.remove("header__buttons-sounds_active");
+    } else {
+      imgSound.src = soundBlackImg;
+      imgSound.parentElement.classList.add("header__button-sound_active");
+      imgSound.parentElement.children[0].classList.add("header__buttons-sounds_active");
+    }
+  });
+  imgSound.src = soundImg;
+  buttonSound.appendChild(imgSound);
+
+  const squareSound = document.createElement('div');
+  squareSound.className = 'header__square-sound';
+  squareSound.addEventListener("click", (event) => {
+    if (event.target.classList.contains("header__square-sound_active")) {
+      event.target.classList.remove("header__square-sound_active");
+      flagSoundSquare = true;
+    }else{
+      event.target.classList.add("header__square-sound_active");
+      flagSoundSquare = false;
+    }
+  })
+  buttonsSounds.appendChild(squareSound);
+
+  const crossSound = document.createElement('div');
+  crossSound.className = 'header__cross-sounds';
+  crossSound.innerText = "X";
+  crossSound.addEventListener("click", (event) => {
+    if (event.target.classList.contains("header__cross-sounds_active")) {
+      event.target.classList.remove("header__cross-sounds_active");
+      flagSoundCross = true;
+    }else{
+      event.target.classList.add("header__cross-sounds_active");
+      flagSoundCross = false;
+    }
+  })
+  buttonsSounds.appendChild(crossSound);
+
+  const voidSound = document.createElement('div');
+  voidSound.className = 'header__void-sounds';
+  voidSound.addEventListener("click", (event) => {
+    if (event.target.classList.contains("header__void-sounds_active")) {
+      event.target.classList.remove("header__void-sounds_active");
+      flagSoundVoid = true;
+    }else{
+      event.target.classList.add("header__void-sounds_active");
+      flagSoundVoid = false;
+    }
+  })
+  buttonsSounds.appendChild(voidSound);
+
+  const winSound = document.createElement('div');
+  winSound.className = 'header__win-sounds';
+  winSound.innerText = "WIN";
+  winSound.addEventListener("click", (event) => {
+    if (event.target.classList.contains("header__win-sounds_active")) {
+      event.target.classList.remove("header__win-sounds_active");
+      flagSoundWin = true;
+    }else{
+      event.target.classList.add("header__win-sounds_active");
+      flagSoundWin = false;
+    }
+  })
+  buttonsSounds.appendChild(winSound);
+
+  //Background
   const buttonBackground = document.createElement('button');
   buttonBackground.className = 'header__button header__button-background';
   buttonBackground.innerHTML = '&#9728';
   buttonBackground.addEventListener('click', changeBackground);
-  header.appendChild(buttonBackground);
+  buttonHeadConRight.appendChild(buttonBackground);
 
   //MAIN
   const main = document.createElement('main');

@@ -76,8 +76,68 @@ body {
   color: $buttonColor;
   background-color: $buttonBackColor;
 }
+.header__head-right{
+  display: flex;
+  align-items: center;
+}
+.header__button-sound{
+  z-index: 1;
+  display: flex;
+}
+.header__button-sound_active{
+  background-color: white;
+  border-radius: 7px;
+}
+.header__buttons-sounds{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  height: 20px;
+  width: 100px;
+
+  background-color: inherit;
+}
+.header__buttons-sounds_active{
+  display: flex;
+}
+.header__button-sound_active .header__img-sound{
+  background-color: white;
+}
+.header__square-sound,.header__cross-sounds, .header__void-sounds, .header__win-sounds{
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
+.header__square-sound{
+  background-color: black;
+}
+.header__square-sound_active{
+  background-color: inherit;
+}
+.header__cross-sounds{
+  color: red;
+}
+.header__cross-sounds_active{
+  color: white;
+}
+.header__void-sounds{
+  border: 1px solid black;
+}
+.header__void-sounds_active{
+  border: 0;
+}
+.header__win-sounds{
+  width: 25px;
+  color: black;
+  font-size: 14px;
+}
+.header__win-sounds_active{
+  color: white;
+}
 .header__button-background {
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   border-radius: 5px;
   font-size: 25px;
 }
