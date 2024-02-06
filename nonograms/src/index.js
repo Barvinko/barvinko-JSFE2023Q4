@@ -7,6 +7,7 @@ import squareImg from './assets/img/cell/square.svg';
 import crossImg from './assets/img/cell/cross.svg';
 
 let flagClick;
+let flagSave;
 
 function createHelps(nonogram) {
   const help = [];
@@ -24,11 +25,14 @@ function createHelps(nonogram) {
 }
 
 function createNonogram(nonogram) {
+  //Create Timer
   clearInterval(timer);
   const nonogramTimer = document.querySelector(".nonogram__timer");
   nonogramTimer.innerText = "00:00";
   startTime = false;
+  flagSave = true;
 
+  //Create TABLE
   console.log(nonogram);
   const nonogramTable = document.createElement('table');
   nonogramTable.className = 'nonogram';
@@ -98,7 +102,7 @@ function createNonogram(nonogram) {
     }
   }
 
-  //create button
+  //create buttons
   const nonogramConBut = document.createElement('section');
   nonogramConBut.className = 'nonogram__container-buttons';
   containerOfNonogram.replaceChild(nonogramConBut, document.querySelector(".nonogram__container-buttons"));
@@ -116,6 +120,51 @@ function createNonogram(nonogram) {
   nonogramButtonRestart.innerText = "Restart";
   nonogramButtonRestart.addEventListener("click", () => createNonogram(nonogram));
   nonogramConBut.appendChild(nonogramButtonRestart);
+
+  const nonogramButtonSave = document.createElement('button');
+  nonogramButtonSave.className = 'nonogram__button nonogram__save-game';
+  nonogramButtonSave.innerText = "Save";
+  nonogramButtonSave.addEventListener("click", () => {
+    if (!flagSave) {
+      return;
+    }
+    flagSave = false;
+
+    const imgArr = document.querySelectorAll('.nonogram__img');
+    let srcArr = [];
+    for (const img of imgArr) {
+      srcArr.push(img.src.includes("assets") ? img.src : '');
+    }
+    const timeEnd = new Date().getTime();
+    stopGame('.nonogram__img');
+    localStorage.setItem('@Barvinko-Nonograms__save-nonograms', JSON.stringify({
+      nonogram: nonogram,
+      timeText: nonogramTimer.innerHTML,
+      time: timeEnd - startTime,
+      progress: srcArr,
+    }));
+  });
+  nonogramConBut.appendChild(nonogramButtonSave);
+
+  const nonogramButtonUpload = document.createElement('button');
+  nonogramButtonUpload.className = 'nonogram__button nonogram__upload-game';
+  nonogramButtonUpload.innerText = "Upload";
+  nonogramButtonUpload.addEventListener("click", uploadNonogram);
+  nonogramConBut.appendChild(nonogramButtonUpload);
+}
+
+function uploadNonogram() {
+  const saveGame = JSON.parse(localStorage.getItem('@Barvinko-Nonograms__save-nonograms'));
+  const nonogramTimer = document.querySelector(".nonogram__timer");
+  console.log(saveGame);
+  createNonogram(saveGame.nonogram);
+  const cellArr = document.querySelectorAll('.nonogram__img');
+  for (let i = 0; i < cellArr.length; i++) { 
+    cellArr[i].src = saveGame.progress[i] != '' ? saveGame.progress[i] : '';
+  }
+
+  nonogramTimer.innerText = saveGame.timeText;
+  startTimer(saveGame.time);
 }
 
 function clickCell(nonogramPicture, element) {
@@ -157,13 +206,18 @@ function checkNonogram(nonogramPicture, element) {
 
     dialogWinAnswer.innerText = `Great! You have solved the nonogram in ${nonogramTimer.innerText} seconds!`
 
-    clearInterval(timer);
-    flagClick = false;
-
-    cellArr.forEach(img => {
-      img.parentNode.removeEventListener('contextmenu', cellRightClick);
-    })
+    stopGame('.nonogram__img');
   }
+}
+
+function stopGame(classImgs = '.nonogram__img') {
+  const cellArr = document.querySelectorAll(classImgs);
+  cellArr.forEach(img => {
+    img.parentNode.removeEventListener('contextmenu', cellRightClick);
+  })
+
+  clearInterval(timer);
+  flagClick = false;
 }
 
 function displaySwitch(button) {
@@ -180,11 +234,11 @@ function displaySwitch(button) {
 let timer;
 let startTime = false;
 
-function startTimer() {
+function startTimer(oldTime = 0) {
   const nonogramTimer = document.querySelector(".nonogram__timer");
     
   if (!startTime) {
-    startTime = new Date().getTime();
+    startTime = new Date().getTime() - oldTime;
     timer = setInterval(updateTimer, 1000);
   }
 
