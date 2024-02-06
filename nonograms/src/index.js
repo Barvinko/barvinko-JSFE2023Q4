@@ -151,6 +151,20 @@ function createNonogram(nonogram) {
   nonogramButtonUpload.innerText = "Upload";
   nonogramButtonUpload.addEventListener("click", uploadNonogram);
   nonogramConBut.appendChild(nonogramButtonUpload);
+
+  const nonogramButtonSolution = document.createElement('button');
+  nonogramButtonSolution.className = 'nonogram__button nonogram__solution-game';
+  nonogramButtonSolution.innerText = "Solution";
+  nonogramButtonSolution.addEventListener("click", () => {
+    stopGame('.nonogram__img')
+    const cellArr = document.querySelectorAll('.nonogram__img');
+    const nonogramAnswer = nonogram.picture.flat();
+
+    for (let i = 0; i < nonogramAnswer.length; i++) {
+      cellArr[i].src = nonogramAnswer[i] == 'X' ? squareImg : '';
+    }
+  });
+  nonogramConBut.appendChild(nonogramButtonSolution);
 }
 
 function uploadNonogram() {
@@ -167,12 +181,13 @@ function uploadNonogram() {
   startTimer(saveGame.time);
 }
 
-function clickCell(nonogramPicture, element) {
-  startTimer();
-  
+function clickCell(nonogramPicture, element) {  
   if (!flagClick) {
     return;
   }
+
+  startTimer();
+
   const elementImg = element.children[0];
   elementImg.src = elementImg.src != squareImg ? squareImg : '';
   checkNonogram(nonogramPicture, element);

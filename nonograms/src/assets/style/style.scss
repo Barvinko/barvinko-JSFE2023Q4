@@ -3,19 +3,21 @@
 }
 body{
   margin: 0;
-  min-height: 100vh;
-  height: 100vh;
+  // min-height: 100vh;
+  // height: 100vh;
 }
 
 .container{
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 700px;
 }
 .main{
   display: flex;
   position: relative;
+
   height: calc(100vh - $headerHight);
+  min-height: 700px;
 }
 
 @media (max-width: 768px) {
@@ -108,6 +110,7 @@ body{
 //Table nonogram
 .article-nonogram{
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -159,14 +162,17 @@ body{
 
 //ContainerButtons
 .nonogram__container-buttons{
-  width: 200px;
+  width: 220px;
   
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 .nonogram__button{
   font-size: 18px;
 
+  width: 100px;
   padding: 5px 15px;
   border: 0;
   border-radius: 15px;
