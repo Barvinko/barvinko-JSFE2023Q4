@@ -1,7 +1,7 @@
 export default [
   [
     {
-      name: "Chess board",
+      name: "Chess",
       picture: [
         ['X', ' ', 'X', ' ', 'X'],
         [' ', 'X', ' ', 'X', ' '],

@@ -93,7 +93,7 @@ function createNonogram(nonogram) {
         flagClick = true;
         cell.addEventListener(
           'click',
-          clickCell.bind(null, nonogram.picture, cell),
+          clickCell.bind(null, nonogram.picture, cell, nonogram),
         );
         cell.addEventListener('contextmenu', cellRightClick);
         const cellImg = new Image();
@@ -183,7 +183,7 @@ function uploadNonogram() {
   startTimer(saveGame.time);
 }
 
-function clickCell(nonogramPicture, element) {  
+function clickCell(nonogramPicture, element, name) {  
   if (!flagClick) {
     return;
   }
@@ -192,7 +192,7 @@ function clickCell(nonogramPicture, element) {
 
   const elementImg = element.children[0];
   elementImg.src = elementImg.src != squareImg ? squareImg : '';
-  checkNonogram(nonogramPicture, element);
+  checkNonogram(nonogramPicture, name);
 }
 
 function cellRightClick(event) {
@@ -202,7 +202,7 @@ function cellRightClick(event) {
   elementImg.src = elementImg.src != crossImg ? crossImg : '';
 }
 
-function checkNonogram(nonogramPicture, element) {
+function checkNonogram(nonogramPicture, nonogram) {
   const cellArr = document.querySelectorAll('.nonogram__img');
   const nonogramAnswer = nonogramPicture.flat();
   let flagWin = true;
@@ -224,6 +224,20 @@ function checkNonogram(nonogramPicture, element) {
     dialogWinAnswer.innerText = `Great! You have solved the nonogram in ${nonogramTimer.innerText} seconds!`
 
     stopGame('.nonogram__img');
+    if (!localStorage.getItem("@Barvinko-Nonograms__wins")) {
+      localStorage.setItem("@Barvinko-Nonograms__wins", JSON.stringify([]));
+    }
+    const winArr = JSON.parse(localStorage.getItem("@Barvinko-Nonograms__wins"));
+    if (winArr.length == 5) {
+      winArr.shift();
+    }
+    winArr.push({
+      name: nonogram.name,
+      level: nonogram.helpHead.length,
+      time: nonogramTimer.innerText,
+    })
+    localStorage.setItem("@Barvinko-Nonograms__wins", JSON.stringify(winArr));
+    showHistory()
   }
 }
 
@@ -291,6 +305,7 @@ function changeBackground(event) {
   event.target.innerHTML = event.target.innerHTML == check.innerHTML ? "&#9789" : "&#9728";
 
   const header = document.querySelector(".header");
+  const main = document.querySelector(".main");
   const articleNonogram = document.querySelector(".article-nonogram");
   const switchNonogram = document.querySelector(".switch-nonogram");
   const nonogram = document.querySelector(".nonogram");
@@ -300,6 +315,7 @@ function changeBackground(event) {
   if (event.target.innerHTML != check.innerHTML) {
     squareImg = squareImgWhite;
     header.classList.add("header_style-active");
+    main.classList.add("main_style-active");
     articleNonogram.classList.add("article-nonogram_style-active");
     switchNonogram.classList.add("switch-nonogram_style-active");
     nonogram.classList.add("nonogram_style-active");
@@ -308,6 +324,7 @@ function changeBackground(event) {
     console.log(squareImgCopy)
     squareImg = squareImgCopy;
     header.classList.remove("header_style-active");
+    main.classList.remove("main_style-active");
     articleNonogram.classList.remove("article-nonogram_style-active");
     switchNonogram.classList.remove("switch-nonogram_style-active");
     nonogram.classList.remove("nonogram_style-active");
@@ -318,6 +335,88 @@ function changeBackground(event) {
       img.src = squareImg;
     }
   })
+}
+
+function showHistory() {
+  const topSide = document.querySelector('.top-nonogram')
+
+  const topTable = document.createElement('table');
+  topTable.className = 'top-nonogram__table';
+  topSide.replaceChild(topTable, document.querySelector(".top-nonogram__table"));
+
+  const topRowTitle = document.createElement('tr');
+  topRowTitle.className = 'top-nonogram__title-row';
+  topTable.appendChild(topRowTitle);
+
+  const topNumber = document.createElement('th');
+  topNumber.className = 'top-nonogram__number';
+  topNumber.innerText = "#"
+  topRowTitle.appendChild(topNumber);
+
+  const topName = document.createElement('th');
+  topName.className = 'top-nonogram__name';
+  topName.innerText = "Name"
+  topRowTitle.appendChild(topName);
+
+  const topLevel = document.createElement('th');
+  topLevel.className = 'top-nonogram__level';
+  topLevel.innerText = "Level"
+  topRowTitle.appendChild(topLevel);
+
+  const topTime = document.createElement('th');
+  topTime.className = 'top-nonogram__time';
+  topTime.innerText = "Time"
+  topRowTitle.appendChild(topTime);
+
+  let winArr = JSON.parse(localStorage.getItem("@Barvinko-Nonograms__wins"));
+
+  winArr.sort((a, b) => {
+    const timeA = parseInt(a.time.split(':')[0]) * 60 + parseInt(a.time.split(':')[1]);
+    const timeB = parseInt(b.time.split(':')[0]) * 60 + parseInt(b.time.split(':')[1]);
+    return timeA - timeB;
+  });
+
+  winArr.forEach((win, index) => {
+    const row = document.createElement('tr');
+    row.className = 'top-nonogram__row';
+    topTable.appendChild(row);
+  
+    for (let i = 0; i < 4; i++) {
+      const column = document.createElement('td');
+      column.className = 'top-nonogram__column';
+      row.appendChild(column);
+
+      switch (i) {
+        case 0:
+          column.innerText = index + 1;
+          break;
+        case 1:
+          column.innerText = win.name;
+          break;
+        case 2:
+          column.innerText = `${win.level}x${win.level}`;
+          break;
+        case 3:
+          column.innerText = win.time;
+          break;
+      }
+    }
+  })
+}
+
+function showTop(event) {
+  const top = document.querySelector(".top-nonogram");
+  const buttonAsideTop = event.target;
+
+  if (buttonAsideTop.classList.contains("header__button-top_active")) {
+    buttonAsideTop.classList.remove("header__button-top_active");
+    top.classList.remove("top-nonogram_active");
+  }else{
+    buttonAsideTop.classList.add("header__button-top_active");
+    top.classList.add("top-nonogram_active");
+  }
+
+  showHistory()
 }
 
 (() => {
@@ -331,11 +430,21 @@ function changeBackground(event) {
   header.className = 'header';
   container.appendChild(header);
 
+  const buttonHeadConLeft = document.createElement('div');
+  buttonHeadConLeft.className = 'header__head-left';
+  header.appendChild(buttonHeadConLeft);
+
   const buttonAside = document.createElement('button');
   buttonAside.className = 'header__button header__button-aside';
   buttonAside.innerText = "Choose Nonogram";
   buttonAside.addEventListener("click", () => displaySwitch(buttonAside))
-  header.appendChild(buttonAside);
+  buttonHeadConLeft.appendChild(buttonAside);
+
+  const buttonAsideTop = document.createElement('button');
+  buttonAsideTop.className = 'header__button header__history';
+  buttonAsideTop.innerText = "History";
+  buttonAsideTop.addEventListener('click', showTop)
+  buttonHeadConLeft.appendChild(buttonAsideTop);
 
   const buttonBackground = document.createElement('button');
   buttonBackground.className = 'header__button header__button-background';
@@ -398,6 +507,21 @@ function changeBackground(event) {
     });
   });
 
+  //Top
+  const topSide = document.createElement('aside');
+  topSide.className = 'top-nonogram';
+  main.appendChild(topSide);
+
+  const topTitle = document.createElement('h2');
+  topTitle.className = 'top-nonogram__title';
+  topTitle.innerText = "History of wins"
+  topSide.appendChild(topTitle);
+
+  const topTable = document.createElement('table');
+  topTable.className = 'top-nonogram__table';
+  topSide.appendChild(topTable);
+  
+  //TABLE
   const nonogramAeticle = document.createElement('article');
   nonogramAeticle.className = 'article-nonogram';
   main.appendChild(nonogramAeticle);
