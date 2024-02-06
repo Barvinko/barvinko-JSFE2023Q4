@@ -371,10 +371,12 @@ function changeBackground(event) {
   const switchNonogram = document.querySelector('.switch-nonogram');
   const nonogram = document.querySelector('.nonogram');
   const nonogramButton = document.querySelector('.nonogram__button');
+  const imgSound = document.querySelector(".header__img-sound");
 
   const cellArr = document.querySelectorAll('.nonogram__img');
   if (event.target.innerHTML != check.innerHTML) {
     squareImg = squareImgWhite;
+    imgSound.src = soundBlackImg;
     header.classList.add('header_style-active');
     main.classList.add('main_style-active');
     articleNonogram.classList.add('article-nonogram_style-active');
@@ -384,6 +386,7 @@ function changeBackground(event) {
   } else {
     console.log(squareImgCopy);
     squareImg = squareImgCopy;
+    imgSound.src = soundImg;
     header.classList.remove('header_style-active');
     main.classList.remove('main_style-active');
     articleNonogram.classList.remove('article-nonogram_style-active');
