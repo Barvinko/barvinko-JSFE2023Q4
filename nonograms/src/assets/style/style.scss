@@ -18,9 +18,9 @@ body {
   min-height: 700px;
 }
 
-@media (max-width: 768px) {
-  .container {
-    min-width: 500px;
+@media (max-width: 340px) {
+  .main{
+    height: calc(100vh - 80px);
   }
 }
 
@@ -142,6 +142,38 @@ body {
   font-size: 25px;
 }
 
+@media (max-width: 500px) {
+  .header__button-sound{
+    position: relative;
+    flex-direction: column;
+  }
+  .header__button-sound_active{
+    border: 1px solid $buttonBackColor;
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+  }
+  .header__buttons-sounds_active{
+    position: absolute;
+    top: 20px;
+    left: -1px;
+
+    width: 34px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid $buttonBackColor;
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+  }
+}
+@media (max-width: 340px) {
+  .header{
+    height: 80px;
+  }
+}
+
 //Switch Nonogram
 .switch-nonogram {
   height: 100%;
@@ -190,6 +222,7 @@ body {
   .switch-nonogram {
     position: absolute;
     width: 100%;
+    height: min-content;
 
     flex-direction: row;
     justify-content: center;
@@ -197,6 +230,11 @@ body {
   }
   .switch-nonogram__section {
     height: inherit;
+  }
+}
+@media (max-width: 500px) {
+  .switch-nonogram{
+    flex-wrap: wrap;
   }
 }
 
@@ -298,6 +336,24 @@ main .article-nonogram.article-nonogram_style-active * {
 }
 .article-nonogram_style-active .nonogram__timer {
   color: white;
+}
+@media (max-width: 390px) {
+  .nonogram__cell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid $tableColor;
+    padding: 0;
+  
+    position: relative;
+  
+    .nonogram__img {
+      padding: 0 0 1px 1px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
 //ContainerButtons
