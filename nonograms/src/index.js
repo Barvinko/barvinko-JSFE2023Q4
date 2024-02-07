@@ -306,6 +306,7 @@ function stopGame(classImgs = '.nonogram__img') {
   });
 
   clearInterval(timer);
+  flagSave = false;
   flagClick = false;
 }
 
