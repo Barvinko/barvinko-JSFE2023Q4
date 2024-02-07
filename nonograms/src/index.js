@@ -395,7 +395,7 @@ function changeBackground(event) {
     nonogramButton.classList.remove('nonogram__button_style-active');
   }
   cellArr.forEach((img) => {
-    if (img.src != '' && img.src != crossImg) {
+    if (img.src == squareImgCopy || img.src == squareImgWhite) {
       img.src = squareImg;
     }
   });
