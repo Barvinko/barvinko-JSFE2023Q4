@@ -205,7 +205,6 @@ function createNonogram(nonogram) {
 }
 
 function uploadNonogram() {
-  flagSave = true;
   const saveGame = JSON.parse(
     localStorage.getItem('@Barvinko-Nonograms__save-nonograms'),
   );
@@ -219,6 +218,7 @@ function uploadNonogram() {
 
   nonogramTimer.innerText = saveGame.timeText;
   startTimer(saveGame.time);
+  flagSave = true;
 }
 
 function clickCell(nonogramPicture, element, name) {
