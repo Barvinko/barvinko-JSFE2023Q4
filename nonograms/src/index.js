@@ -43,7 +43,7 @@ function createNonogram(nonogram) {
   const nonogramTimer = document.querySelector('.nonogram__timer');
   nonogramTimer.innerText = '00:00';
   startTime = false;
-  flagSave = true;
+  flagSave = false;
 
   //Create TABLE
   console.log(nonogram);
@@ -205,6 +205,7 @@ function createNonogram(nonogram) {
 }
 
 function uploadNonogram() {
+  flagSave = true;
   const saveGame = JSON.parse(
     localStorage.getItem('@Barvinko-Nonograms__save-nonograms'),
   );
@@ -224,6 +225,7 @@ function clickCell(nonogramPicture, element, name) {
   if (!flagClick) {
     return;
   }
+  flagSave = true;
 
   startTimer();
 
