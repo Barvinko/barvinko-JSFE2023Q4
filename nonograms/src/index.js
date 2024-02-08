@@ -217,7 +217,11 @@ function uploadNonogram() {
   }
 
   nonogramTimer.innerText = saveGame.timeText;
-  startTimer(saveGame.time);
+
+  const [minutes, seconds] = saveGame.timeText.split(':').map(Number);
+  const milliseconds = (minutes * 60 + seconds) * 1000;
+
+  startTimer(milliseconds);
   flagSave = true;
 }
 
