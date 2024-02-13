@@ -27,7 +27,9 @@ MongoDB, a non-relational database, was selected as database, and the Mongoose t
 ## Links:
 **Resume:**
 [https://barvinko.github.io/](https://barvinko.github.io/)
+
 **Master's work:**
 [https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view](https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view)
+
 **Master's thesis applications:**
 [https://github.com/Barvinko/CryWEB](https://github.com/Barvinko/CryWEB)
