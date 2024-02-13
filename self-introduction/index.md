@@ -40,14 +40,17 @@ And finally, this is my old resume, which I want to rewrite, already with all th
 With that, I conclude this video. All links to the showcased works can be found in index.md. Goodbye!
 
 ## Links:
-##### Master's work:
+##### Master's thesis:
 [https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view](https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view)
 
+##### Master's thesis application:
+[https://github.com/Barvinko/CryWEB](https://github.com/Barvinko/CryWEB)
+
 ##### Epam Marathon:
-[https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/](https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/)
+[https://barvinkodomain.github.io/](https://barvinkodomain.github.io/)
 
 ##### Coffee House:
-[https://github.com/Barvinko/CryWEB](https://github.com/Barvinko/CryWEB)
+[https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/](https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/)
 
 ##### Nonograms:
 [https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/nonograms/](https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/nonograms/)
