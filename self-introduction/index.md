@@ -1,5 +1,5 @@
 ## Link to video on YouTube:
-[https://youtu.be/jIoCzyE7aSs](https://youtu.be/jIoCzyE7aSs)
+[https://youtu.be/2W60oCKVx0A](https://youtu.be/2W60oCKVx0A)
 
 ## Transcript
 
@@ -24,12 +24,33 @@ Here is a block diagram of the "sender-server" algorithm, as well as the "server
 Node.js with the Express library was chosen for implementing the server-side of this project. 
 MongoDB, a non-relational database, was selected as database, and the Mongoose technology was used to work with it through Node.js.
 
-## Links:
-**Resume:**
-[https://barvinko.github.io/](https://barvinko.github.io/)
+### Epam Marathon
+I participated in the Epam marathon, where I developed registration form for flight to planets of the Solar System and received certificate for it.
 
-**Master's work:**
+## Coffee House
+On the RSS courses, first challenge I encountered was slider with time delay. I implemented it using setTimeout() closure. On hover, I removed it and saved the time elapsed since beginning, and upon restart, I passed the remainder to new setTimeout().
+
+## Nonograms/WebPack
+For Nonograms, I used SASS and WebPack, which I had studied before the courses. Additionally, I connected Babel to transform code for older browsers.
+
+## Resume
+And finally, this is my old resume, which I want to rewrite, already with all the modern technologies. However, it still contains useful information about my education, skills, and experience.
+
+## End
+With that, I conclude this video. All links to the showcased works can be found in index.md. Goodbye!
+
+## Links:
+##### Master's work:
 [https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view](https://drive.google.com/file/d/1vi4HbGKlJRF3IhDFLFvvxGWYouaILV4k/view)
 
-**Master's thesis applications:**
+##### Epam Marathon:
+[https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/](https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/coffee-house/)
+
+##### Coffee House:
 [https://github.com/Barvinko/CryWEB](https://github.com/Barvinko/CryWEB)
+
+##### Nonograms:
+[https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/nonograms/](https://rolling-scopes-school.github.io/barvinko-JSFE2023Q4/nonograms/)
+
+##### Resume:
+[https://barvinko.github.io/](https://barvinko.github.io/)
