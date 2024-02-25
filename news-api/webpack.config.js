@@ -28,7 +28,10 @@ const baseConfig = {
         path: path.resolve(__dirname, './dist'),
     },
     plugins: [
-        new DotenvWebpackPlugin(),
+        new DotenvWebpackPlugin({
+            'process.env.API_URL': JSON.stringify(process.env.API_URL),
+            'process.env.API_KEY': JSON.stringify(process.env.API_KEY)
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
