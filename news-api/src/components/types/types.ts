@@ -3,13 +3,13 @@ interface GetDateStatus {
     totalResults?: number;
 }
 
-type GetDateArray<T extends { type: 'news' | 'sourses' }> = T extends { type: 'news' }
+type GetDateArray<T extends { type: 'news' | 'sources' }> = T extends { type: 'news' }
     ? { articles: NewsType[] }
-    : T extends { type: 'sourses' }
+    : T extends { type: 'sources' }
       ? { sources: SourseType[] }
       : never;
 
-export type GetDateFull<T extends { type: 'news' | 'sourses' }> = GetDateStatus & GetDateArray<T>;
+export type GetDateFull<T extends { type: 'news' | 'sources' }> = GetDateStatus & GetDateArray<T>;
 
 export type TryNull<T> = T | null;
 

@@ -1,20 +1,19 @@
 import AppLoader from './appLoader';
+import { GetDateFull, OptionType, EndpointType} from '../types/types';
 
 class AppController extends AppLoader {
-    getSources(callback: any) {
+    getSources(callback:(data?: GetDateFull<{ type: 'sources' }>) => void): void {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: 'sources' as EndpointType,
             },
             callback
         );
-        // console.log(callback)
     }
 
-    getNews(e: any, callback: any) {
-        console.log(callback);
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    getNews(e: Event, callback: (data?: GetDateFull<{ type: 'news' }>) => void): void {
+        let target = e.target as Element;
+        const newsContainer = e.currentTarget as Element;
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
@@ -23,9 +22,9 @@ class AppController extends AppLoader {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {
-                            endpoint: 'everything',
+                            endpoint: 'everything' as EndpointType,
                             _options: {
-                                sources: sourceId,
+                                sources: sourceId as string,
                             },
                         },
                         callback
@@ -33,7 +32,7 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            target = target.parentNode;
+            target = target.parentNode as Element;
         }
     }
 }

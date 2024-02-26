@@ -16,7 +16,7 @@ export class AppView {
         this.news.draw(values);
     }
 
-    drawSources(data: GetDateFull<{ type: 'sourses' }>) {
+    drawSources(data: GetDateFull<{ type: 'sources' }>) {
         const values: SourseType[] = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

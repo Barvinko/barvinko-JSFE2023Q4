@@ -45,7 +45,7 @@ class Loader {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data: GetDateFull<{type: 'news' | 'sourses'}>) => callback(data))
+            .then((data: GetDateFull<{type: 'news' | 'sources'}>) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }

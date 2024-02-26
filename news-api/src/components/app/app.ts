@@ -3,8 +3,8 @@ import { AppView } from '../view/appView';
 import { GetDateFull } from '../types/types';
 
 class App {
-    public controller: any;
-    public view: any;
+    public controller: AppController;
+    public view: AppView;
 
     constructor() {
         this.controller = new AppController();
@@ -17,7 +17,7 @@ class App {
             .addEventListener('click', (e) =>
                 this.controller.getNews(e, (data: GetDateFull<{ type: 'news' }>) => this.view.drawNews(data))
             );
-        this.controller.getSources((data: GetDateFull<{ type: 'sourses' }>) => this.view.drawSources(data));
+        this.controller.getSources((data: GetDateFull<{ type: 'sources' }>): void => this.view.drawSources(data));
     }
 }
 
