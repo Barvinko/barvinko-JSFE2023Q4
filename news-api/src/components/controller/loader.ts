@@ -17,7 +17,7 @@ class Loader {
     }
 
     errorHandler(res: Response): Response {
-        console.log(res)
+        console.log(res);
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -28,7 +28,7 @@ class Loader {
     }
 
     makeUrl(_options: object, endpoint: object): string {
-        const urlOptions: {[key: string]: object} = { ...this._options, ..._options };
+        const urlOptions: { [key: string]: object } = { ...this._options, ..._options };
         let url = `${this._baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string) => {
@@ -38,7 +38,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: "GET" | "POST", endpoint: object, callback: Function, _options = {}): void {
+    load(method: 'GET' | 'POST', endpoint: object, callback: Function, _options = {}): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())

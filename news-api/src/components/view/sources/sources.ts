@@ -1,5 +1,5 @@
 import './sources.css';
-import {SourseType, TryNull} from '../../types/types'
+import { SourseType, TryNull } from '../../types/types';
 
 class Sources {
     draw(data: TryNull<SourseType>[]): void {
