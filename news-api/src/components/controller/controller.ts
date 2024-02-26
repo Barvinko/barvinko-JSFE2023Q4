@@ -8,9 +8,11 @@ class AppController extends AppLoader {
             },
             callback
         );
+        // console.log(callback)
     }
 
     getNews(e: any, callback: any) {
+        console.log(callback)
         let target = e.target;
         const newsContainer = e.currentTarget;
 

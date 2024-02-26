@@ -12,11 +12,11 @@ class Loader {
         callback = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load('GET', endpoint, callback, _options);
     }
 
-    errorHandler(res: any) {
+    errorHandler(res: Response): Response {
         console.log(res)
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
@@ -27,21 +27,21 @@ class Loader {
         return res;
     }
 
-    makeUrl(_options: any, endpoint: any) {
-        const urlOptions = { ...this._options, ..._options };
+    makeUrl(_options: object, endpoint: object): string {
+        const urlOptions: {[key: string]: object} = { ...this._options, ..._options };
         let url = `${this._baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key) => {
+        Object.keys(urlOptions).forEach((key: string) => {
             url += `${key}=${urlOptions[key]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load(method: any, endpoint: any, callback: any, _options = {}) {
+    load(method: "GET" | "POST", endpoint: object, callback: Function, _options = {}): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
+            .then((res: Response) => res.json())
             .then((data) => callback(data))
             .catch((err) => console.error(err));
     }
