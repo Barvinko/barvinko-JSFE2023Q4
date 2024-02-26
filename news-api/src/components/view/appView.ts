@@ -13,7 +13,7 @@ export class AppView {
 
     public drawNews(data: GetDateFull<{ type: 'news' }> | undefined) {
         if (data === undefined) return;
-        
+
         const values: NewsType[] = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
