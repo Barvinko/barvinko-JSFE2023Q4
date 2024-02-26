@@ -1,8 +1,8 @@
 import AppLoader from './appLoader';
-import { GetDateFull, OptionType, EndpointType } from '../types/types';
+import { GetDateFull, EndpointType } from '../types/types';
 
 class AppController extends AppLoader {
-    getSources(callback: (data?: GetDateFull<{ type: 'sources' }>) => void): void {
+    public getSources(callback: (data?: GetDateFull<{ type: 'sources' }>) => void): void {
         super.getResp(
             {
                 endpoint: 'sources' as EndpointType,
@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: (data?: GetDateFull<{ type: 'news' }>) => void): void {
+    public getNews(e: Event, callback: (data?: GetDateFull<{ type: 'news' }>) => void): void {
         let target = e.target as Element;
         const newsContainer = e.currentTarget as Element;
 

@@ -9,7 +9,7 @@ class Loader {
         this._options = _options;
     }
 
-    getResp(
+    protected getResp(
         { endpoint = {}, _options = {} },
         callback = (): void => {
             console.error('No callback for GET response');
@@ -18,8 +18,7 @@ class Loader {
         this.load('GET', endpoint, callback, _options);
     }
 
-    errorHandler(res: Response): Response {
-        console.log(res);
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -29,9 +28,8 @@ class Loader {
         return res;
     }
 
-    makeUrl(_options: OptionType, endpoint: EndpointType): string {
+    private makeUrl(_options: OptionType, endpoint: EndpointType): string {
         const urlOptions: OptionType = { ...this._options, ..._options };
-        console.log(urlOptions);
         let url: string = `${this._baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string) => {
@@ -41,7 +39,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: 'GET' | 'POST', endpoint: EndpointType, callback: Function, _options: OptionType = {}): void {
+    private load(method: 'GET' | 'POST', endpoint: EndpointType, callback: Function, _options: OptionType = {}): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json() as Promise<GetDateFull<{ type: 'news' | 'sources' }>>)

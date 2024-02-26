@@ -3,19 +3,18 @@ import { AppView } from '../view/appView';
 import { GetDateFull, TryNull } from '../types/types';
 
 class App {
-    public controller: AppController;
-    public view: AppView;
+    private controller: AppController;
+    private view: AppView;
 
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
     }
 
-    start(): void {
+    public start(): void {
         const sourceElement: TryNull<HTMLElement> = document.querySelector('.sources');
         if (!sourceElement) return;
-        // document
-        //     .querySelector('.sources')
+
         sourceElement.addEventListener('click', (e) =>
             this.controller.getNews(e, (data: GetDateFull<{ type: 'news' }> | undefined) => this.view.drawNews(data))
         );

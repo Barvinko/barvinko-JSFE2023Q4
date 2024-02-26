@@ -11,13 +11,14 @@ export class AppView {
         this.sources = new Sources();
     }
 
-    drawNews(data: GetDateFull<{ type: 'news' }> | undefined) {
+    public drawNews(data: GetDateFull<{ type: 'news' }> | undefined) {
         if (data === undefined) return;
+        
         const values: NewsType[] = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: GetDateFull<{ type: 'sources' }> | undefined) {
+    public drawSources(data: GetDateFull<{ type: 'sources' }> | undefined) {
         if (data === undefined) return;
 
         const values: SourseType[] = data?.sources ? data?.sources : [];
