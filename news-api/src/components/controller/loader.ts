@@ -1,4 +1,4 @@
-import { GetDateFull, OptionType, EndpointType} from '../types/types';
+import { GetDateFull, OptionType, EndpointType } from '../types/types';
 
 class Loader {
     private _baseLink: string;
@@ -31,7 +31,7 @@ class Loader {
 
     makeUrl(_options: OptionType, endpoint: EndpointType): string {
         const urlOptions: OptionType = { ...this._options, ..._options };
-        console.log(urlOptions)
+        console.log(urlOptions);
         let url: string = `${this._baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string) => {
@@ -44,8 +44,8 @@ class Loader {
     load(method: 'GET' | 'POST', endpoint: EndpointType, callback: Function, _options: OptionType = {}): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response) => res.json())
-            .then((data: GetDateFull<{type: 'news' | 'sources'}>) => callback(data))
+            .then((res: Response) => res.json() as Promise<GetDateFull<{ type: 'news' | 'sources' }>>)
+            .then((data: GetDateFull<{ type: 'news' | 'sources' }>) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }

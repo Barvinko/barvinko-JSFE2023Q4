@@ -2,20 +2,32 @@ import './sources.css';
 import { SourseType, TryNull } from '../../types/types';
 
 class Sources {
-    draw(data: TryNull<SourseType>[]): void {
+    draw(data: SourseType[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp') as TryNull<HTMLTemplateElement>;
+        const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
-        data.forEach((item: SourseType) => {
+        data.forEach((item: TryNull<SourseType>) => {
+            if (!item || item === null) {
+                return;
+            }
             const sourceClone = sourceItemTemp.content.cloneNode(true) as TryNull<HTMLElement>;
+            if (sourceClone === null) {
+                return;
+            }
 
-            sourceClone.querySelector('.source__item-name').textContent = item.name;
-            sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+            const itemNameElement: TryNull<Element> = sourceClone.querySelector('.source__item-name');
+            const itemElement: TryNull<Element> = sourceClone.querySelector('.source__item');
 
-            fragment.append(sourceClone);
+            if (itemNameElement !== null && itemElement !== null) {
+                itemNameElement.textContent = item.name;
+                itemElement.setAttribute('data-source-id', item.id);
+
+                fragment.append(sourceClone);
+            }
         });
 
-        document.querySelector('.sources').append(fragment);
+        const sourcesElement: TryNull<Element> = document.querySelector('.sources');
+        if (sourcesElement !== null) sourcesElement.append(fragment);
     }
 }
 

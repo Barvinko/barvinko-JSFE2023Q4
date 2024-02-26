@@ -14,14 +14,14 @@ export type GetDateFull<T extends { type: 'news' | 'sources' }> = GetDateStatus 
 export type TryNull<T> = T | null;
 
 export type NewsType = {
-    author: TryNull<string>;
-    content: TryNull<string>;
-    description: TryNull<string>;
-    publishedAt: TryNull<string>;
-    source: { id: string; name: TryNull<string> };
-    title: TryNull<string>;
+    author: string;
+    content: string;
+    description: string;
+    publishedAt: string;
+    source: { id: string; name: string };
+    title: string;
     url: string;
-    urlToImage: TryNull<string>;
+    urlToImage: string;
 };
 
 export type SourseType = {
@@ -34,10 +34,9 @@ export type SourseType = {
     url: string;
 };
 
-
 export type OptionType = {
+    [key: string]: string | undefined;
     sources?: string;
-    [key: string]: string;
-}
+};
 
-export type EndpointType = {} | "sources" | "everything";
+export type EndpointType = {} | 'sources' | 'everything';

@@ -1,8 +1,8 @@
 import AppLoader from './appLoader';
-import { GetDateFull, OptionType, EndpointType} from '../types/types';
+import { GetDateFull, OptionType, EndpointType } from '../types/types';
 
 class AppController extends AppLoader {
-    getSources(callback:(data?: GetDateFull<{ type: 'sources' }>) => void): void {
+    getSources(callback: (data?: GetDateFull<{ type: 'sources' }>) => void): void {
         super.getResp(
             {
                 endpoint: 'sources' as EndpointType,
@@ -17,8 +17,8 @@ class AppController extends AppLoader {
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
+                const sourceId: string | null = target.getAttribute('data-source-id');
+                if (newsContainer.getAttribute('data-source') !== sourceId && sourceId !== null) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {

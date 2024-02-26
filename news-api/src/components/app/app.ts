@@ -1,6 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { GetDateFull } from '../types/types';
+import { GetDateFull, TryNull } from '../types/types';
 
 class App {
     public controller: AppController;
@@ -11,13 +11,17 @@ class App {
         this.view = new AppView();
     }
 
-    start() {
-        document
-            .querySelector('.sources')
-            .addEventListener('click', (e) =>
-                this.controller.getNews(e, (data: GetDateFull<{ type: 'news' }>) => this.view.drawNews(data))
-            );
-        this.controller.getSources((data: GetDateFull<{ type: 'sources' }>): void => this.view.drawSources(data));
+    start(): void {
+        const sourceElement: TryNull<HTMLElement> = document.querySelector('.sources');
+        if (!sourceElement) return;
+        // document
+        //     .querySelector('.sources')
+        sourceElement.addEventListener('click', (e) =>
+            this.controller.getNews(e, (data: GetDateFull<{ type: 'news' }> | undefined) => this.view.drawNews(data))
+        );
+        this.controller.getSources((data: GetDateFull<{ type: 'sources' }> | undefined): void =>
+            this.view.drawSources(data)
+        );
     }
 }
 
