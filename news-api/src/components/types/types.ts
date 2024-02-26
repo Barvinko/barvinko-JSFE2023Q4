@@ -33,3 +33,11 @@ export type SourseType = {
     name: TryNull<string>;
     url: string;
 };
+
+
+export type OptionType = {
+    sources?: string;
+    [key: string]: string;
+}
+
+export type EndpointType = {} | "sources" | "everything";

@@ -1,15 +1,17 @@
+import { GetDateFull, OptionType, EndpointType} from '../types/types';
+
 class Loader {
     private _baseLink: string;
-    private _options: object;
+    private _options: OptionType;
 
-    constructor(_baseLink: string, _options: object) {
+    constructor(_baseLink: string, _options: OptionType) {
         this._baseLink = _baseLink;
         this._options = _options;
     }
 
     getResp(
         { endpoint = {}, _options = {} },
-        callback = () => {
+        callback = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -27,9 +29,10 @@ class Loader {
         return res;
     }
 
-    makeUrl(_options: object, endpoint: object): string {
-        const urlOptions: { [key: string]: object } = { ...this._options, ..._options };
-        let url = `${this._baseLink}${endpoint}?`;
+    makeUrl(_options: OptionType, endpoint: EndpointType): string {
+        const urlOptions: OptionType = { ...this._options, ..._options };
+        console.log(urlOptions)
+        let url: string = `${this._baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key: string) => {
             url += `${key}=${urlOptions[key]}&`;
@@ -38,12 +41,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: 'GET' | 'POST', endpoint: object, callback: Function, _options = {}): void {
+    load(method: 'GET' | 'POST', endpoint: EndpointType, callback: Function, _options: OptionType = {}): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response) => res.json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((data: GetDateFull<{type: 'news' | 'sourses'}>) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 
