@@ -56,6 +56,18 @@ footer .copyright:before {
     content: '©';
 }
 
+.scroll::-webkit-scrollbar{
+    width: 12px;
+} 
+.scroll::-webkit-scrollbar-track{
+    border-radius: 5px;
+    background-color: gray;
+} 
+.scroll::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: #333;
+} 
+
 
 @media (max-width: 768px) {
     .header {
