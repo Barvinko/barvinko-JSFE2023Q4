@@ -1,0 +1,30 @@
+.footer{
+  height: 150px;
+}
+.footer__logo{
+  height: 60px;
+  box-shadow: 0 0 white;
+}
+.footer__comtainer-link{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding-left: 10px;
+}
+.copyright{
+  margin: 0;
+}
+.footer__git-hub{
+  color: #444;
+}
+
+@media (max-width: 360px) {
+  .footer__comtainer-link{
+    align-items: center;
+
+    width: 150px;
+    padding: 0;
+  }
+}
