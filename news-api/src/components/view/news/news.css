@@ -1,3 +1,7 @@
+.news_disable{
+    display: none;
+}
+
 .news__item {
     display: flex;
     flex-direction: column;

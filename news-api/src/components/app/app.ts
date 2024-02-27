@@ -15,6 +15,11 @@ class App {
     }
 
     public start(): void {
+        const newsClose: TryNull<HTMLElement> = document.querySelector('.header__close')
+            ? document.querySelector('.header__close')
+            : null;
+        newsClose?.addEventListener('click', this.view.closeOpenNews);
+
         const sourceElement: TryNull<HTMLElement> = document.querySelector('.sources');
         if (!sourceElement) return;
 

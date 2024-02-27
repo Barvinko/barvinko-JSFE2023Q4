@@ -4,13 +4,35 @@ body {
     font-family: sans-serif;
 }
 
-header {
+.header {
     padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__close{
+    display: none;
+    background-color: inherit;
+    color: inherit;
+    height: 50px;
+    width: 100px;
+
+    border-radius: 30px;
+    border: 0;
+}
+
+.header__close_active{
+    display: block;
 }
 
 header h1 {
     font-size: 40px;
     font-weight: 800;
+}
+
+main{
+    position: relative;
 }
 
 footer {
@@ -32,4 +54,11 @@ footer .copyright a:hover {
 }
 footer .copyright:before {
     content: '©';
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
 }
