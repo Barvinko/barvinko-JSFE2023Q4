@@ -1,14 +1,14 @@
 import './footer.css';
-import { TryNull } from '../types/types';
+import { TryNull } from '../../library/types';
 import rssImage from '../../assets/img/rss.svg';
 
 class Footer {
     private readonly _footer: TryNull<HTMLElement>;
     constructor() {
-        this._footer = document.querySelector('footer') ? document.querySelector('footer') : null;
+        this._footer = document.querySelector('footer') || null;
     }
 
-    public createLogo() {
+    private createRssLink(): HTMLAnchorElement {
         const rssLink: HTMLAnchorElement = document.createElement('a');
         rssLink.href = 'https://rs.school/js/';
         rssLink.target = '_blank';
@@ -20,25 +20,56 @@ class Footer {
 
         rssLink.appendChild(logo);
 
-        this._footer?.insertBefore(rssLink, this._footer.firstChild);
+        return rssLink;
+    }
 
-        const newsLinks: HTMLElement | null = this._footer?.querySelector('.copyright')
-            ? this._footer?.querySelector('.copyright')
-            : null;
+    private createOtherLinksContainer(): HTMLDivElement {
+        const otherLinks: HTMLDivElement = document.createElement('div');
+        otherLinks.className = 'footer__container-link';
 
-        const otherLinks: HTMLElement = document.createElement('div');
-        otherLinks.className = 'footer__comtainer-link';
+        return otherLinks;
+    }
 
-        this._footer?.appendChild(otherLinks);
-
+    private createGitHubLink(): HTMLAnchorElement {
         const gitHubLink: HTMLAnchorElement = document.createElement('a');
         gitHubLink.innerText = 'GitHub - Barvinko';
         gitHubLink.className = 'footer__git-hub';
         gitHubLink.href = 'https://github.com/Barvinko';
         gitHubLink.target = '_blank';
 
+        return gitHubLink;
+    }
+
+    private createNewsLink(): HTMLDivElement {
+        const newsContainer: HTMLDivElement = document.createElement('div');
+        newsContainer.className = 'footer__news-link';
+        newsContainer.innerText = 'Copyright 2024 ';
+
+        const newsLink: HTMLAnchorElement = document.createElement('a');
+        newsLink.innerText = 'NewsAPI';
+        newsLink.href = 'https://newsapi.org';
+        newsLink.target = '_blank';
+
+        newsContainer.appendChild(newsLink);
+
+        return newsContainer;
+    }
+
+    public createLogo(): void {
+        if (!this._footer) {
+            console.error(`ERROR: Tag footer was not found`);
+            return;
+        }
+
+        const rssLink: HTMLAnchorElement = this.createRssLink();
+        this._footer.appendChild(rssLink);
+
+        const otherLinks: HTMLDivElement = this.createOtherLinksContainer();
+        const newsLink: HTMLDivElement = this.createNewsLink();
+        const gitHubLink: HTMLAnchorElement = this.createGitHubLink();
         otherLinks.appendChild(gitHubLink);
-        if (newsLinks !== null) otherLinks.appendChild(newsLinks);
+        otherLinks.appendChild(newsLink);
+        this._footer.appendChild(otherLinks);
     }
 }
 

@@ -1,8 +1,16 @@
+.footer {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .footer__logo{
   height: 60px;
   box-shadow: 0 0 white;
 }
-.footer__comtainer-link{
+.footer__container-link{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -10,11 +18,24 @@
 
   padding-left: 10px;
 }
-.copyright{
-  margin: 0;
-}
 .footer__git-hub{
   color: #444;
+}
+
+.footer__news-link {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin: 0;
+}
+.footer__news-link a {
+  color: #444;
+}
+.footer__news-link a:hover {
+  color: #555;
+}
+.footer__news-link:before {
+  content: '©';
 }
 
 @media (max-width: 360px) {

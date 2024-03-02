@@ -1,33 +1,49 @@
 import './sources.css';
-import { SourseType, TryNull } from '../../types/types';
+import { SourseType, TryNull } from '../../../library/types';
 
 class Sources {
     public draw(data: SourseType[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
+        if (!sourceItemTemp) {
+            console.error('Source item template not found.');
+            return;
+        }
+
         data.forEach((item: TryNull<SourseType>) => {
-            if (!item || item === null) {
+            if (!item) {
+                console.warn('Skipping null or undefined source item.');
                 return;
             }
-            const sourceClone = sourceItemTemp.content.cloneNode(true) as TryNull<HTMLElement>;
+
+            const sourceClone = sourceItemTemp.content.cloneNode(true) as TryNull<HTMLTemplateElement>;
+
             if (sourceClone === null) {
+                console.error('Failed to clone source item template.');
                 return;
             }
 
-            const itemNameElement: TryNull<Element> = sourceClone.querySelector('.source__item-name');
-            const itemElement: TryNull<Element> = sourceClone.querySelector('.source__item');
+            const itemNameElement: TryNull<HTMLSpanElement> = sourceClone.querySelector('.source__item-name');
+            const itemElement: TryNull<HTMLDivElement> = sourceClone.querySelector('.source__item');
 
-            if (itemNameElement !== null && itemElement !== null) {
-                itemNameElement.textContent = item.name;
+            if (itemNameElement && itemElement) {
+                itemNameElement.textContent = item.name || '';
                 itemElement.setAttribute('data-source-id', item.id);
 
                 fragment.append(sourceClone);
+            } else {
+                console.error('Required elements not found in source item template.');
             }
         });
 
-        const sourcesElement: TryNull<Element> = document.querySelector('.sources');
-        if (sourcesElement !== null) sourcesElement.append(fragment);
+        const sourcesElement: TryNull<HTMLDivElement> = document.querySelector('.sources');
+        if (sourcesElement) {
+            sourcesElement.innerHTML = '';
+            sourcesElement.append(fragment);
+        } else {
+            console.error('Sources element not found.');
+        }
     }
 }
 

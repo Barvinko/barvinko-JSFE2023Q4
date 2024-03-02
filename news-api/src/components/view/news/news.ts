@@ -1,68 +1,90 @@
 import './news.css';
-import { NewsType, TryNull } from '../../types/types';
+import { NewsType, TryNull } from '../../../library/types';
 
 class News {
+    private static readonly MAX_NEWS_ITEMS: number = 10;
+
+    private applyAltClass(newsItem: TryNull<Element>, idx: number): void {
+        if (idx % 2 && newsItem) newsItem.classList.add('alt');
+    }
+
+    private applyMetaPhotoStyle(metaFoto: TryNull<HTMLElement>, url: string): void {
+        if (metaFoto) metaFoto.style.backgroundImage = `url(${url || 'img/news_placeholder.jpg'})`;
+    }
+
+    private applyMetaAuthor(metaAvtor: TryNull<HTMLElement>, nameAvtor: string, nameSourse: string): void {
+        if (metaAvtor) metaAvtor.textContent = nameAvtor || nameSourse;
+    }
+
+    private applyMetaDate(metaData: TryNull<HTMLElement>, publishedAt: string): void {
+        if (metaData) metaData.textContent = publishedAt.slice(0, 10).split('-').reverse().join('-');
+    }
+
+    private applyDescription(description: TryNull<HTMLElement>, content: string): void {
+        if (description) description.textContent = content;
+    }
+
+    private applyReadMoreLink(readMore: TryNull<HTMLElement>, url: string): void {
+        if (readMore) readMore.setAttribute('href', url);
+    }
+
     public draw(data: NewsType[]): void {
-        const news = data.length >= 10 ? data.filter((_item: NewsType, idx: number) => idx < 10) : data;
+        const news =
+            data.length >= News.MAX_NEWS_ITEMS
+                ? data.filter((_item: NewsType, idx: number) => idx < News.MAX_NEWS_ITEMS)
+                : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp') as TryNull<HTMLTemplateElement>;
         if (!newsItemTemp) {
+            console.error("Don't have template for news` items");
             return;
         }
         news.forEach((item: NewsType, idx: number) => {
             const newsClone = newsItemTemp.content.cloneNode(true) as TryNull<HTMLElement>;
             if (!newsClone) {
+                console.error('Failed to clone source item template.');
                 return;
             }
 
             const newsItem: TryNull<Element> = newsClone.querySelector('.news__item');
 
-            if (idx % 2 && newsItem) newsItem.classList.add('alt');
+            this.applyAltClass(newsItem, idx);
 
-            const newsMetaPhoto: TryNull<HTMLElement> = newsClone.querySelector(
-                '.news__meta-photo'
-            ) as TryNull<HTMLElement>;
+            this.applyMetaPhotoStyle(
+                newsClone.querySelector('.news__meta-photo') as TryNull<HTMLElement>,
+                item.urlToImage
+            );
 
-            if (newsMetaPhoto) {
-                newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
-            }
+            this.applyMetaAuthor(
+                newsClone.querySelector('.news__meta-author') as TryNull<HTMLElement>,
+                item.author,
+                item.source.name
+            );
 
-            const newsMetaAuthor: TryNull<HTMLElement> = newsClone.querySelector('.news__meta-author');
-            if (newsMetaAuthor) {
-                newsMetaAuthor.textContent = item.author || item.source.name;
-            }
+            this.applyMetaDate(newsClone.querySelector('.news__meta-date') as TryNull<HTMLElement>, item.publishedAt);
 
-            const newsMetaDate: TryNull<HTMLElement> = newsClone.querySelector('.news__meta-date');
-            if (newsMetaDate) {
-                newsMetaDate.textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
-            }
+            this.applyDescription(
+                newsClone.querySelector('.news__description-title') as TryNull<HTMLElement>,
+                item.title
+            );
+            this.applyDescription(
+                newsClone.querySelector('.news__description-source') as TryNull<HTMLElement>,
+                item.source.name
+            );
+            this.applyDescription(
+                newsClone.querySelector('.news__description-content') as TryNull<HTMLElement>,
+                item.description
+            );
 
-            const newsDescriptionTitle: TryNull<HTMLElement> = newsClone.querySelector('.news__description-title');
-            if (newsDescriptionTitle) {
-                newsDescriptionTitle.textContent = item.title;
-            }
-
-            const newsDescriptionSource: TryNull<HTMLElement> = newsClone.querySelector('.news__description-source');
-            if (newsDescriptionSource) {
-                newsDescriptionSource.textContent = item.source.name;
-            }
-
-            const newsDescriptionContent: TryNull<HTMLElement> = newsClone.querySelector('.news__description-content');
-            if (newsDescriptionContent) {
-                newsDescriptionContent.textContent = item.description;
-            }
-
-            const newsReadMoreLink: TryNull<HTMLElement> = newsClone.querySelector('.news__read-more a');
-            if (newsReadMoreLink) {
-                newsReadMoreLink.setAttribute('href', item.url);
-            }
+            this.applyReadMoreLink(newsClone.querySelector('.news__read-more a') as TryNull<HTMLElement>, item.url);
 
             fragment.append(newsClone);
         });
 
         const newsElement: TryNull<HTMLElement> = document.querySelector('.news');
         if (!newsElement) {
+            console.error('News element not found.');
             return;
         }
         newsElement.innerHTML = '';

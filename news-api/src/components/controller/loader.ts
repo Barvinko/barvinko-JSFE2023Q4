@@ -1,4 +1,5 @@
-import { GetDateFull, OptionType, EndpointType } from '../types/types';
+import { ApiResponse, OptionType, EndpointType } from '../../library/types';
+import { NEWS_TYPE, SOURCES_TYPE } from '../../library/variable';
 
 class Loader {
     private _baseLink: string;
@@ -10,7 +11,7 @@ class Loader {
     }
 
     protected getResp(
-        { endpoint = {}, _options = {} },
+        { endpoint = {}, _options = {} }: { endpoint?: EndpointType; _options?: OptionType } = {},
         callback = (): void => {
             console.error('No callback for GET response');
         }
@@ -21,7 +22,7 @@ class Loader {
     private errorHandler(res: Response): Response {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
-                console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+                console.error(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
 
@@ -32,18 +33,23 @@ class Loader {
         const urlOptions: OptionType = { ...this._options, ..._options };
         let url: string = `${this._baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key: string) => {
-            url += `${key}=${urlOptions[key]}&`;
-        });
+        const queryString = Object.entries(urlOptions)
+            .map(([key, value]) => `${key}=${value}`)
+            .join('&');
 
-        return url.slice(0, -1);
+        return `${this._baseLink}${endpoint}?${queryString}`;
     }
 
-    private load(method: 'GET' | 'POST', endpoint: EndpointType, callback: Function, _options: OptionType = {}): void {
+    private load(
+        method: 'GET' | 'POST',
+        endpoint: EndpointType,
+        callback: (data?: ApiResponse<typeof NEWS_TYPE | typeof SOURCES_TYPE> | undefined) => void,
+        _options: OptionType = {}
+    ): void {
         fetch(this.makeUrl(_options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response) => res.json() as Promise<GetDateFull<{ type: 'news' | 'sources' }>>)
-            .then((data: GetDateFull<{ type: 'news' | 'sources' }>) => callback(data))
+            .then((res: Response) => res.json() as Promise<ApiResponse<typeof NEWS_TYPE | typeof SOURCES_TYPE>>)
+            .then((data: ApiResponse<typeof NEWS_TYPE | typeof SOURCES_TYPE>) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }

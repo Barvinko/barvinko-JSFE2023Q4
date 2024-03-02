@@ -1,49 +1,57 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { GetDateFull, NewsType, SourseType, TryNull } from '../types/types';
+import { ApiResponse, NewsType, SourseType, TryNull } from '../../library/types';
+import { NEWS_TYPE, SOURCES_TYPE } from '../../library/variable';
 
 export class AppView {
     private news: News;
     private sources: Sources;
+    private _newsClose: TryNull<HTMLDivElement>;
+    private _newsContainer: TryNull<HTMLDivElement>;
+    private _sourcesContainer: TryNull<HTMLDivElement>;
 
     constructor() {
         this.news = new News();
         this.sources = new Sources();
+        this._newsClose = document.querySelector('.header__close');
+        this._newsContainer = document.querySelector('.news');
+        this._sourcesContainer = document.querySelector('.sources');
     }
 
-    public closeOpenNews(): void {
-        const newsClose: TryNull<HTMLElement> = document.querySelector('.header__close');
-        const newsContainer: TryNull<HTMLElement> = document.querySelector('.news');
-        const sourcesContainer: TryNull<HTMLElement> = document.querySelector('.sources');
-
-        console.log(newsClose?.classList.contains('header__close_active'));
-        if (newsClose?.classList.contains('header__close_active')) {
-            console.log(newsClose?.classList.contains('header__close_active'));
-            sourcesContainer?.classList.remove('sources_none');
-            newsClose?.classList.remove('header__close_active');
-            newsContainer?.classList.add('news_disable');
-
+    public closeOpenNews(view: AppView = this): void {
+        if (!view._newsClose) {
+            console.error('button "newsClose" not found');
             return;
         }
 
-        sourcesContainer?.classList.add('sources_none');
-        newsClose?.classList.add('header__close_active');
-        newsContainer?.classList.remove('news_disable');
+        const active: boolean = view._newsClose.classList.contains('header__close_active');
+
+        if (view._newsContainer && view._sourcesContainer && view._newsClose) {
+            view._sourcesContainer.classList.toggle('sources_none', !active);
+            view._newsContainer.classList.toggle('news_disable', active);
+            view._newsClose.classList.toggle('header__close_active', !active);
+        }
     }
 
-    public drawNews(data: GetDateFull<{ type: 'news' }> | undefined) {
-        if (data === undefined) return;
+    public drawNews(data: ApiResponse<typeof NEWS_TYPE> | undefined) {
+        if (!data) {
+            console.error('Articles of API-news not received');
+            return;
+        }
 
         this.closeOpenNews();
 
-        const values: NewsType[] = data?.articles ? data?.articles : [];
+        const values: NewsType[] = data.articles || [];
         this.news.draw(values);
     }
 
-    public drawSources(data: GetDateFull<{ type: 'sources' }> | undefined) {
-        if (data === undefined) return;
+    public drawSources(data: ApiResponse<typeof SOURCES_TYPE> | undefined) {
+        if (!data) {
+            console.error('Sources of API-news not received');
+            return;
+        }
 
-        const values: SourseType[] = data?.sources ? data?.sources : [];
+        const values: SourseType[] = data.sources || [];
         this.sources.draw(values);
     }
 }

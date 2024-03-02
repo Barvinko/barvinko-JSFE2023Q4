@@ -1,15 +1,17 @@
-interface GetDateStatus {
+import { NEWS_TYPE, SOURCES_TYPE } from '../library/variable';
+
+interface IApiResponseStatus {
     status: 'ok';
     totalResults?: number;
 }
 
-type GetDateArray<T extends { type: 'news' | 'sources' }> = T extends { type: 'news' }
+type ApiResponseArray<T extends typeof NEWS_TYPE | typeof SOURCES_TYPE> = T extends typeof NEWS_TYPE
     ? { articles: NewsType[] }
-    : T extends { type: 'sources' }
+    : T extends typeof SOURCES_TYPE
       ? { sources: SourseType[] }
       : never;
 
-export type GetDateFull<T extends { type: 'news' | 'sources' }> = GetDateStatus & GetDateArray<T>;
+export type ApiResponse<T extends typeof NEWS_TYPE | typeof SOURCES_TYPE> = IApiResponseStatus & ApiResponseArray<T>;
 
 export type TryNull<T> = T | null;
 
@@ -39,4 +41,4 @@ export type OptionType = {
     sources?: string;
 };
 
-export type EndpointType = {} | 'sources' | 'everything';
+export type EndpointType = {} | typeof SOURCES_TYPE | typeof NEWS_TYPE;

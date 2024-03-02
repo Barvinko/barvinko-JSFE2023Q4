@@ -1,17 +1,18 @@
 import AppLoader from './appLoader';
-import { GetDateFull, EndpointType } from '../types/types';
+import { ApiResponse, EndpointType } from '../../library/types';
+import { NEWS_TYPE, SOURCES_TYPE, EVERYTHING_TYPE } from '../../library/variable';
 
 class AppController extends AppLoader {
-    public getSources(callback: (data?: GetDateFull<{ type: 'sources' }>) => void): void {
+    public getSources(callback: (data?: ApiResponse<typeof SOURCES_TYPE>) => void): void {
         super.getResp(
             {
-                endpoint: 'sources' as EndpointType,
+                endpoint: SOURCES_TYPE as EndpointType,
             },
             callback
         );
     }
 
-    public getNews(e: Event, callback: (data?: GetDateFull<{ type: 'news' }>) => void): void {
+    public getNews(e: Event, callback: (data?: ApiResponse<typeof NEWS_TYPE>) => void): void {
         let target = e.target as Element;
         const newsContainer = e.currentTarget as Element;
 
@@ -22,7 +23,7 @@ class AppController extends AppLoader {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {
-                            endpoint: 'everything' as EndpointType,
+                            endpoint: EVERYTHING_TYPE as EndpointType,
                             _options: {
                                 sources: sourceId as string,
                             },
