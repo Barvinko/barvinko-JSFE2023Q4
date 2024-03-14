@@ -23,8 +23,8 @@ class TimerComponent extends BaseComponent {
       this.stc('The premiere has started');
       this.timerService.stop();
     } else {
-      const timeResult = formatTime(this.p - t);
-      this.stc(timeResult);
+      // const timeResult: string = formatTime(this.p - t);
+      this.stc(formatTime(this.p - t));
     }
   }
 

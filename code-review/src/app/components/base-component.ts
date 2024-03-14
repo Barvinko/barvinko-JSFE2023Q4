@@ -1,7 +1,9 @@
 import { isNotNullable } from '@utils/is-nullable';
 
+type PropsPossible  = 'style' | 'dataset' | 'classList' | 'children' | 'tagName';
+
 export type Props<T extends HTMLElement = HTMLElement> = Partial<
-  Omit<T, 'style' | 'dataset' | 'classList' | 'children' | 'tagName'>
+  Omit<T, PropsPossible>
 > & {
   txt?: string;
   tag?: keyof HTMLElementTagNameMap;
@@ -60,10 +62,11 @@ export class BaseComponent<T extends HTMLElement = HTMLElement> {
   }
 
   public destroyAllHumans(): void {
-    this.children.reduce((_, child) => {
-      child.destroy();
-      return null;
-    }, null);
+    this.children.forEach((child) => child.destroy());
+    // this.children.reduce((_, child) => {
+    //   child.destroy();
+    //   return null;
+    // }, null);
     this.children.length = 0;
   }
 

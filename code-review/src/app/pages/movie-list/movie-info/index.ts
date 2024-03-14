@@ -2,19 +2,24 @@ import { BaseComponent } from '@components/base-component';
 import { ImageWithPlaceholder } from '@components/img/img';
 import { div, h3, iconFromCode, span } from '@components/tags';
 import { Timer } from '@components/timer/timer';
-import type { MovieWithFavorite } from '@interfaces/movie.interface';
+import type { IMovieWithFavorite } from '@interfaces/movie.interface';
 
 import styles from './styles.module.scss';
 
-type MovieInfoPropsFields = {
-  movie: MovieWithFavorite;
-};
+// type MovieInfoPropsFields = {
+//   movie: IMovieWithFavorite;
+// };
 
-type MovieInfoPropsFns = {
+// type MovieInfoPropsFns = {
+//   onMakeFavorite: () => void;
+// };
+
+// interface Drops extends MovieInfoPropsFields, MovieInfoPropsFns {}
+
+type Drops = {
+  movie: IMovieWithFavorite;
   onMakeFavorite: () => void;
-};
-
-interface Drops extends MovieInfoPropsFields, MovieInfoPropsFns {}
+}
 
 class MovieInfoComponent extends BaseComponent {
   private readonly favoriteIcon: BaseComponent;

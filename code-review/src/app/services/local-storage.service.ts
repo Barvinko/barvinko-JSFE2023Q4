@@ -15,7 +15,7 @@ export class StorageService<T> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public getData<K extends keyof T>(key: K): any | null {
+  public getData<K extends keyof T>(key: K): string | null {
     const storageKey = this.getStorageKey(key.toString());
     const data = localStorage.getItem(storageKey);
     return data ? JSON.parse(data) : null;

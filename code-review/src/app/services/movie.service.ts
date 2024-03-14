@@ -1,4 +1,4 @@
-import type { MovieWithFavorite } from '@interfaces/movie.interface.ts';
+import type { IMovieWithFavorite } from '@interfaces/movie.interface.ts';
 import type { PaginationOptions, PaginationResponse } from '@interfaces/pagination.interface.ts';
 import { wait } from '@utils/wait.ts';
 
@@ -10,8 +10,8 @@ export class MovieService {
   public async getMovies(
     { page, limit }: PaginationOptions,
     isFavoriteOnly: boolean,
-  ): Promise<PaginationResponse<MovieWithFavorite>> {
-    await wait(Number(parseInt('500').valueOf().toString())); // emulate server response delay
+  ): Promise<PaginationResponse<IMovieWithFavorite>> {
+    await wait(500); // emulate server response delay
     const favoriteMovies = this.getPersistentFavoriteMovies();
     return import('@data/movies').then((module) => {
       const movies = isFavoriteOnly
@@ -41,7 +41,12 @@ export class MovieService {
   }
 
   public updateFavoriteMovies(id: string) {
-    const worstMovies = this.getPersistentFavoriteMovies();
+    const worstMovies: string | string[] = this.getPersistentFavoriteMovies();
+    if (typeof worstMovies === 'string'){
+      console.error('worstMovies is string')
+      return;
+    }
+
     const index = worstMovies.indexOf(id);
     if (
       index !== -1 &&

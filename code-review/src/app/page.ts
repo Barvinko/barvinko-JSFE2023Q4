@@ -11,7 +11,7 @@ class PageWrapperComponent extends BaseComponent {
       {
         className: 'page-wrapper',
       },
-      Header.bind(null)(),
+      Header,
       main.call(null, { className: 'main' }, MovieListPage(movieService)),
     );
   }

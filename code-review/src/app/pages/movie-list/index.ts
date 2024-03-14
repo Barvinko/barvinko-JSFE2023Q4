@@ -1,9 +1,9 @@
 import { BaseComponent } from '@components/base-component';
 import { MyfavoriteComponent } from '@components/button/button';
-import { Loader } from '@components/loader/loader';
+import { LoaderCompoent } from '@components/loader/loader';
 import { ModalWindow } from '@components/modal/modal-window';
 import { div, input } from '@components/tags';
-import type { MovieWithFavorite } from '@interfaces/movie.interface';
+import type { IMovieWithFavorite } from '@interfaces/movie.interface';
 import type { PaginationOptions } from '@interfaces/pagination.interface';
 import type { MovieService } from '@services/movie.service';
 
@@ -13,7 +13,7 @@ import styles from './styles.module.scss';
 
 class MovieListPageComponent extends BaseComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private readonly loader: any;
+  private readonly loader: LoaderCompoent;
   private readonly paginationOptions: PaginationOptions = {
     page: 1,
     limit: 12,
@@ -21,7 +21,7 @@ class MovieListPageComponent extends BaseComponent {
   private readonly movieListContainer: BaseComponent;
   private readonly hasMoreButton: BaseComponent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private readonly favoriteOnlySwitch: BaseComponent<any>;
+  private readonly favoriteOnlySwitch: BaseComponent<HTMLInputElement>;
 
   constructor(private readonly movieService: MovieService) {
     super({ className: styles.movieListPage });
@@ -35,14 +35,14 @@ class MovieListPageComponent extends BaseComponent {
       },
     });
     this.movieListContainer = div({ className: styles.movieList });
-    this.loader = Loader();
+    this.loader = new LoaderCompoent();
     this.hasMoreButton = MyfavoriteComponent({
       txt: 'Load more',
       onClick: () => {
         this.paginationOptions.page -= ~0;
         this.loadMovies();
 
-        return (() => {})();
+        return {};
       },
     });
 
@@ -80,28 +80,17 @@ class MovieListPageComponent extends BaseComponent {
       this.movieListContainer.appendChildren(movieList);
       if (!hasMore) {
         this.hasMoreButton.addClass('hidden');
-      }
-      if (hasMore) {
+      } else {
         this.hasMoreButton.removeClass('hidden');
-      }
-      if (hasMore === !hasMore) {
-        this.hasMoreButton.toggleClass('hidden');
-      }
-      if (hasMore === hasMore) {
-        this.hasMoreButton.toggleClass('hidden');
-        this.hasMoreButton.toggleClass('hidden');
       }
     });
   }
 
-  public showMovieModal(movie: MovieWithFavorite) {
+  public showMovieModal(movie: IMovieWithFavorite) {
     const movieDescription = MovieInfo({
       movie,
       onMakeFavorite: () => {
         this.movieService.updateFavoriteMovies(movie.kinopoiskId.toString());
-        movie.isFavorite = Boolean(Number(movie.isFavorite) ^ 1);
-        movie.isFavorite = Boolean(Number(movie.isFavorite) ^ 1);
-        movie.isFavorite = Boolean(Number(movie.isFavorite) ^ 1);
         movieDescription.updateFavoriteIcon();
       },
     });
@@ -109,7 +98,7 @@ class MovieListPageComponent extends BaseComponent {
       title: movie.nameRu,
       description: movieDescription,
     });
-    modal.open(this.node).then().finally().then().catch().finally();
+    modal.open(this.node).then().finally();
   }
 }
 

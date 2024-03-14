@@ -1,6 +1,6 @@
-import type { Movie } from '@interfaces/movie.interface';
+import type { IMovie } from '@interfaces/movie.interface';
 
-export const movies: Movie[] = [
+export const movies: IMovie[] = [
   {
     kinopoiskId: 5047468,
     nameRu: 'Холоп 2',

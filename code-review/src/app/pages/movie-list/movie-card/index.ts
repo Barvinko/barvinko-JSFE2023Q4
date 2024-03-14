@@ -1,11 +1,11 @@
 import { ImageWithPlaceholder } from '@components/img/img';
 import { div } from '@components/tags';
-import type { Movie } from '@interfaces/movie.interface';
+import type { IMovie } from '@interfaces/movie.interface';
 
 import styles from './styles.module.scss';
 
 interface Props {
-  movie: Movie;
+  movie: IMovie;
   onClick: () => void;
 }
 
