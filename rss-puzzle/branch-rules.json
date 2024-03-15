@@ -1,0 +1,7 @@
+{
+  "rules": [
+    {
+      "pattern": "^feat/RSS-PZ-\\d{2}_[a-zA-Z]+$"
+    }
+  ]
+}
