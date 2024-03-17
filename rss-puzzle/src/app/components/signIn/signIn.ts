@@ -1,4 +1,5 @@
 import '@components/signIn/signIn-style';
+import { LocalStorage } from '@components/local-storage/LocalStorage';
 import { createElement, createLabel, createInput } from '@utils/createElement';
 
 export class SignIn {
@@ -18,21 +19,27 @@ export class SignIn {
 
   private _errorSurname: HTMLSpanElement;
 
+  private _localStorage: LocalStorage;
+
+  private _form: HTMLFormElement;
+
   constructor() {
+    this._localStorage = new LocalStorage();
+
     this._patternName = '[A-Z][a-zA-Z-]{2,}';
     this._patternSurname = '[A-Z][a-zA-Z-]{3,}';
 
     this._formContainer = createElement('div', 'container  sign-in') as HTMLDivElement;
-    const form = createElement('form', 'sign-in__form', this._formContainer) as HTMLFormElement;
-    createLabel('sign-in__label', 'sign-in__name', 'Name:', form) as HTMLLabelElement;
-    this._inputName = createInput('sign-in__name', 'Enter name', form) as HTMLInputElement;
-    this._errorName = createElement('span', 'sign-in__error', form);
+    this._form = createElement('form', 'sign-in__form', this._formContainer) as HTMLFormElement;
+    createLabel('sign-in__label', 'sign-in__name', 'Name:', this._form) as HTMLLabelElement;
+    this._inputName = createInput('sign-in__name', 'Enter name', this._form) as HTMLInputElement;
+    this._errorName = createElement('span', 'sign-in__error', this._form);
 
-    createLabel('sign-in__label', 'sign-in__surname', 'Surname:', form) as HTMLLabelElement;
-    this._inputSurname = createInput('sign-in__name', 'Enter surname', form) as HTMLInputElement;
-    this._errorSurname = createElement('span', 'sign-in__error', form);
+    createLabel('sign-in__label', 'sign-in__surname', 'Surname:', this._form) as HTMLLabelElement;
+    this._inputSurname = createInput('sign-in__name', 'Enter surname', this._form) as HTMLInputElement;
+    this._errorSurname = createElement('span', 'sign-in__error', this._form);
 
-    this._buttonForm = createElement('button', 'sign-in__send', form) as HTMLButtonElement;
+    this._buttonForm = createElement('button', 'sign-in__send', this._form) as HTMLButtonElement;
 
     this.setParameters();
   }
@@ -50,8 +57,19 @@ export class SignIn {
     });
     this._inputSurname.pattern = this._patternSurname;
 
-    this._buttonForm.innerText = 'SignIn';
+    this._buttonForm.innerText = 'Login';
     this._buttonForm.disabled = true;
+    this._form.addEventListener('submit', (event: Event) => {
+      event.preventDefault();
+      this.enter();
+    });
+  }
+
+  private enter() {
+    this._localStorage.setFullName({
+      name: this._inputName.value,
+      surname: this._inputSurname.value,
+    });
   }
 
   private checkLetter(input: HTMLInputElement): void {
