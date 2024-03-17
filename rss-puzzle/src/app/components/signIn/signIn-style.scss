@@ -1,0 +1,59 @@
+@import '../../style/value.scss';
+
+.sign-in {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $mainColor;
+}
+
+.sign-in__form {
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: 3px solid $mainColor;
+  border-radius: 25px;
+}
+
+.sign-in__label {
+  font-size: 2rem;
+}
+
+.sign-in__name,
+.sign-in__surname {
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+
+  border-color: $mainColor;
+  border-radius: 20px;
+
+  font-size: 1.2rem;
+}
+
+.sign-in__name {
+  margin-bottom: 40px;
+}
+
+.sign-in__send {
+  padding: 10px 20px;
+
+  background-color: $mainColor;
+  border-radius: 20px;
+
+  font-size: 1.2rem;
+}
+
+.sign-in__send:disabled {
+  background-color: gray;
+  color: black;
+}

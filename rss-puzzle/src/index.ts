@@ -1,4 +1,6 @@
 import './index.html';
-import './index.scss'
+import './index.scss';
+import { Layout } from '@app/layout';
 
-console.log(document);
+const layout: Layout = new Layout();
+layout.drawSignIn();

@@ -16,13 +16,10 @@ module.exports = {
   devServer: {
     port: 8080,
     open: true,
-    //CAN PROBLEM
     hot: true,
   },
 
-  // from get files for WebPack
   entry: path.resolve(__dirname, 'src', 'index.ts'),
-  //to files past WebPack
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
@@ -55,7 +52,6 @@ module.exports = {
         test: /\.(c|sa|sc)ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          // "style-loader",
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -118,14 +114,20 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'assets/audio/', // Путь для сохранения файлов
+            outputPath: 'assets/audio/',
           },
         },
       },
     ],
   },
   resolve: {
-    fallback: {},
+    extensions: ['.js', '.ts', '.tsx', '.scss', '.svg'],
+    alias: {
+      '@app': path.resolve(__dirname, 'src/app'),
+      '@components': path.resolve(__dirname, 'src/app/components'),
+      '@utils': path.resolve(__dirname, 'src/app/utils'),
+      '@style': path.resolve(__dirname, 'src/app/style'),
+    },
   },
   optimization: {
     minimize: true,

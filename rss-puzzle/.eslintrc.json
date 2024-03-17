@@ -1,27 +1,43 @@
 {
-  "plugins": ["prettier", "import", "@typescript-eslint"],
+  "plugins": ["prettier", "import", "@typescript-eslint", "import"],
   "extends": [
     "eslint:recommended",
     "airbnb-base",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module"
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
   "env": {
-      "es6": true,
-      "browser": true,
-      "node": true
+    "es6": true,
+    "browser": true,
+    "node": true
   },
   "rules": {
-      "no-debugger": "off",
-      "no-console": "off",
-      "class-methods-use-this": "off",
-      "@typescript-eslint/no-explicit-any": "error"
+    "no-debugger": "off",
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@components", "./src/app/components"],
+          ["@app/*", "./src/app/*"],
+          ["@components/*", "./src/app/components/*"],
+          ["@utils/*", "./src/app/utils/*"],
+          ["@style/*", "./src/app/style/*"]
+        ],
+        "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", "scss"]
+      }
+    }
   }
 }
