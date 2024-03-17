@@ -40,8 +40,13 @@
   font-size: 1.2rem;
 }
 
-.sign-in__name {
-  margin-bottom: 40px;
+.sign-in__error{
+  height: 28px;
+  width: 230px;
+
+  font-size: 0.8rem;
+
+  color: red;
 }
 
 .sign-in__send {

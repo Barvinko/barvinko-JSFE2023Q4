@@ -16,6 +16,6 @@ export class Layout {
   }
 
   drawSignIn(): void {
-    this.draw(this._signIn.getFromContainer());
+    this.draw(this._signIn.getFormContainer());
   }
 }

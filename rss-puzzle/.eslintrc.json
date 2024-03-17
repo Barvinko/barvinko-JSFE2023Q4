@@ -24,7 +24,8 @@
     "class-methods-use-this": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "import/no-unresolved": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {
