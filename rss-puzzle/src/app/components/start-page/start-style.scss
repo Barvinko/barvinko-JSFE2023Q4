@@ -49,4 +49,12 @@
 
   font-size: 1rem;
   color: white;
+
+  transition: background-color 0.5s;
+}
+
+@media (hover: hover) {
+  .start__button:hover{
+    background-color: $mainColorHover;
+  }
 }

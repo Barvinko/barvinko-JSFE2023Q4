@@ -1,4 +1,4 @@
-import { SignIn } from '@components/signIn/signIn';
+import { SignIn } from '@components/signIn/SignIn';
 import { StartPage } from '@components/start-page/StartPage';
 import { GamePage } from '@components/game-page/GamePage';
 import { LocalStorage } from '@utils/LocalStorage';
