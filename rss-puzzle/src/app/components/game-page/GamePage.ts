@@ -1,5 +1,5 @@
 import { createElement } from '@utils/createElement';
-import { LocalStorage } from '@components/local-storage/LocalStorage';
+import { LocalStorage } from '@utils/LocalStorage';
 
 export class GamePage {
   private _gameContainer: HTMLDivElement;
@@ -8,8 +8,8 @@ export class GamePage {
 
   private _localStorage: LocalStorage;
 
-  constructor() {
-    this._localStorage = new LocalStorage();
+  constructor(storage: LocalStorage) {
+    this._localStorage = storage;
 
     this._gameContainer = createElement('div', 'container') as HTMLDivElement;
 

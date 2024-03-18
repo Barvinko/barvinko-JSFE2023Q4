@@ -1,7 +1,7 @@
 import { SignIn } from '@components/signIn/signIn';
 import { StartPage } from '@components/start-page/StartPage';
 import { GamePage } from '@components/game-page/GamePage';
-import { LocalStorage } from '@components/local-storage/LocalStorage';
+import { LocalStorage } from '@utils/LocalStorage';
 
 export class Layout {
   private _bodyLink: HTMLBodyElement;
@@ -16,10 +16,11 @@ export class Layout {
 
   constructor() {
     this._bodyLink = document.body as HTMLBodyElement;
-    this._signIn = new SignIn();
-    this._startPage = new StartPage();
-    this._gamePage = new GamePage();
     this._localStorage = new LocalStorage();
+
+    this._signIn = new SignIn(this._localStorage);
+    this._startPage = new StartPage(this._localStorage);
+    this._gamePage = new GamePage(this._localStorage);
 
     this._signIn.getForm().addEventListener('submit', (event: Event) => {
       event.preventDefault();

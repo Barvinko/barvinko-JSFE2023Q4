@@ -1,5 +1,5 @@
 import '@components/signIn/signIn-style';
-import { LocalStorage } from '@components/local-storage/LocalStorage';
+import { LocalStorage } from '@utils/LocalStorage';
 import { createElement, createLabel, createInput } from '@utils/createElement';
 
 export class SignIn {
@@ -23,8 +23,8 @@ export class SignIn {
 
   private _form: HTMLFormElement;
 
-  constructor() {
-    this._localStorage = new LocalStorage();
+  constructor(storage: LocalStorage) {
+    this._localStorage = storage;
 
     this._patternName = '[A-Z][a-zA-Z-]{2,}';
     this._patternSurname = '[A-Z][a-zA-Z-]{3,}';
