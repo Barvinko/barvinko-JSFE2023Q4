@@ -1,3 +1,4 @@
+import '@components/start-page/start-style.scss';
 import { createElement } from '@utils/createElement';
 
 export class StartPage {

@@ -1,0 +1,47 @@
+@import '../../style/value.scss';
+
+.start{
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url(https://i.pinimg.com/originals/ec/3a/f3/ec3af39654d5a715baf5e1f301c2e416.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.start__container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: white;
+  text-align: center;
+
+  margin-bottom: 20vh;
+}
+
+.start__game-name{
+  font-size: 2.5rem;
+  font-weight: lighter;
+  letter-spacing: 4px;
+}
+
+.start__text{
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.start__button{
+  margin-top: 60px;
+  background-color: $mainColor;
+  padding: 7px 35px;
+
+  font-size: 1rem;
+  color: white;
+}
