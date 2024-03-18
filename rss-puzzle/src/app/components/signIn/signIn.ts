@@ -59,13 +59,9 @@ export class SignIn {
 
     this._buttonForm.innerText = 'Login';
     this._buttonForm.disabled = true;
-    this._form.addEventListener('submit', (event: Event) => {
-      event.preventDefault();
-      this.enter();
-    });
   }
 
-  private enter() {
+  public enter(): void {
     this._localStorage.setFullName({
       name: this._inputName.value,
       surname: this._inputSurname.value,
@@ -88,7 +84,11 @@ export class SignIn {
     this._errorSurname.innerText = surnameValid ? ' ' : `${erorrMessage} 4`;
   }
 
-  public getFormContainer() {
+  public getForm(): HTMLFormElement {
+    return this._form;
+  }
+
+  public getFormContainer(): HTMLDivElement {
     return this._formContainer;
   }
 }
