@@ -74,7 +74,7 @@ export class GamePage {
     this._round.words.forEach((row): void => {
       const words: string[] = row.textExample.split(' ');
 
-      for (let i = 0; i < words.length; i + 1) {
+      for (let i = 0; i < words.length; i += 1) {
         const j = Math.floor(Math.random() * words.length);
         [words[i], words[j]] = [words[j], words[i]];
       }
