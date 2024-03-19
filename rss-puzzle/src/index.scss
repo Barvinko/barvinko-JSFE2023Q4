@@ -1,3 +1,5 @@
+@import './app/style/value.scss';
+
 body {
   margin: 0;
 }
@@ -9,5 +11,16 @@ input {
 button {
   border: none;
   background: none;
+  cursor: pointer;
+}
+
+.button {
+  background-color: $mainColor;
+  padding: 7px 35px;
+
+  font-size: 1rem;
+
+  color: white;
+
   cursor: pointer;
 }

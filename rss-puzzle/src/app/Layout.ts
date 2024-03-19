@@ -28,7 +28,7 @@ export class Layout {
       this.draw(this._startPage.getStart());
     });
 
-    this._startPage.getButton().addEventListener('click', () => this.draw(this._gamePage.getStart()));
+    this._startPage.getButton().addEventListener('click', () => this.draw(this._gamePage.getGame()));
 
     this._gamePage.getButton().addEventListener('click', () => this.draw(this._signIn.getFormContainer()));
   }

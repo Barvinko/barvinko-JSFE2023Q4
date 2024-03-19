@@ -1,0 +1,27 @@
+.header{
+  padding: 10px;
+}
+
+.game{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game__container{
+  margin-bottom: 40px;
+  min-width: 600px;
+  width: 75vw;
+
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.game_card{
+  padding: 10px 20px;
+  border: 1px solid black;
+  margin: 10px 5px;
+  cursor: pointer;
+}

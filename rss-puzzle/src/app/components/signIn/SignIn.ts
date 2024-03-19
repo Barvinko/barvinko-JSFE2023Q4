@@ -39,7 +39,7 @@ export class SignIn {
     this._inputSurname = createInput('sign-in__name', 'Enter surname', this._form) as HTMLInputElement;
     this._errorSurname = createElement('span', 'sign-in__error', this._form);
 
-    this._buttonForm = createElement('button', 'sign-in__send', this._form) as HTMLButtonElement;
+    this._buttonForm = createElement('button', 'button sign-in__send', this._form) as HTMLButtonElement;
 
     this.setParameters();
   }

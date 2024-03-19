@@ -35,7 +35,8 @@
           ["@app/*", "./src/app/*"],
           ["@components/*", "./src/app/components/*"],
           ["@utils/*", "./src/app/utils/*"],
-          ["@style/*", "./src/app/style/*"]
+          ["@style/*", "./src/app/style/*"],
+          ["@assets/*", "./src/app/assets/*"]
         ],
         "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", "scss"]
       }
