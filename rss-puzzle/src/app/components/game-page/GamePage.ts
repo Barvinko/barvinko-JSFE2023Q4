@@ -113,8 +113,6 @@ export class GamePage {
       return;
     }
     this._randomCards.appendChild(cards);
-
-    console.log(cards);
   }
 
   public changeWidth(): void {
