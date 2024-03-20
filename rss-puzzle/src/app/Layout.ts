@@ -28,7 +28,10 @@ export class Layout {
       this.draw(this._startPage.getStart());
     });
 
-    this._startPage.getButton().addEventListener('click', () => this.draw(this._gamePage.getGame()));
+    this._startPage.getButton().addEventListener('click', () => {
+      this.draw(this._gamePage.getGame());
+      this._gamePage.changeWidth();
+    });
 
     this._gamePage.getButton().addEventListener('click', () => this.draw(this._signIn.getFormContainer()));
   }
@@ -42,7 +45,7 @@ export class Layout {
     this._bodyLink.appendChild(layout);
   }
 
-  public drawSignIn(): void {
+  public drawFirst(): void {
     if (this._localStorage.getFullName()) {
       this.draw(this._startPage.getStart());
       return;

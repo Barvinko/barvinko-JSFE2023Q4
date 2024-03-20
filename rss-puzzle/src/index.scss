@@ -1,5 +1,9 @@
 @import './app/style/value.scss';
 
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }

@@ -7,21 +7,30 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  gap: 40px
 }
 
 .game__container{
-  margin-bottom: 40px;
-  min-width: 600px;
+  min-width: 700px;
   width: 75vw;
 
-  display: flex;
-  flex-wrap: wrap;
+  border: 1px solid black;
+}
 
+.game__random-cards{
+  display: flex;
+  gap: 10px;
+
+  padding: 3px 3px;
+
+  height: 38px;
 }
 
 .game_card{
-  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border: 1px solid black;
-  margin: 10px 5px;
   cursor: pointer;
 }

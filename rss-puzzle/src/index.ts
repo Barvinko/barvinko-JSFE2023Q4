@@ -3,4 +3,4 @@ import './index.scss';
 import { Layout } from '@app/Layout';
 
 const layout: Layout = new Layout();
-layout.drawSignIn();
+layout.drawFirst();
