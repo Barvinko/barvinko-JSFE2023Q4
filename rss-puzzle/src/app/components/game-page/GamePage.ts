@@ -34,6 +34,7 @@ type WordCollection = {
 type CurrentDate = {
   id: number;
   text: string[];
+  textTranslate: string;
 };
 
 export class GamePage {
@@ -59,6 +60,8 @@ export class GamePage {
 
   private _words!: HTMLDivElement[];
 
+  private _hintFeatureElements!: HTMLDivElement[];
+
   constructor(storage: LocalStorage) {
     this._localStorage = storage;
     this._fieldGame = new FieldGame();
@@ -68,6 +71,7 @@ export class GamePage {
     this.createHead();
 
     this._main = createElement('main', 'main game', this._gameContainer);
+    this.createHintFeature(this._main);
 
     this._main.appendChild(this._fieldGame.getFieldGame());
 
@@ -85,8 +89,17 @@ export class GamePage {
     this.startGame();
   }
 
+  private createHintFeature(main: HTMLElement) {
+    const hideFeature = createElement('div', 'game__hide-feature game__container', main);
+
+    this._hintFeatureElements = [];
+
+    this._hintFeatureElements.push(createElement('div', 'game__translation', hideFeature) as HTMLDivElement);
+    createElement('div', 'game__switch', hideFeature);
+  }
+
   private createButtons(main: HTMLElement) {
-    const buttons = createElement('div', 'game_buttons', main);
+    const buttons = createElement('div', 'game__buttons', main);
 
     this._checkContaine = createElement('button', 'button game_continue-check', buttons) as HTMLButtonElement;
     this._checkContaine.innerText = 'Check';
@@ -179,7 +192,10 @@ export class GamePage {
     this._currentDate = {
       id: this._fieldGame.getNumberCurrent(),
       text: roundData.words[row].textExample.split(' '),
+      textTranslate: roundData.words[row].textExampleTranslate,
     };
+
+    this._hintFeatureElements[0].innerText = this._currentDate.textTranslate;
 
     this.randomWords();
   }
