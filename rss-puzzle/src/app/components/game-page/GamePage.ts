@@ -39,23 +39,25 @@ type CurrentDate = {
 export class GamePage {
   private _gameContainer: HTMLDivElement;
 
-  private _main: HTMLElement;
-
   private _closeButton!: HTMLButtonElement;
 
-  private _localStorage: LocalStorage;
+  private _main: HTMLElement;
 
   private _fieldGame: FieldGame;
 
   private _randomCards: HTMLDivElement;
+
+  private _containeButtons!: HTMLButtonElement;
+
+  private _checkButton!: HTMLButtonElement;
+
+  private _localStorage: LocalStorage;
 
   private _round: number;
 
   private _currentDate!: CurrentDate;
 
   private _words!: HTMLDivElement[];
-
-  private _containeButtons!: HTMLButtonElement;
 
   constructor(storage: LocalStorage) {
     this._localStorage = storage;
@@ -80,10 +82,27 @@ export class GamePage {
   }
 
   private createButtons(main: HTMLElement) {
-    this._containeButtons = createElement('button', 'button game_containe', main) as HTMLButtonElement;
+    const buttons = createElement('div', 'game_buttons', main);
+
+    this._containeButtons = createElement('button', 'button game_containe', buttons) as HTMLButtonElement;
     this._containeButtons.innerText = 'Container';
     this._containeButtons.disabled = true;
     this._containeButtons.addEventListener('click', () => this.toRound());
+
+    this._checkButton = createElement('button', 'button game_check', buttons) as HTMLButtonElement;
+    this._checkButton.innerText = 'Check';
+    this._checkButton.disabled = true;
+    this._checkButton.addEventListener('click', () => this.checkRow());
+  }
+
+  private checkRow(): void {
+    const wordsCurrent = Array.from(this._fieldGame.getCurrentRow().children) as HTMLDivElement[];
+
+    wordsCurrent.forEach((wordCurr, i) => {
+      let verificationClass = 'game_card_';
+      verificationClass += wordCurr.innerText === this._currentDate.text[i] ? 'right' : 'wrong';
+      wordCurr.classList.add(verificationClass);
+    });
   }
 
   private createHead(): void {
@@ -124,7 +143,7 @@ export class GamePage {
     this.randomWords();
   }
 
-  private randomWords() {
+  private randomWords(): void {
     const words: string[] = [...this._currentDate.text];
     this._words = [];
 
@@ -142,6 +161,7 @@ export class GamePage {
   }
 
   private async toRound() {
+    this.deleteVerifClass(this._words);
     this._words.forEach((word) => {
       word.style.pointerEvents = 'none';
     });
@@ -151,20 +171,35 @@ export class GamePage {
     this.changeWidth();
   }
 
-  private chooseCard(event: Event): void {
-    const cards: HTMLDivElement = event.target as HTMLDivElement;
+  private deleteVerifClass(cardsArr: HTMLDivElement[]): void {
+    cardsArr.forEach((card) => {
+      let verificationClass = 'game_card_';
+      verificationClass += card.classList.contains('game_card_right') ? 'right' : '';
+      verificationClass += card.classList.contains('game_card_wrong') ? 'wrong' : '';
 
-    if (cards.parentElement !== this._randomCards) {
-      this._randomCards.appendChild(cards);
+      if (verificationClass !== 'game_card_') card.classList.remove(verificationClass);
+    });
+  }
+
+  private chooseCard(event: Event): void {
+    const card: HTMLDivElement = event.target as HTMLDivElement;
+
+    if (card.parentElement !== this._randomCards) {
+      this._randomCards.appendChild(card);
       this._containeButtons.disabled = true;
+      this._checkButton.disabled = true;
+
+      this.deleteVerifClass([card]);
       return;
     }
 
-    this._fieldGame.getCurrentRow().appendChild(cards);
+    this._fieldGame.getCurrentRow().appendChild(card);
     const curentRow = this._fieldGame.getCurrentRow();
     const curentListWords = Array.from(curentRow.children) as HTMLDivElement[];
 
     if (curentListWords.length === this._words.length) {
+      this._checkButton.disabled = false;
+
       const rightText: string = this._currentDate.text.join(' ');
       const curentText = curentListWords.reduce((text, word: HTMLDivElement) => {
         if (text === '') return word.innerText;
@@ -173,6 +208,7 @@ export class GamePage {
 
       if (curentText !== rightText) return;
 
+      this._checkButton.disabled = true;
       this._containeButtons.disabled = false;
     }
   }
