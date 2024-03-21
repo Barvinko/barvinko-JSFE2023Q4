@@ -49,7 +49,7 @@ export class GamePage {
 
   private _checkContaine!: HTMLButtonElement;
 
-  private _checkButton!: HTMLButtonElement;
+  private _autoComplete!: HTMLButtonElement;
 
   private _localStorage: LocalStorage;
 
@@ -88,6 +88,34 @@ export class GamePage {
     this._checkContaine.innerText = 'Check';
     this._checkContaine.disabled = true;
     this._checkContaine.addEventListener('click', () => this.checkContinue(this._checkContaine));
+
+    this._autoComplete = createElement('button', 'button game_auto-complete', buttons) as HTMLButtonElement;
+    this._autoComplete.innerText = 'Auto-Complete';
+    this._autoComplete.addEventListener('click', () => this.runAutoComplete());
+  }
+
+  private runAutoComplete() {
+    this._words.forEach((word) => {
+      this._fieldGame.getCurrentRow().appendChild(word);
+      word.classList.add('game__card_move');
+      setTimeout(() => {
+        word.classList.remove('game__card_move');
+      }, 300);
+    });
+
+    if (this._fieldGame.getNumberCurrent() !== 9) {
+      this.toRound();
+      return;
+    }
+
+    this._checkContaine.disabled = false;
+    this._autoComplete.disabled = true;
+    this._checkContaine.innerText = 'Continue';
+
+    this.deleteVerifClass(this._words);
+    this._words.forEach((word) => {
+      word.style.pointerEvents = 'none';
+    });
   }
 
   private checkContinue(button: HTMLButtonElement) {
@@ -149,25 +177,29 @@ export class GamePage {
       text: roundData.words[row].textExample.split(' '),
     };
 
-    console.log(this._currentDate.text);
-
     this.randomWords();
   }
 
   private randomWords(): void {
-    const words: string[] = [...this._currentDate.text];
+    const wordsString: string[] = [...this._currentDate.text];
+    const words: HTMLDivElement[] = [];
     this._words = [];
+
+    wordsString.forEach((word, index) => {
+      const element = createElement('div', 'game_card') as HTMLDivElement;
+      element.innerText = word;
+      words[index] = element;
+      this._words[index] = element;
+      element.addEventListener('click', (event: Event) => this.chooseCard(event));
+    });
 
     for (let i = 0; i < words.length; i += 1) {
       const j = Math.floor(Math.random() * words.length);
       [words[i], words[j]] = [words[j], words[i]];
     }
 
-    words.forEach((word, index) => {
-      const element = createElement('div', 'game_card', this._randomCards) as HTMLDivElement;
-      element.innerText = word;
-      this._words[index] = element;
-      element.addEventListener('click', (event: Event) => this.chooseCard(event));
+    words.forEach((word) => {
+      this._randomCards.appendChild(word);
     });
   }
 
@@ -179,6 +211,7 @@ export class GamePage {
 
     this._checkContaine.disabled = true;
     this._checkContaine.innerHTML = 'Check';
+    this._autoComplete.disabled = false;
 
     this._fieldGame.incrementCurrent();
     await this.startGame();
@@ -203,6 +236,8 @@ export class GamePage {
       this._checkContaine.disabled = true;
       this._checkContaine.innerText = 'Check';
 
+      this._autoComplete.disabled = false;
+
       this.deleteVerifClass([card]);
       return;
     }
@@ -222,6 +257,7 @@ export class GamePage {
 
       if (curentText !== rightText) return;
 
+      this._autoComplete.disabled = true;
       this._checkContaine.innerText = 'Continue';
     }
   }

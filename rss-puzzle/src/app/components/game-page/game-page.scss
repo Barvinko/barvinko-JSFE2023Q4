@@ -44,3 +44,18 @@
 .game_card_wrong{
   color: red;
 }
+
+.game__card_move {
+  animation-name: slideIn;
+  animation-duration: 0.3s;
+}
+
+@keyframes slideIn {
+  0% { opacity: 0}
+  100% { opacity: 1}
+}
+
+.game_buttons{
+  display: flex;
+  gap: 30px;
+}
