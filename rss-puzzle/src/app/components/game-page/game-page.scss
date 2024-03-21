@@ -17,24 +17,51 @@
   border: 1px solid black;
 }
 
-.game__random-cards{
+.game_field-words{
   display: flex;
-  gap: 10px;
-
-  padding: 3px 3px;
-
+  background-color: #EFE5DF;
   height: 38px;
 }
 
-.game_card{
+.game__card{
   display: flex;
   justify-content: center;
   align-items: center;
 
+  padding: 10px;
+
   font-weight: 600;
 
   border: 1px solid black;
+  background-color: white;
   cursor: pointer;
+
+  position: relative;
+}
+
+.game__card_before::before, .game__card_after::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border: inherit;
+  border-left: 0;
+  border-radius: 43%;
+}
+
+.game__card_before::before{
+  background-color: #EFE5DF;
+  z-index: 1;
+  width: 9px;
+  left: -1px;
+}
+
+.game__card_after::after{
+  background-color: white;
+  z-index: 2;
+  right: -11px;
 }
 
 .game_card_right{

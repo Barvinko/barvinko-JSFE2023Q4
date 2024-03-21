@@ -71,7 +71,11 @@ export class GamePage {
 
     this._main.appendChild(this._fieldGame.getFieldGame());
 
-    this._randomCards = createElement('div', 'game__random-cards game__container', this._main) as HTMLDivElement;
+    this._randomCards = createElement(
+      'div',
+      'game__random-cards game__container game_field-words',
+      this._main,
+    ) as HTMLDivElement;
     this.createButtons(this._main);
 
     window.addEventListener('resize', () => {
@@ -161,7 +165,7 @@ export class GamePage {
       const oldFieldGame = this._fieldGame.getFieldGame();
       const oldRandomCards = this._randomCards;
       this._fieldGame = new FieldGame();
-      this._randomCards = createElement('div', 'game__random-cards game__container') as HTMLDivElement;
+      this._randomCards = createElement('div', 'game__random-cards game__container game_field-words') as HTMLDivElement;
 
       this._main.replaceChild(this._fieldGame.getFieldGame(), oldFieldGame);
       this._main.replaceChild(this._randomCards, oldRandomCards);
@@ -186,8 +190,16 @@ export class GamePage {
     this._words = [];
 
     wordsString.forEach((word, index) => {
-      const element = createElement('div', 'game_card') as HTMLDivElement;
+      const element = createElement('div', 'game__card') as HTMLDivElement;
       element.innerText = word;
+
+      if (index !== 0) {
+        element.classList.add('game__card_before');
+      }
+      if (index !== wordsString.length - 1) {
+        element.classList.add('game__card_after');
+      }
+
       words[index] = element;
       this._words[index] = element;
       element.addEventListener('click', (event: Event) => this.chooseCard(event));
@@ -266,10 +278,9 @@ export class GamePage {
     const parentComputedStyle = window.getComputedStyle(this._randomCards);
 
     const exampleWord = window.getComputedStyle(this._words[0]);
-    const padding: number = parseFloat(exampleWord.paddingBlockEnd) * 2;
-    const gap: number = parseFloat(parentComputedStyle.gap);
+    const padding: number = parseFloat(exampleWord.padding) * 2;
 
-    const spase: number = padding * text.length + gap * text.length;
+    const spase: number = padding * text.length;
     const parentWidth = parseFloat(parentComputedStyle.width);
     const symbols: number = text.join('').length;
     const symbolWidth: number = (parentWidth - spase) / symbols;
