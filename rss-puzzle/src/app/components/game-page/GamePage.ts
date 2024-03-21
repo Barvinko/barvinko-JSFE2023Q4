@@ -62,6 +62,8 @@ export class GamePage {
 
   private _hintFeatureElements!: HTMLDivElement[];
 
+  private _hintFeatureSwitch!: HTMLDivElement[];
+
   constructor(storage: LocalStorage) {
     this._localStorage = storage;
     this._fieldGame = new FieldGame();
@@ -93,9 +95,32 @@ export class GamePage {
     const hideFeature = createElement('div', 'game__hide-feature game__container', main);
 
     this._hintFeatureElements = [];
+    this._hintFeatureSwitch = [];
 
     this._hintFeatureElements.push(createElement('div', 'game__translation', hideFeature) as HTMLDivElement);
-    createElement('div', 'game__switch', hideFeature);
+    const switchHint = createElement('div', 'game__switch', hideFeature) as HTMLDivElement;
+
+    this._hintFeatureSwitch.push(
+      createElement('div', 'game__translation-switch game_switch-toggle', switchHint) as HTMLDivElement,
+    );
+    this._hintFeatureSwitch[0].innerText = 'T';
+    this._hintFeatureSwitch[0].addEventListener('click', () => this.toggleTranslation());
+  }
+
+  private toggleTranslation() {
+    const switchToggle: HTMLDivElement = this._hintFeatureSwitch[0];
+    const hintFeature: HTMLDivElement = this._hintFeatureElements[0];
+
+    const classDisable: string = 'game__hide_disable';
+    const classOff: string = 'game__switch-toggle_off';
+
+    if (switchToggle.classList.contains(classOff)) {
+      switchToggle.classList.remove(classOff);
+      hintFeature.classList.remove(classDisable);
+      return;
+    }
+    switchToggle.classList.add(classOff);
+    hintFeature.classList.add(classDisable);
   }
 
   private createButtons(main: HTMLElement) {

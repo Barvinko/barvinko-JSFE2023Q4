@@ -21,8 +21,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 
   border: 0;
+}
+
+.game__translation{
+  height: 20px;
+}
+
+.game_switch-toggle{
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #EFE5DF;
+  cursor: pointer;
+}
+
+.game__switch-toggle_off{
+  background-color: white;
+}
+
+.game__hide_disable{
+  opacity: 0;
 }
 
 .game_field-words{
@@ -90,7 +111,7 @@
   100% { opacity: 1}
 }
 
-.game_buttons{
+.game__buttons{
   display: flex;
   gap: 30px;
 }
