@@ -11,8 +11,11 @@ export class FieldGame {
 
   private _rows!: Rows;
 
+  private _rowNumber: number;
+
   constructor() {
     this._fieldGame = createElement('div', 'game__field-game game__container') as HTMLDivElement;
+    this._rowNumber = 0;
     this.createFieldGame();
   }
 
@@ -34,7 +37,20 @@ export class FieldGame {
     return this._fieldGame;
   }
 
-  public getRows(): Rows {
-    return this._rows;
+  public getRows(): HTMLDivElement[] {
+    return this._rows.rows;
+  }
+
+  public getCurrentRow(): HTMLDivElement {
+    return this._rows.rowCurrent;
+  }
+
+  public getNumberCurrent(): number {
+    return this._rowNumber;
+  }
+
+  public incrementCurrent() {
+    this._rowNumber += 1;
+    this._rows.rowCurrent = this._rows.rows[this._rowNumber];
   }
 }

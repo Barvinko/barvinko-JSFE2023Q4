@@ -31,10 +31,17 @@ type WordCollection = {
   roundsCount: number;
 };
 
+type CurrentDate = {
+  id: number;
+  text: string[];
+};
+
 export class GamePage {
   private _gameContainer: HTMLDivElement;
 
-  private _closeButton: HTMLButtonElement;
+  private _main: HTMLElement;
+
+  private _closeButton!: HTMLButtonElement;
 
   private _localStorage: LocalStorage;
 
@@ -42,37 +49,47 @@ export class GamePage {
 
   private _randomCards: HTMLDivElement;
 
-  private _round!: Puzzle;
+  private _round: number;
 
-  private _words: HTMLDivElement[];
+  private _currentDate!: CurrentDate;
+
+  private _words!: HTMLDivElement[];
+
+  private _containeButtons!: HTMLButtonElement;
 
   constructor(storage: LocalStorage) {
     this._localStorage = storage;
+    this._fieldGame = new FieldGame();
+    this._round = 0;
 
     this._gameContainer = createElement('div', 'container') as HTMLDivElement;
-
-    this._closeButton = createElement('button', 'button exit') as HTMLButtonElement;
     this.createHead();
 
-    const main = createElement('main', 'main game', this._gameContainer);
+    this._main = createElement('main', 'main game', this._gameContainer);
 
-    this._fieldGame = new FieldGame();
+    this._main.appendChild(this._fieldGame.getFieldGame());
 
-    main.appendChild(this._fieldGame.getFieldGame());
-
-    this._randomCards = createElement('div', 'game__random-cards game__container', main) as HTMLDivElement;
+    this._randomCards = createElement('div', 'game__random-cards game__container', this._main) as HTMLDivElement;
+    this.createButtons(this._main);
 
     window.addEventListener('resize', () => {
       if (document.querySelector('.game') && window.innerWidth > 768) this.changeWidth();
     });
 
-    this._words = [];
-
     this.startGame();
+  }
+
+  private createButtons(main: HTMLElement) {
+    this._containeButtons = createElement('button', 'button game_containe', main) as HTMLButtonElement;
+    this._containeButtons.innerText = 'Container';
+    this._containeButtons.disabled = true;
+    this._containeButtons.addEventListener('click', () => this.toRound());
   }
 
   private createHead(): void {
     const header = createElement('header', 'header', this._gameContainer);
+
+    this._closeButton = createElement('button', 'button exit') as HTMLButtonElement;
 
     header.appendChild(this._closeButton);
     this._closeButton.innerText = 'Logout';
@@ -81,16 +98,35 @@ export class GamePage {
 
   public async startGame(): Promise<void> {
     const wordCollection: WordCollection = (await import(`@assets/data/wordCollectionLevel1.json`)).default;
-    const round: number = 0;
-    this._round = wordCollection.rounds[round];
+    if (this._currentDate && this._fieldGame.getNumberCurrent() === 10) {
+      this._round += 1;
 
-    if (!this._round) return;
+      const oldFieldGame = this._fieldGame.getFieldGame();
+      const oldRandomCards = this._randomCards;
+      this._fieldGame = new FieldGame();
+      this._randomCards = createElement('div', 'game__random-cards game__container') as HTMLDivElement;
 
-    this.randomWords(0);
+      this._main.replaceChild(this._fieldGame.getFieldGame(), oldFieldGame);
+      this._main.replaceChild(this._randomCards, oldRandomCards);
+    }
+
+    const roundData: Puzzle = wordCollection.rounds[this._round];
+    const row = this._fieldGame.getNumberCurrent();
+
+    if (!roundData) return;
+
+    this._currentDate = {
+      id: this._fieldGame.getNumberCurrent(),
+      text: roundData.words[row].textExample.split(' '),
+    };
+    console.log(this._currentDate.text);
+
+    this.randomWords();
   }
 
-  private randomWords(row: number) {
-    const words: string[] = this._round.words[row].textExample.split(' ');
+  private randomWords() {
+    const words: string[] = [...this._currentDate.text];
+    this._words = [];
 
     for (let i = 0; i < words.length; i += 1) {
       const j = Math.floor(Math.random() * words.length);
@@ -105,32 +141,69 @@ export class GamePage {
     });
   }
 
+  private async toRound() {
+    this._words.forEach((word) => {
+      word.style.pointerEvents = 'none';
+    });
+    this._containeButtons.disabled = true;
+    this._fieldGame.incrementCurrent();
+    await this.startGame();
+    this.changeWidth();
+  }
+
   private chooseCard(event: Event): void {
     const cards: HTMLDivElement = event.target as HTMLDivElement;
 
-    if (cards.parentElement === this._randomCards) {
-      this._fieldGame.getRows().rowCurrent.appendChild(cards);
+    if (cards.parentElement !== this._randomCards) {
+      this._randomCards.appendChild(cards);
+      this._containeButtons.disabled = true;
       return;
     }
-    this._randomCards.appendChild(cards);
+
+    this._fieldGame.getCurrentRow().appendChild(cards);
+    const curentRow = this._fieldGame.getCurrentRow();
+    const curentListWords = Array.from(curentRow.children) as HTMLDivElement[];
+
+    if (curentListWords.length === this._words.length) {
+      const rightText: string = this._currentDate.text.join(' ');
+      const curentText = curentListWords.reduce((text, word: HTMLDivElement) => {
+        if (text === '') return word.innerText;
+        return `${text} ${word.innerText}`;
+      }, '');
+
+      if (curentText !== rightText) return;
+
+      this._containeButtons.disabled = false;
+    }
   }
 
-  public changeWidth(): void {
+  public changeWidth(words = this._words, text = this._currentDate.text): void {
     const parentComputedStyle = window.getComputedStyle(this._randomCards);
 
     const exampleWord = window.getComputedStyle(this._words[0]);
     const padding: number = parseFloat(exampleWord.paddingBlockEnd) * 2;
     const gap: number = parseFloat(parentComputedStyle.gap);
-    const spase: number = padding * 10 + gap * 7;
 
+    const spase: number = padding * text.length + gap * text.length;
     const parentWidth = parseFloat(parentComputedStyle.width);
-    const symbols: number = this._round.words[0].textExample.split(' ').join('').length;
+    const symbols: number = text.join('').length;
     const symbolWidth: number = (parentWidth - spase) / symbols;
 
-    this._words.forEach((word: HTMLDivElement) => {
+    words.forEach((word: HTMLDivElement) => {
       const letters: number = word.innerText.length;
       word.style.width = `${symbolWidth * letters + padding}px`;
     });
+
+    if (words === this._words) {
+      for (let i = 0; i < this._currentDate.id; i += 1) {
+        const rowBefore = document.getElementById(`game__row-${i}`) as HTMLDivElement;
+        const wordsRowBefore = Array.from(rowBefore.children) as HTMLDivElement[];
+
+        const wordsBeforeText = wordsRowBefore.map((word) => word.innerText);
+
+        this.changeWidth(wordsRowBefore, wordsBeforeText);
+      }
+    }
   }
 
   public getButton(): HTMLButtonElement {
