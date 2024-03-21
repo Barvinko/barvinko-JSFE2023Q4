@@ -47,7 +47,7 @@ export class GamePage {
 
   private _randomCards: HTMLDivElement;
 
-  private _containeButtons!: HTMLButtonElement;
+  private _checkContaine!: HTMLButtonElement;
 
   private _checkButton!: HTMLButtonElement;
 
@@ -84,15 +84,25 @@ export class GamePage {
   private createButtons(main: HTMLElement) {
     const buttons = createElement('div', 'game_buttons', main);
 
-    this._containeButtons = createElement('button', 'button game_containe', buttons) as HTMLButtonElement;
-    this._containeButtons.innerText = 'Container';
-    this._containeButtons.disabled = true;
-    this._containeButtons.addEventListener('click', () => this.toRound());
+    this._checkContaine = createElement('button', 'button game_continue-check', buttons) as HTMLButtonElement;
+    this._checkContaine.innerText = 'Check';
+    this._checkContaine.disabled = true;
+    this._checkContaine.addEventListener('click', () => this.checkContinue(this._checkContaine));
+  }
 
-    this._checkButton = createElement('button', 'button game_check', buttons) as HTMLButtonElement;
-    this._checkButton.innerText = 'Check';
-    this._checkButton.disabled = true;
-    this._checkButton.addEventListener('click', () => this.checkRow());
+  private checkContinue(button: HTMLButtonElement) {
+    switch (button.innerText) {
+      case 'Check':
+        this.checkRow();
+        break;
+      case 'Continue':
+        this.toRound();
+        break;
+
+      default:
+        console.error('checkContinue does not have correct name');
+        break;
+    }
   }
 
   private checkRow(): void {
@@ -138,6 +148,7 @@ export class GamePage {
       id: this._fieldGame.getNumberCurrent(),
       text: roundData.words[row].textExample.split(' '),
     };
+
     console.log(this._currentDate.text);
 
     this.randomWords();
@@ -165,7 +176,10 @@ export class GamePage {
     this._words.forEach((word) => {
       word.style.pointerEvents = 'none';
     });
-    this._containeButtons.disabled = true;
+
+    this._checkContaine.disabled = true;
+    this._checkContaine.innerHTML = 'Check';
+
     this._fieldGame.incrementCurrent();
     await this.startGame();
     this.changeWidth();
@@ -186,8 +200,8 @@ export class GamePage {
 
     if (card.parentElement !== this._randomCards) {
       this._randomCards.appendChild(card);
-      this._containeButtons.disabled = true;
-      this._checkButton.disabled = true;
+      this._checkContaine.disabled = true;
+      this._checkContaine.innerText = 'Check';
 
       this.deleteVerifClass([card]);
       return;
@@ -198,7 +212,7 @@ export class GamePage {
     const curentListWords = Array.from(curentRow.children) as HTMLDivElement[];
 
     if (curentListWords.length === this._words.length) {
-      this._checkButton.disabled = false;
+      this._checkContaine.disabled = false;
 
       const rightText: string = this._currentDate.text.join(' ');
       const curentText = curentListWords.reduce((text, word: HTMLDivElement) => {
@@ -208,8 +222,7 @@ export class GamePage {
 
       if (curentText !== rightText) return;
 
-      this._checkButton.disabled = true;
-      this._containeButtons.disabled = false;
+      this._checkContaine.innerText = 'Continue';
     }
   }
 
