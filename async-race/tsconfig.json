@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "target": "ES2021",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@components/*": ["src/app/components/*"],
+      "@utils/*": ["src/app/utils/*"],
+      "@style/*": ["src/app/style/*"]
+    }
+  },
+  "typeRoots": ["types", "./index.d.ts"],
+  "include": ["src", "./index.d.ts"]
+}
