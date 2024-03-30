@@ -1,5 +1,5 @@
 {
-  "name": "rss-puzzle",
+  "name": "async-race",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -12,25 +12,25 @@
     "ci:format": "prettier --check \"src/**/*.+(js|jsx|ts|tsx)\"",
     "lint": "eslint \"src/**/*.+(js|jsx|ts|tsx)\"",
     "lint:fix": "eslint --fix \"src/**/*.+(js|jsx|ts|tsx)\"",
-    "pre-commit": "lint-staged",
-    "pre-push": "lint && validate-branch-name",
+    "pre-commit": "npm run format && npm run lint && git add .",
+    "pre-push": "npm run lint && validate-branch-name",
     "check-branch": "validate-branch-name"
   },
   "lint-staged": {
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "lint",
-      "git add"
+    "src/**/*.+(ts|tsx|scss)": [
+      "npm run format",
+      "npm run lint",
+      "git add ."
     ]
   },
   "validate-branch-name": {
-    "pattern": "^(feat|init|fix|refactor|docs)/RSS-PZ-\\d{2}_[a-zA-Z]+$",
+    "pattern": "^(feat|init|fix|refactor|docs)/RSS-AR-\\d{2}_[a-zA-Z]+$",
     "errorMsg": "Name of branch is not correct"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pre-commit",
-      "pre-push": "pre-push"
+      "pre-commit": "npm run pre-commit",
+      "pre-push": "npm run pre-push"
     }
   },
   "devDependencies": {

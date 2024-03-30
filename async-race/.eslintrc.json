@@ -25,7 +25,9 @@
     "@typescript-eslint/no-explicit-any": "error",
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error"
   },
   "settings": {
     "import/resolver": {
@@ -35,7 +37,8 @@
           ["@app/*", "./src/app/*"],
           ["@components/*", "./src/app/components/*"],
           ["@utils/*", "./src/app/utils/*"],
-          ["@style/*", "./src/app/style/*"]
+          ["@style/*", "./src/app/style/*"],
+          ["@type/*", "src/app/types/*"]
         ],
         "extensions": [".ts", ".tsx", ".js", ".jsx", ".json", "scss"]
       }

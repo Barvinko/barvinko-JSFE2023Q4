@@ -126,7 +126,8 @@ module.exports = {
       '@app': path.resolve(__dirname, 'src/app'),
       '@components': path.resolve(__dirname, 'src/app/components'),
       '@utils': path.resolve(__dirname, 'src/app/utils'),
-      '@style': path.resolve(__dirname, 'src/app/style')
+      '@style': path.resolve(__dirname, 'src/app/style'),
+      '@type': path.resolve(__dirname, 'src/app/types')
     },
   },
   optimization: {
