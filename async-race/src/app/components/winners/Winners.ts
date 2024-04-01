@@ -1,7 +1,9 @@
-import { Page } from '@app/components/page/Page';
+import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 
-export class Winners extends Page {
+export class Winners extends ComponentMain {
   constructor() {
     super('article', 'article winners');
+
+    this.createTitle();
   }
 }

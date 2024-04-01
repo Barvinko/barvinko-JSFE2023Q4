@@ -51,7 +51,7 @@ module.exports = {
       {
         test: /\.(c|sa|sc)ss$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -72,7 +72,11 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpe&g|webp|svg|gif)$/i,
+        test: /\.svg$/,
+        use: 'svg-inline-loader'
+      },
+      {
+        test: /\.(png|jpe&g|webp|gif)$/i,
         use: [
           {
             loader: 'image-webpack-loader',

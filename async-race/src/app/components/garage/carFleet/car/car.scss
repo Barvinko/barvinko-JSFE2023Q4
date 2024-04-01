@@ -1,0 +1,51 @@
+.garage__car{
+  padding: 0.5rem;
+}
+
+.garage__car-race{
+  display: flex;
+  gap: 5px;
+
+  padding-top: 1rem;
+
+  border-bottom: 2px dashed black;
+}
+
+.garage__car-pedal-buttons{
+  display: flex;
+  gap: 5px;
+
+  .garage__car-pedal{
+    border: 1px solid black;
+    height: min-content;
+    padding: 5px;
+    border-radius: 20%;
+  }
+  .garage__car-start{
+    border-top-left-radius: $pedal-radius;
+    border-bottom-left-radius: $pedal-radius;
+  }
+  .garage__car-stop{
+    border-top-right-radius: $pedal-radius;
+    border-bottom-right-radius: $pedal-radius;
+  }
+}
+
+.garage__car-field{
+  position: relative;
+  flex-grow: 1;
+
+  &::after{
+    content: "🏁";
+    font-size: 2rem;
+    position: absolute;
+    bottom: 0.2rem;
+    right: 2rem;
+    z-index: 1;
+  }
+  .garage__car-svg{
+    width: 7rem;
+    max-height: 4.1rem;
+    z-index: 2;
+  }
+}
