@@ -34,3 +34,9 @@ export function createSpans(
   span.innerText = text;
   return span;
 }
+
+export function createInput(className: string, type: string, parent?: HTMLElement): HTMLInputElement {
+  const input = createElement('input', className, parent) as HTMLInputElement;
+  input.type = type;
+  return input;
+}

@@ -16,6 +16,8 @@ button {
 }
 
 .button{
+  height: min-content;
+
   background-color: $mainColor;
   padding: 0.3rem 1rem;
 
@@ -29,5 +31,6 @@ button {
   background-color: gray;
 }
 
+@import './app//components/garage/workshop/workshop.scss';
 @import './app/components/garage/carFleet/car-fleet.scss';
 @import './app/components/garage/carFleet/car/car.scss';

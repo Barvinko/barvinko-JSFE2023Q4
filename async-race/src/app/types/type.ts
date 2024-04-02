@@ -4,6 +4,11 @@ export type CarType = {
   id: number;
 };
 
+export type CarTypeApi = {
+  name: string;
+  color: string;
+};
+
 export type WinnerData = {
   id: number;
   wins: number;

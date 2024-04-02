@@ -1,6 +1,8 @@
 import { createDiv, createButton } from '@app/utils/createElement';
 import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 import { Car } from '@components/garage/carFleet/car/Car';
+import { ApiUrls } from '@type/enums';
+import { deleteData } from '@utils/deleteData';
 
 type ChangeButtons = {
   back: HTMLButtonElement;
@@ -11,23 +13,23 @@ export class CarFleet extends ComponentMain {
   private _changeButtons!: ChangeButtons;
 
   constructor() {
-    super('sector', 'garage');
-    this.createTitle(this._container).then(() => {
+    super('section', 'garage');
+    this.createTitle().then(() => {
+      this.createNumberPage();
       this.createContainerCars();
       this._changeButtons = this.createChangeButton();
       this.blockChangePage();
     });
   }
 
+  public async updateCarage(): Promise<void> {
+    await this.createTitle();
+    this.createContainerCars();
+    if (this._changeButtons) this.blockChangePage();
+  }
+
   private createContainerCars(): void {
-    const oldContainer = this._container.querySelector('.garage__cars');
     const container = createDiv('garage__cars');
-    if (oldContainer) {
-      this._container.replaceChild(container, oldContainer);
-      oldContainer.remove();
-    } else {
-      this._container.appendChild(container);
-    }
 
     let i: number = (this.getNumberPage() - 1) * 7;
     let endIndex: number = i + 7;
@@ -36,7 +38,18 @@ export class CarFleet extends ComponentMain {
     for (i; i < endIndex; i += 1) {
       const car = new Car(ComponentMain._carsData[i]);
       container.appendChild(car.getContainer());
+      const { id } = ComponentMain._carsData[i];
+
+      car.getSelect().addEventListener('click', async () => {
+        car.selectUpdate();
+      });
+      car.getRemove().addEventListener('click', async () => {
+        const url = await deleteData(`${ApiUrls.GARAGE}/${id}`);
+        if (url) this.updateCarage();
+      });
     }
+
+    this.replaceElement(container);
   }
 
   private createChangeButton(): ChangeButtons {

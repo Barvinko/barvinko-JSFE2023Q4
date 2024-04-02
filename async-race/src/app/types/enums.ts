@@ -18,3 +18,8 @@ export enum RequestMethods {
   DELETE = 'DELETE',
   PATCH = 'PATCH',
 }
+
+export enum TypeInput {
+  TEXT = 'text',
+  COLOR = 'color',
+}

@@ -11,6 +11,11 @@
   border-bottom: 2px dashed black;
 }
 
+.garage__car-header-buttons{
+  display: flex;
+  align-items: center;
+}
+
 .garage__car-pedal-buttons{
   display: flex;
   gap: 5px;
