@@ -8,18 +8,20 @@ import { carMarks, carModelNames } from '@utils/carsData';
 import { CarFleet } from '@components/garage/carFleet/CarFleet';
 
 export class Workshop extends Component {
-  private _carFlee: CarFleet;
+  private _carFlet: CarFleet;
+
+  private _race!: HTMLButtonElement;
+
+  private _reset!: HTMLButtonElement;
 
   constructor(carFleet: CarFleet) {
     super('section', 'workshop');
 
-    this._carFlee = carFleet;
+    this._carFlet = carFleet;
 
     this.createform('create', false);
     this.createform('update', true);
-
-    const generateCar = createButton('button workshop__generate-car', 'Cenerate Cars'.toUpperCase(), this._container);
-    generateCar.addEventListener('click', () => this.randomCar());
+    this.createGlobalFun();
   }
 
   private createform(func: 'create' | 'update', disabled: boolean): void {
@@ -51,6 +53,59 @@ export class Workshop extends Component {
     setDisabled([inputName, inputColor, button], disabled);
   }
 
+  private createGlobalFun() {
+    const containerGlobal = createDiv('workshop__global', this._container);
+
+    this._race = createButton('button workshop__race', 'Race'.toUpperCase(), containerGlobal);
+    this._reset = createButton('button workshop__reset', 'Reset'.toUpperCase(), containerGlobal);
+    const generateCar = createButton('button workshop__generate-car', 'Cenerate Cars'.toUpperCase(), containerGlobal);
+
+    this._reset.disabled = true;
+
+    this._race.addEventListener('click', () => {
+      this.startRace();
+    });
+    this._reset.addEventListener('click', () => {
+      this.resetCar();
+    });
+    generateCar.addEventListener('click', () => this.randomCar());
+  }
+
+  private async startRace() {
+    this._race.disabled = true;
+    let flafWin: boolean = false;
+    await this.stopAllCars();
+
+    this._carFlet._carsPage.forEach(async (car) => {
+      car.carToStart();
+      const status: number = await car.startEngine();
+      if (flafWin || status !== 200) {
+        return;
+      }
+      flafWin = true;
+
+      const winner = this._carFlet._dialog.querySelector('.dialog__winner') as HTMLHeadingElement;
+      if (!winner) return;
+      winner.innerText = car._carData.name;
+      this._carFlet._dialog.show();
+      this._reset.disabled = false;
+    });
+  }
+
+  private async stopAllCars() {
+    const stopPromises: Promise<void>[] = this._carFlet._carsPage.map(async (car) => {
+      await car.stopEngine();
+    });
+    await Promise.all(stopPromises);
+  }
+
+  private async resetCar() {
+    this._reset.disabled = true;
+    await this.stopAllCars();
+    this._carFlet._dialog.close();
+    this._race.disabled = false;
+  }
+
   private randomCar() {
     for (let i = 0; i < 100; i += 1) {
       const markRandom = this.getRandomNumber(carMarks.length);
@@ -76,7 +131,7 @@ export class Workshop extends Component {
       color,
     };
     await createData(ApiUrls.GARAGE, car);
-    this._carFlee.updateCarage();
+    this._carFlet.updateCarage();
   }
 
   private async updateCar(name: string, color: string, id: number) {
@@ -86,6 +141,6 @@ export class Workshop extends Component {
     };
 
     await putData(`${ApiUrls.GARAGE}/${id}`, car);
-    this._carFlee.updateCarage();
+    this._carFlet.updateCarage();
   }
 }

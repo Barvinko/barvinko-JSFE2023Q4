@@ -7,7 +7,7 @@ import { createDiv, createButton, createSpans } from '@app/utils/createElement';
 import { carEngine } from '@app/utils/api-functions/carEngine';
 
 export class Car extends Component {
-  private _carData: CarType;
+  public _carData: CarType;
 
   private _removeButton!: HTMLButtonElement;
 
@@ -47,33 +47,34 @@ export class Car extends Component {
     this._carSvg.classList.add('garage__car-svg');
     this._carSvg.setAttribute('fill', this._carData.color);
 
-    this._startEngine.addEventListener('click', () => this.startEngine(fieldRace));
+    this._startEngine.addEventListener('click', () => this.startEngine());
     this._stopEngine.addEventListener('click', () => this.stopEngine());
   }
 
-  public async startEngine(race: HTMLDivElement) {
+  public async startEngine(): Promise<number> {
     this._startEngine.disabled = true;
     this._stopEngine.disabled = false;
 
     const dataAnswer: EngineAnswer = await carEngine(this._carData.id, EngineStatus.STARTED);
 
     if (typeof dataAnswer.data === 'string') {
-      return;
+      return 0;
     }
     const { data } = dataAnswer;
 
     const duration = `${Math.round(data.distance / data.velocity)}ms`;
-    if (!this._carSvg.parentElement) return;
+    if (!this._carSvg.parentElement) return 0;
 
     this._carSvg.style.transitionDuration = duration;
-    this._carSvg.style.transform = `translateX(${race.offsetWidth - this._carSvg.clientWidth}px)`;
-    this.breakEngine();
+    const raceLength = this._carSvg.parentElement.offsetWidth - this._carSvg.clientWidth;
+    this._carSvg.style.transform = `translateX(${raceLength}px)`;
+    const result = await this.breakEngine();
+    return result;
   }
 
-  public async breakEngine() {
+  public async breakEngine(): Promise<number> {
     const data = await carEngine(this._carData.id, EngineStatus.DRIVE);
     if (data.status === 500) {
-      console.log(this._carData.name, data.data);
       const computedStyle = window.getComputedStyle(this._carSvg);
       const currentTransform = computedStyle.transform;
       const matrix = new DOMMatrix(currentTransform);
@@ -83,6 +84,7 @@ export class Car extends Component {
       this._carSvg.style.transitionDuration = '0ms';
       this._carSvg.style.transform = `translateX(${translateX}px)`;
     }
+    return data.status;
   }
 
   public async stopEngine() {
@@ -91,6 +93,10 @@ export class Car extends Component {
 
     await carEngine(this._carData.id, EngineStatus.STOPPED);
     if (!this._carSvg.parentElement) return;
+    this.carToStart();
+  }
+
+  public carToStart() {
     this._carSvg.style.transform = 'translateX(0)';
     this._carSvg.style.transitionDuration = '0s';
   }

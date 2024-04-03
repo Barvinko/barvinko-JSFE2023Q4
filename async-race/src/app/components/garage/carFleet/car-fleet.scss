@@ -1,7 +1,45 @@
+.garage{
+  position: relative;
+}
 .garage__click-page{
   padding-top: 1rem;
   width: 100%;
 
   display: flex;
   justify-content: center;
+}
+
+.dialog{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(231, 212, 212, 0.274);
+
+  border: 0;
+  
+  .dialog__container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #674242;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+
+    text-align: center;
+
+    .dialog__win{
+      font-size: 7rem;
+      margin-bottom: 0;
+    }
+    .dialog__winner{
+      font-size: 4rem;
+    }
+  }
 }

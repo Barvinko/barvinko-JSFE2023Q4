@@ -21,10 +21,19 @@
   gap: 5px;
 
   .garage__car-pedal{
-    border: 1px solid black;
+    background-color: $mainColor;
+    border: 1px solid $mainColor;
+    color: white;
+    box-shadow: 0 0 3px $mainColorActive;
     height: min-content;
     padding: 5px;
     border-radius: 20%;
+  }
+  .garage__car-pedal:disabled{
+    background-color: white;
+    color: gray;
+    border-color: gray;
+    box-shadow: 0 0 0;
   }
   .garage__car-start{
     border-top-left-radius: $pedal-radius;
@@ -45,7 +54,7 @@
     font-size: 2rem;
     position: absolute;
     bottom: 0.2rem;
-    right: 2rem;
+    right: 7rem;
     z-index: 1;
   }
   .garage__car-svg{

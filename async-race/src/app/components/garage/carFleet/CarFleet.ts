@@ -1,7 +1,7 @@
-import { createDiv, createButton } from '@app/utils/createElement';
+import { createElement, createDiv, createButton, createSpans } from '@app/utils/createElement';
 import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 import { Car } from '@components/garage/carFleet/car/Car';
-import { ApiUrls } from '@type/enums';
+import { ApiUrls, Spans } from '@type/enums';
 import { deleteData } from '@utils/api-functions';
 
 type ChangeButtons = {
@@ -12,6 +12,10 @@ type ChangeButtons = {
 export class CarFleet extends ComponentMain {
   private _changeButtons!: ChangeButtons;
 
+  public _carsPage!: Car[];
+
+  public _dialog!: HTMLDialogElement;
+
   constructor() {
     super('section', 'garage');
     this.createTitle().then(() => {
@@ -19,6 +23,7 @@ export class CarFleet extends ComponentMain {
       this.createContainerCars();
       this._changeButtons = this.createChangeButton();
       this.blockChangePage();
+      this.createDialog();
     });
   }
 
@@ -30,6 +35,7 @@ export class CarFleet extends ComponentMain {
 
   private createContainerCars(): void {
     const container = createDiv('garage__cars');
+    this._carsPage = [];
 
     let i: number = (this.getNumberPage() - 1) * 7;
     let endIndex: number = i + 7;
@@ -37,6 +43,8 @@ export class CarFleet extends ComponentMain {
 
     for (i; i < endIndex; i += 1) {
       const car = new Car(ComponentMain._carsData[i]);
+      this._carsPage.push(car);
+
       container.appendChild(car.getContainer());
       const { id } = ComponentMain._carsData[i];
 
@@ -64,6 +72,13 @@ export class CarFleet extends ComponentMain {
       back: pageBack,
       next: pageNext,
     };
+  }
+
+  private createDialog(): void {
+    this._dialog = createElement('dialog', 'dialog', this._container) as HTMLDialogElement;
+    const containerWin = createDiv('dialog__container', this._dialog);
+    createSpans('dialog__win', 'WIN!!!', containerWin, Spans.H2);
+    createSpans('dialog__winner', '', containerWin, Spans.H3);
   }
 
   private blockChangePage(): void {
