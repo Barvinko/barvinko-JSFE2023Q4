@@ -2,7 +2,7 @@ import { Component } from '@components/Component/Component';
 import { Spans, ApiUrls } from '@type/enums';
 import { CarType, WinnerData } from '@type/type';
 import { createSpans } from '@app/utils/createElement';
-import { getData } from '@utils/getData';
+import { getData } from '@utils/api-functions';
 
 export class ComponentMain extends Component {
   public static _carsData: CarType[];

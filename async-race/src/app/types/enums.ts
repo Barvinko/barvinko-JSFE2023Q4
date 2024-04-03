@@ -23,3 +23,9 @@ export enum TypeInput {
   TEXT = 'text',
   COLOR = 'color',
 }
+
+export enum EngineStatus {
+  STARTED = 'started',
+  STOPPED = 'stopped',
+  DRIVE = 'drive',
+}

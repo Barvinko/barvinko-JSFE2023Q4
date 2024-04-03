@@ -2,7 +2,7 @@ import { createDiv, createButton } from '@app/utils/createElement';
 import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 import { Car } from '@components/garage/carFleet/car/Car';
 import { ApiUrls } from '@type/enums';
-import { deleteData } from '@utils/deleteData';
+import { deleteData } from '@utils/api-functions';
 
 type ChangeButtons = {
   back: HTMLButtonElement;

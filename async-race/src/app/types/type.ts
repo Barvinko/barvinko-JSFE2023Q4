@@ -14,3 +14,13 @@ export type WinnerData = {
   wins: number;
   time: number;
 };
+
+export type EngineData = {
+  velocity: number;
+  distance: number;
+};
+
+export type EngineAnswer = {
+  data: EngineData | string;
+  status: number;
+};

@@ -3,8 +3,7 @@ import { CarTypeApi } from '@app/types/type';
 import { createDiv, createElement, createSpans, createInput, createButton } from '@utils/createElement';
 import { setDisabled } from '@utils/setDisabled';
 import { Spans, TypeInput, ApiUrls } from '@type/enums';
-import { createData } from '@utils/createData';
-import { putData } from '@utils/putData';
+import { createData, putData } from '@utils/api-functions';
 import { carMarks, carModelNames } from '@utils/carsData';
 import { CarFleet } from '@components/garage/carFleet/CarFleet';
 
