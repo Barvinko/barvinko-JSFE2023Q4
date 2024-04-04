@@ -1,5 +1,5 @@
 import { Component } from '@components/Component/Component';
-import { Spans, ApiUrls } from '@type/enums';
+import { Spans, ApiUrls, Order, TypeDataSort } from '@type/enums';
 import { CarType, WinnerData } from '@type/type';
 import { createSpans } from '@app/utils/createElement';
 import { getData } from '@utils/api-functions';
@@ -38,7 +38,7 @@ export class ComponentMain extends Component {
     this.replaceElement(title);
 
     const { WINNERS, GARAGE } = ApiUrls;
-    const url = flag ? WINNERS : GARAGE;
+    const url = flag ? `${WINNERS}?_sort=${TypeDataSort.TIME}&_order=${Order.ASC}` : GARAGE;
     const { data } = await getData<CarType[] | WinnerData[]>(url);
 
     if (flag) {

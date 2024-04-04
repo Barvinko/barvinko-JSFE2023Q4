@@ -1,7 +1,8 @@
 import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 import { createElement, createTableRow, createDiv, createButton } from '@app/utils/createElement';
-import { TypeTableRow } from '@type/enums';
-import { ChangeButtons } from '@type/type';
+import { TypeTableRow, TypeDataSort, ApiUrls, Order } from '@type/enums';
+import { ChangeButtons, SortFlags, WinnerData } from '@type/type';
+import { getData } from '@utils/api-functions';
 import svgCarImport from '@utils/img/car-svg.svg';
 
 export class Winners extends ComponentMain {
@@ -11,10 +12,18 @@ export class Winners extends ComponentMain {
 
   private _changeButtons!: ChangeButtons;
 
+  private _sortFlags: SortFlags;
+
   constructor() {
     super('article', 'article winners');
 
+    this._sortFlags = {
+      wins: false,
+      time: true,
+    };
+
     this.createTitle().then(() => {
+      this.sortWin(TypeDataSort.TIME);
       this.createNumberPage();
       this._table = createElement('table', 'winners__table', this._container) as HTMLTableElement;
       this.createTableHeader();
@@ -27,8 +36,18 @@ export class Winners extends ComponentMain {
     cellsHeader[0].innerText = '#';
     cellsHeader[1].innerText = 'Car';
     cellsHeader[2].innerText = 'Name';
+
     cellsHeader[3].innerText = 'Wins';
+    cellsHeader[3].addEventListener('click', () => {
+      this.sortWin(TypeDataSort.WINS);
+    });
+    cellsHeader[3].style.cursor = 'pointer';
+
     cellsHeader[4].innerText = 'Best time (s)';
+    cellsHeader[4].addEventListener('click', () => {
+      this.sortWin(TypeDataSort.TIME);
+    });
+    cellsHeader[4].style.cursor = 'pointer';
   }
 
   public createTableRow() {
@@ -58,6 +77,17 @@ export class Winners extends ComponentMain {
       cellsRow[3].innerText = `${Winners._winnersData[i].wins}`;
       cellsRow[4].innerText = `${Winners._winnersData[i].time}`;
     }
+  }
+
+  private async sortWin(typeData: TypeDataSort) {
+    const order: Order = this._sortFlags[typeData] ? Order.ASC : Order.DESC;
+    this._sortFlags[typeData] = !this._sortFlags[typeData];
+
+    const url = `${ApiUrls.WINNERS}?_sort=${typeData}&_order=${order}`;
+    const { data } = await getData<WinnerData[]>(url);
+
+    ComponentMain._winnersData = data as WinnerData[];
+    this.createTableRow();
   }
 
   public createChangeButton(): void {

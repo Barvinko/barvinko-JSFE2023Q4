@@ -34,3 +34,8 @@ export type ChangeButtons = {
   back: HTMLButtonElement;
   next: HTMLButtonElement;
 };
+
+export type SortFlags = {
+  wins: boolean;
+  time: boolean;
+};
