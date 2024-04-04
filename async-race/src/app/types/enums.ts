@@ -29,3 +29,8 @@ export enum EngineStatus {
   STOPPED = 'stopped',
   DRIVE = 'drive',
 }
+
+export enum TypeTableRow {
+  TH = 'th',
+  TD = 'td',
+}

@@ -1,7 +1,7 @@
 import { Component } from '@components/Component/Component';
 import { CarType, EngineAnswer } from '@type/type';
 import { Spans, EngineStatus } from '@type/enums';
-import svgCarImport from '@components/garage/carFleet/car/car-svg.svg';
+import svgCarImport from '@utils/img/car-svg.svg';
 import { setDisabled } from '@utils/setDisabled';
 import { createDiv, createButton, createSpans } from '@app/utils/createElement';
 import { carEngine } from '@app/utils/api-functions/carEngine';
