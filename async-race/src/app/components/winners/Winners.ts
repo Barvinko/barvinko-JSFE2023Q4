@@ -37,13 +37,13 @@ export class Winners extends ComponentMain {
     cellsHeader[1].innerText = 'Car';
     cellsHeader[2].innerText = 'Name';
 
-    cellsHeader[3].innerText = 'Wins';
+    cellsHeader[3].innerText = `Wins ↕`;
     cellsHeader[3].addEventListener('click', () => {
       this.sortWin(TypeDataSort.WINS);
     });
     cellsHeader[3].style.cursor = 'pointer';
 
-    cellsHeader[4].innerText = 'Best time (s)';
+    cellsHeader[4].innerText = 'Best time (s) ↕';
     cellsHeader[4].addEventListener('click', () => {
       this.sortWin(TypeDataSort.TIME);
     });

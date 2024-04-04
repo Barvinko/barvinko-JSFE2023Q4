@@ -175,6 +175,8 @@ export class Workshop extends Component {
     };
 
     await putData<CarTypeApi>(`${ApiUrls.GARAGE}/${id}`, car);
-    this._carFlet.updateCarage();
+    await this._carFlet.updateCarage();
+    await this._winners.createTitle();
+    this._winners.createTableRow();
   }
 }
