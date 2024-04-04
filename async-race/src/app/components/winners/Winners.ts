@@ -1,12 +1,15 @@
 import { ComponentMain } from '@components/ComponentMain/ComponentMain';
-import { createElement, createTableRow } from '@app/utils/createElement';
+import { createElement, createTableRow, createDiv, createButton } from '@app/utils/createElement';
 import { TypeTableRow } from '@type/enums';
+import { ChangeButtons } from '@type/type';
 import svgCarImport from '@utils/img/car-svg.svg';
 
 export class Winners extends ComponentMain {
   private _headers!: HTMLTableRowElement;
 
   private _table!: HTMLTableElement;
+
+  private _changeButtons!: ChangeButtons;
 
   constructor() {
     super('article', 'article winners');
@@ -15,7 +18,6 @@ export class Winners extends ComponentMain {
       this.createNumberPage();
       this._table = createElement('table', 'winners__table', this._container) as HTMLTableElement;
       this.createTableHeader();
-      this.createTableRow();
     });
   }
 
@@ -29,7 +31,12 @@ export class Winners extends ComponentMain {
     cellsHeader[4].innerText = 'Best time (s)';
   }
 
-  private createTableRow() {
+  public createTableRow() {
+    const oldRows = this._table.querySelectorAll('.winners__row');
+    oldRows.forEach((oldRow) => {
+      oldRow.remove();
+    });
+
     let i: number = (this.getNumberPage() - 1) * 10;
     let endIndex: number = i + 10;
     if (endIndex > ComponentMain._winnersData.length) endIndex += ComponentMain._winnersData.length - endIndex;
@@ -50,6 +57,55 @@ export class Winners extends ComponentMain {
       cellsRow[2].innerText = Winners._carsData[index].name;
       cellsRow[3].innerText = `${Winners._winnersData[i].wins}`;
       cellsRow[4].innerText = `${Winners._winnersData[i].time}`;
+    }
+  }
+
+  public createChangeButton(): void {
+    const buttonsPage = createDiv('garage__click-page', this._container);
+    const pageBack = createButton('button garage__page-back', 'Back', buttonsPage);
+    pageBack.addEventListener('click', () => this.changePage('back'));
+
+    const pageNext = createButton('button garage__page-next', 'Next', buttonsPage);
+    pageNext.addEventListener('click', () => this.changePage('next'));
+
+    this._changeButtons = {
+      back: pageBack,
+      next: pageNext,
+    };
+  }
+
+  private changePage(click: 'back' | 'next'): void {
+    let change: number;
+    switch (click) {
+      case 'back':
+        change = -1;
+        break;
+      case 'next':
+        change = 1;
+        break;
+
+      default:
+        return;
+    }
+    this.setNumberPage(this.getNumberPage() + change);
+    this.createTableRow();
+    this.blockChangePage();
+  }
+
+  private blockChangePage(): void {
+    const page: number = this.getNumberPage();
+    const numberCars: number = ComponentMain._winnersData.length;
+
+    if (page === 1) {
+      this._changeButtons.back.disabled = true;
+    } else {
+      this._changeButtons.back.disabled = false;
+    }
+
+    if (numberCars <= 7 * page) {
+      this._changeButtons.next.disabled = true;
+    } else {
+      this._changeButtons.next.disabled = false;
     }
   }
 }

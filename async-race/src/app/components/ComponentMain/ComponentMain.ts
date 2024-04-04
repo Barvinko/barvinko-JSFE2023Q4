@@ -12,7 +12,14 @@ export class ComponentMain extends Component {
   private _numberPage!: HTMLSpanElement;
 
   protected replaceElement(newElement: HTMLElement) {
-    const oldElement = this._container.querySelector(`.${newElement.className}`);
+    const classArr: string[] = newElement.className.split(' ');
+    let oldElement: Element | null;
+    if (classArr.length > 1) {
+      oldElement = this._container.querySelector(`.${classArr[0]}`);
+    } else {
+      oldElement = this._container.querySelector(`.${newElement.className}`);
+    }
+
     if (oldElement) {
       this._container.replaceChild(newElement, oldElement);
       oldElement.remove();
@@ -21,7 +28,7 @@ export class ComponentMain extends Component {
     }
   }
 
-  protected async createTitle(container: HTMLElement = this._container): Promise<void> {
+  public async createTitle(container: HTMLElement = this._container): Promise<void> {
     const flag: boolean = this._container.classList.contains('winners');
 
     const textTitle: string = flag ? 'Winners ' : 'Garage ';

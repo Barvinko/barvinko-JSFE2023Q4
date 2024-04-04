@@ -11,8 +11,8 @@ export class Layout {
   private readonly _winners: Winners;
 
   constructor() {
-    this._garage = new Garage();
     this._winners = new Winners();
+    this._garage = new Garage(this._winners);
     this._header = new Header(
       () => this.draw(this._garage.getContainer()),
       () => this.draw(this._winners.getContainer()),

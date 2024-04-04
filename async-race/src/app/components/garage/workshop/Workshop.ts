@@ -1,11 +1,12 @@
 import { Component } from '@components/Component/Component';
-import { CarTypeApi } from '@app/types/type';
+import { CarTypeApi, WinnerData } from '@app/types/type';
 import { createDiv, createElement, createSpans, createInput, createButton } from '@utils/createElement';
 import { setDisabled } from '@utils/setDisabled';
 import { Spans, TypeInput, ApiUrls } from '@type/enums';
-import { createData, putData } from '@utils/api-functions';
+import { createData, putData, getData } from '@utils/api-functions';
 import { carMarks, carModelNames } from '@utils/carsData';
 import { CarFleet } from '@components/garage/carFleet/CarFleet';
+import { Winners } from '@components/winners/Winners';
 
 export class Workshop extends Component {
   private _carFlet: CarFleet;
@@ -14,10 +15,13 @@ export class Workshop extends Component {
 
   private _reset!: HTMLButtonElement;
 
-  constructor(carFleet: CarFleet) {
+  private _winners: Winners;
+
+  constructor(carFleet: CarFleet, winners: Winners) {
     super('section', 'workshop');
 
     this._carFlet = carFleet;
+    this._winners = winners;
 
     this.createform('create', false);
     this.createform('update', true);
@@ -78,17 +82,47 @@ export class Workshop extends Component {
 
     this._carFlet._carsPage.forEach(async (car) => {
       car.carToStart();
-      const status: number = await car.startEngine();
-      if (flafWin || status !== 200) {
+      const statusStart: number = await car.startEngine();
+      if (flafWin || statusStart !== 200) {
         return;
       }
       flafWin = true;
 
       const winner = this._carFlet._dialog.querySelector('.dialog__winner') as HTMLHeadingElement;
+
       if (!winner) return;
+
       winner.innerText = car._carData.name;
       this._carFlet._dialog.show();
+
+      const { data, status } = await getData<WinnerData>(`${ApiUrls.WINNERS}/${car._carData.id}`);
+
+      let winsWinner = 1;
+      let winTime: number = car.getTimeCar();
+
+      if (status === 200) {
+        winsWinner = data.wins + 1;
+        winTime = winTime < data.time ? winTime : data.time;
+
+        const sendData: WinnerData = {
+          id: car._carData.id,
+          wins: winsWinner,
+          time: winTime,
+        };
+
+        await putData<WinnerData>(`${ApiUrls.WINNERS}${car._carData.id}`, sendData);
+      } else {
+        const sendData: WinnerData = {
+          id: car._carData.id,
+          wins: winsWinner,
+          time: winTime,
+        };
+        await createData<WinnerData>(ApiUrls.WINNERS, sendData);
+      }
+
       this._reset.disabled = false;
+      await this._winners.createTitle();
+      this._winners.createTableRow();
     });
   }
 
@@ -130,7 +164,7 @@ export class Workshop extends Component {
       name,
       color,
     };
-    await createData(ApiUrls.GARAGE, car);
+    await createData<CarTypeApi>(ApiUrls.GARAGE, car);
     this._carFlet.updateCarage();
   }
 
@@ -140,7 +174,7 @@ export class Workshop extends Component {
       color,
     };
 
-    await putData(`${ApiUrls.GARAGE}/${id}`, car);
+    await putData<CarTypeApi>(`${ApiUrls.GARAGE}/${id}`, car);
     this._carFlet.updateCarage();
   }
 }

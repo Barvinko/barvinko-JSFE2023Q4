@@ -87,6 +87,11 @@ export class Car extends Component {
     return data.status;
   }
 
+  public getTimeCar(): number {
+    const time = this._carSvg.style.transitionDuration;
+    return parseInt(time, 10) / 1000;
+  }
+
   public async stopEngine() {
     this._startEngine.disabled = false;
     this._stopEngine.disabled = true;

@@ -24,3 +24,13 @@ export type EngineAnswer = {
   data: EngineData | string;
   status: number;
 };
+
+export type UpdateWinnerData = {
+  wins: number;
+  time: number;
+};
+
+export type ChangeButtons = {
+  back: HTMLButtonElement;
+  next: HTMLButtonElement;
+};

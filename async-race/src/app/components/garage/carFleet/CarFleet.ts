@@ -3,11 +3,8 @@ import { ComponentMain } from '@components/ComponentMain/ComponentMain';
 import { Car } from '@components/garage/carFleet/car/Car';
 import { ApiUrls, Spans } from '@type/enums';
 import { deleteData } from '@utils/api-functions';
-
-type ChangeButtons = {
-  back: HTMLButtonElement;
-  next: HTMLButtonElement;
-};
+import { Winners } from '@components/winners/Winners';
+import { ChangeButtons } from '@type/type';
 
 export class CarFleet extends ComponentMain {
   private _changeButtons!: ChangeButtons;
@@ -16,14 +13,20 @@ export class CarFleet extends ComponentMain {
 
   public _dialog!: HTMLDialogElement;
 
-  constructor() {
+  private _winners: Winners;
+
+  constructor(winners: Winners) {
     super('section', 'garage');
+    this._winners = winners;
+
     this.createTitle().then(() => {
       this.createNumberPage();
       this.createContainerCars();
       this._changeButtons = this.createChangeButton();
       this.blockChangePage();
       this.createDialog();
+      winners.createTableRow();
+      winners.createChangeButton();
     });
   }
 
@@ -54,6 +57,9 @@ export class CarFleet extends ComponentMain {
       car.getRemove().addEventListener('click', async () => {
         const url = await deleteData(`${ApiUrls.GARAGE}/${id}`);
         if (url) this.updateCarage();
+        await deleteData(`${ApiUrls.WINNERS}/${id}`);
+        await this._winners.createTitle();
+        this._winners.createTableRow();
       });
     }
 
