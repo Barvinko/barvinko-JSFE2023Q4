@@ -156,7 +156,7 @@ export class Workshop extends Component {
   }
 
   private getRandomNumber(max: number) {
-    return Math.floor(Math.random() * (max + 1));
+    return Math.floor(Math.random() * max);
   }
 
   private async createCar(name: string, color: string) {
