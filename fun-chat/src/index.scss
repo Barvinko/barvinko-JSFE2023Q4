@@ -1,0 +1,38 @@
+@import './app/style/value.scss';
+
+*{
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+input {
+  outline: none;
+}
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.button{
+  height: min-content;
+
+  background-color: $mainColor;
+  padding: 0.3rem 1rem;
+
+  margin: 0.3rem;
+
+  font-size: 0.8rem;
+
+  color: white;
+}
+.button:disabled{
+  background-color: gray;
+}
+
+@import './app/components/ComponentMain/componentMain.scss';
+@import './app/components/garage/workshop/workshop.scss';
+@import './app/components/garage/carFleet/car-fleet.scss';
+@import './app/components/garage/carFleet/car/car.scss';
+@import './app/components/winners/winners.scss';
