@@ -31,8 +31,4 @@ button {
   background-color: gray;
 }
 
-@import './app/components/ComponentMain/componentMain.scss';
-@import './app/components/garage/workshop/workshop.scss';
-@import './app/components/garage/carFleet/car-fleet.scss';
-@import './app/components/garage/carFleet/car/car.scss';
-@import './app/components/winners/winners.scss';
+@import './app/components/signIn/signIn.scss';

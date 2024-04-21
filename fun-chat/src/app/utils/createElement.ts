@@ -40,3 +40,11 @@ export function createInput(className: string, type: string, parent?: HTMLElemen
   input.type = type;
   return input;
 }
+
+export function createLabel(className: string, htmlFor: string, text: string, parent?: HTMLElement) {
+  const element = createElement('label', className, parent) as HTMLLabelElement;
+  element.htmlFor = htmlFor;
+  element.innerText = text;
+
+  return element;
+}

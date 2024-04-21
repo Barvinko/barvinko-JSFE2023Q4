@@ -1,5 +1,5 @@
 {
-  "name": "async-race",
+  "name": "fun-chat",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -24,7 +24,7 @@
     ]
   },
   "validate-branch-name": {
-    "pattern": "^(feat|init|fix|refactor|docs)/RSS-AR-\\d{2}_[a-zA-Z]+$",
+    "pattern": "^(feat|init|fix|refactor|docs)/RSS-FC-\\d{2}_[a-zA-Z]+$",
     "errorMsg": "Name of branch is not correct"
   },
   "husky": {

@@ -1,0 +1,60 @@
+.sign-in {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $mainColor;
+}
+
+.sign-in__form {
+  padding: 30px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border: 3px solid $mainColor;
+  border-radius: 25px;
+}
+
+.sign-in__label {
+  font-size: 2rem;
+}
+
+.sign-in__name,
+.sign-in__password {
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+
+  border-color: $mainColor;
+  border-radius: 20px;
+
+  font-size: 1.2rem;
+}
+
+.sign-in__error{
+  min-height: 28px;
+  height: min-content;
+  width: 230px;
+
+  font-size: 0.8rem;
+
+  color: red;
+}
+
+.sign-in__send {
+  padding: 10px 20px;
+
+  background-color: $mainColor;
+  border-radius: 20px;
+
+  font-size: 1.2rem;
+
+  color: white;
+}

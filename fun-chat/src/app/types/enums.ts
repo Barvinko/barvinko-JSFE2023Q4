@@ -4,22 +4,7 @@ export enum Spans {
   H3 = `h3`,
 }
 
-export enum ApiUrls {
-  MAIN = 'http://localhost:4000',
-  GARAGE = `${MAIN}/garage/`,
-  ENGINE = `${MAIN}/engine/`,
-  WINNERS = `${MAIN}/winners/`,
-}
-
-export enum RequestMethods {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
-  PATCH = 'PATCH',
-}
-
-export enum TypeInput {
-  TEXT = 'text',
-  COLOR = 'color',
+export enum TypeSocket {
+  USER_LOGIN = 'USER_LOGIN',
+  ERROR = 'ERROR',
 }
