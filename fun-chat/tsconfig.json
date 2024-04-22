@@ -11,6 +11,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
+      "@public/*": ["src/public/*"],
       "@app/*": ["src/app/*"],
       "@components/*": ["src/app/components/*"],
       "@utils/*": ["src/app/utils/*"],

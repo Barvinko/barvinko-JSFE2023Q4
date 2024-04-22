@@ -15,6 +15,10 @@ button {
   cursor: pointer;
 }
 
+.container{
+  background-color: $fonColor;
+}
+
 .button{
   height: min-content;
 
@@ -27,8 +31,15 @@ button {
 
   color: white;
 }
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: $mainColorActive
+  }
+}
+
 .button:disabled{
   background-color: gray;
 }
 
-@import './app/components/signIn/signIn.scss';
+@import './app/layuout.scss';

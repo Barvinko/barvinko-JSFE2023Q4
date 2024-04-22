@@ -1,0 +1,28 @@
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+
+  font-size: 1.2rem;
+
+  .footer__link-img svg{
+    width: 5rem;
+  }
+  .footer__autor-git{
+    color: black;
+  }
+  .footer__data:before {
+    content: '©';
+  }
+}
+
+@media (hover: hover) {
+  .footer__autor-git:hover {
+    color: blue;
+  }
+}

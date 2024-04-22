@@ -20,14 +20,15 @@
 
   border: 3px solid $mainColor;
   border-radius: 25px;
+
+  background-color: white;
 }
 
 .sign-in__label {
   font-size: 2rem;
 }
 
-.sign-in__name,
-.sign-in__password {
+.sign-in__input {
   width: 200px;
   height: 30px;
   padding-left: 10px;
@@ -57,4 +58,10 @@
   font-size: 1.2rem;
 
   color: white;
+}
+
+@media (hover: hover) {
+  .sign-in__input:focus {
+    background-color: $fonColor;
+  }
 }

@@ -1,10 +1,11 @@
 import { Component } from '@components/Component/Component';
-import { createElement, createLabel, createInput } from '@utils/createElement';
+import { createElement, createLabel, createInput, createButton } from '@utils/createElement';
 import { User, SocketData, AnswerError } from '@type/type';
 import { webSocket } from '@utils/webSocket';
 import { generateId } from '@utils/generateId';
 import { TypeSocket } from '@app/types/enums';
 import { UserStorage } from '@utils/LocalStorage';
+import { AboutEl } from '@components/about/About';
 
 type PatternSigIn = {
   pattern: string;
@@ -27,7 +28,7 @@ export class SignIn extends Component {
   private _password!: InputDate;
 
   constructor() {
-    super('article', 'article  sign-in');
+    super('article', 'article container sign-in');
 
     this.createSignIn();
     this.setParameters();
@@ -38,7 +39,7 @@ export class SignIn extends Component {
 
     createLabel('sign-in__label', 'sign-in__name', 'Name:', this._form) as HTMLLabelElement;
     this._name = {
-      input: createInput('sign-in__name', 'Enter name', this._form) as HTMLInputElement,
+      input: createInput('sign-in__input sign-in__name', 'Enter name', this._form) as HTMLInputElement,
       patterns: [
         { pattern: '[A-Z].*', erorrMessage: 'first letter must be capitalised' },
         { pattern: '^.{1}[a-z]*$', erorrMessage: 'after first letter must be lowercase or hyphen' },
@@ -49,7 +50,7 @@ export class SignIn extends Component {
 
     createLabel('sign-in__label', 'sign-in__password', 'Surname:', this._form) as HTMLLabelElement;
     this._password = {
-      input: createInput('sign-in__name', 'Enter surname', this._form) as HTMLInputElement,
+      input: createInput('sign-in__input sign-in__name', 'Enter surname', this._form) as HTMLInputElement,
       patterns: [
         { pattern: '[0-9]', erorrMessage: 'need number' },
         { pattern: '[a-zA-Z]', erorrMessage: 'need english letters' },
@@ -62,6 +63,11 @@ export class SignIn extends Component {
     this._password.input.type = 'password';
 
     this._buttonForm = createElement('button', 'button sign-in__send', this._form) as HTMLButtonElement;
+    const aboutButton = createButton('button sign-in__send', 'About', this._form);
+    aboutButton.type = 'button';
+    aboutButton.addEventListener('click', () => {
+      AboutEl.getContainer().show();
+    });
   }
 
   private setParameters(): void {

@@ -48,3 +48,11 @@ export function createLabel(className: string, htmlFor: string, text: string, pa
 
   return element;
 }
+
+export function createLink(className: string, text: string, src: string, parent?: HTMLElement): HTMLAnchorElement {
+  const link = createElement('a', className, parent) as HTMLAnchorElement;
+  link.textContent = text;
+  link.href = src;
+  link.target = '_blank';
+  return link;
+}

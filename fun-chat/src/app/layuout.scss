@@ -1,0 +1,10 @@
+.container{
+  min-width: 380px;
+  max-width: 768px;
+
+  margin: auto;
+}
+
+@import './components/signIn/signIn.scss';
+@import './components/messenger/messenger.scss';
+@import './components/about/about.scss';

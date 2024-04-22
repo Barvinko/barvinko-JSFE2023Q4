@@ -127,6 +127,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.scss', '.svg'],
     alias: {
+      '@public': path.resolve(__dirname, 'src/public'),
       '@app': path.resolve(__dirname, 'src/app'),
       '@components': path.resolve(__dirname, 'src/app/components'),
       '@utils': path.resolve(__dirname, 'src/app/utils'),

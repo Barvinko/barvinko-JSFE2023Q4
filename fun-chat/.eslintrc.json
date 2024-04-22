@@ -33,6 +33,7 @@
     "import/resolver": {
       "alias": {
         "map": [
+          ["@public", "./src/public/"],
           ["@components", "./src/app/components"],
           ["@app/*", "./src/app/*"],
           ["@components/*", "./src/app/components/*"],
