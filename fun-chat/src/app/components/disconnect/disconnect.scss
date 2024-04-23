@@ -1,0 +1,17 @@
+.disconnect{
+  background-color: $fonDialog;
+  text-align: center;
+}
+
+.disconnect_title{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 370px;
+
+  color: $dialogColor;
+
+  font-size: 3rem;
+}

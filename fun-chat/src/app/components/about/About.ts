@@ -1,13 +1,10 @@
-import { Component } from '@components/Component/Component';
+import { Dialog } from '@components/Dialog/Dialog';
 import { Spans } from '@type/enums';
 import { createSpans, createElement, createDiv, createButton, createLink } from '@utils/createElement';
 
-export class About extends Component {
-  private _dialog: HTMLDialogElement;
-
+export class About extends Dialog {
   constructor() {
-    super('dialog', 'about');
-    this._dialog = this._container as HTMLDialogElement;
+    super('about');
     this.createDialog();
   }
 
@@ -22,10 +19,6 @@ export class About extends Component {
 
     const aboutButton = createButton('button about__exit', 'Return', containerDialog);
     aboutButton.addEventListener('click', () => this._dialog.close());
-  }
-
-  public getContainer(): HTMLDialogElement {
-    return this._dialog;
   }
 }
 

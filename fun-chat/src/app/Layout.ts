@@ -1,6 +1,7 @@
 import { SignIn } from '@components/signIn/SignIn';
 import { Messenger } from '@components/messenger/Messenger';
 import { UserStorage } from '@utils/LocalStorage';
+import { Socket } from '@utils/Socket';
 import { AboutEl } from '@components/about/About';
 
 export class Layout {
@@ -11,6 +12,8 @@ export class Layout {
   constructor() {
     this._signIn = new SignIn();
     this._messenger = new Messenger();
+
+    Socket.setEnter(async () => this.drawMessager());
 
     if (UserStorage.getData()) {
       this.drawMessager();

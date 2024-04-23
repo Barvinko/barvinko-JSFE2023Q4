@@ -3,9 +3,9 @@ import { createElement, createSpans, createButton } from '@utils/createElement';
 import { Spans, TypeSocket } from '@type/enums';
 import { UserStorage } from '@utils/LocalStorage';
 import { SocketData } from '@type/type';
-import { webSocket } from '@utils/webSocket';
 import { generateId } from '@utils/generateId';
 import { AboutEl } from '@components/about/About';
+import { Socket } from '@utils/Socket';
 
 export class Header extends Component {
   private _userName!: HTMLSpanElement;
@@ -34,7 +34,6 @@ export class Header extends Component {
 
   public setName() {
     const name: string | undefined = UserStorage.getData()?.login;
-    if (!name) console.error('Does not have the data of an authorised user in the local storege');
     this._userName.innerText = `User: ${name}`;
   }
 
@@ -66,7 +65,7 @@ export class Header extends Component {
         },
       },
     };
-    console.log(await webSocket(userExit));
+    console.log(await Socket.sendRequest(userExit));
 
     UserStorage.deleteData();
   }

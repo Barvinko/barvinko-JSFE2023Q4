@@ -1,10 +1,11 @@
 import { Component } from '@components/Component/Component';
 import { createElement, createLabel, createInput, createButton } from '@utils/createElement';
 import { User, SocketData, AnswerError } from '@type/type';
-import { webSocket } from '@utils/webSocket';
 import { generateId } from '@utils/generateId';
 import { TypeSocket } from '@app/types/enums';
 import { UserStorage } from '@utils/LocalStorage';
+import { Socket } from '@utils/Socket';
+import { objectEqual } from '@utils/objectEqual';
 import { AboutEl } from '@components/about/About';
 
 type PatternSigIn = {
@@ -87,11 +88,12 @@ export class SignIn extends Component {
 
   public async enter(drawMessager: () => void) {
     let user: User | null = UserStorage.getData();
+    const userInput: User = {
+      login: this._name.input.value,
+      password: this._password.input.value,
+    };
     if (!user) {
-      user = {
-        login: this._name.input.value,
-        password: this._password.input.value,
-      } as User;
+      user = userInput;
     }
 
     const request: SocketData = {
@@ -102,12 +104,26 @@ export class SignIn extends Component {
       },
     };
 
-    let response: AnswerError | SocketData | undefined = await webSocket(request);
+    let response: AnswerError | SocketData | undefined = await Socket.sendRequest(request);
+    console.log(response);
     if (!response) return;
 
     if (response.type === TypeSocket.ERROR) {
       response = response as AnswerError;
       this._password.fieldError.innerText = response.payload.error;
+
+      if (
+        UserStorage.getData() &&
+        this._buttonForm.disabled === false &&
+        !objectEqual(UserStorage.getData(), userInput)
+      ) {
+        this._password.fieldError.innerText = 'To log in to another account, log out of your current account';
+      }
+
+      const messenger = document.querySelector('.messenger');
+      if (messenger && messenger.parentElement) {
+        messenger.parentElement.replaceChild(this._container, messenger);
+      }
       return;
     }
 

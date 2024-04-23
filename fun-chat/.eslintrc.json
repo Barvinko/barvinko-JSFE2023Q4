@@ -17,6 +17,7 @@
     "browser": true,
     "node": true
   },
+  "noInlineConfig": true,
   "rules": {
     "no-debugger": "off",
     "no-console": "off",
@@ -27,6 +28,7 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
     "no-shadow": "off",
+    "no-await-in-loop": "off",
     "@typescript-eslint/no-shadow": "error"
   },
   "settings": {
