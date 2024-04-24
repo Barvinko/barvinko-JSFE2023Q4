@@ -1,12 +1,16 @@
 import { URL } from '@type/value';
-import { SocketData, AnswerError } from '@app/types/type';
+import { SocketData, AnswerError, PayloadUserLogin } from '@app/types/type';
 import { TypeSocket } from '@type/enums';
 import { DisconnectEl } from '@components/disconnect/Disconnect';
+import { Payload } from '@type/type';
+import { MessengerWindow } from '@components/messenger/messenger-window/MessengerWindow';
 
 export class Socket {
   public static socket: WebSocket;
 
   private static reLogin: () => Promise<void>;
+
+  private static _messengerWindow: MessengerWindow;
 
   public static async createSocet() {
     try {
@@ -34,6 +38,10 @@ export class Socket {
     }
   }
 
+  public static setMessenger(messengerWindow: MessengerWindow) {
+    this._messengerWindow = messengerWindow;
+  }
+
   public static setEnter(enter: () => Promise<void>) {
     this.reLogin = enter;
   }
@@ -52,16 +60,32 @@ export class Socket {
     }
   }
 
-  public static async sendRequest(request: SocketData): Promise<SocketData | AnswerError> {
+  public static async sendRequest<T>(request: SocketData<Payload>): Promise<SocketData<T> | AnswerError> {
     try {
       Socket.socket.send(JSON.stringify(request));
 
       return new Promise((resolve, reject) => {
-        Socket.socket.onmessage = (event) => resolve(JSON.parse(event.data));
+        Socket.socket.onmessage = (event) => {
+          const response: SocketData<Payload> = JSON.parse(event.data);
+          let user: SocketData<PayloadUserLogin>;
+          switch (response.type) {
+            case TypeSocket.USER_EXTERNAL_LOGIN:
+              user = response as SocketData<PayloadUserLogin>;
+              this._messengerWindow.loginOtherUser(user.payload.user);
+              break;
+            case TypeSocket.USER_EXTERNAL_LOGOUT:
+              user = response as SocketData<PayloadUserLogin>;
+              this._messengerWindow.loginOtherUser(user.payload.user);
+              break;
+            default:
+              break;
+          }
+          const responseReturn: SocketData<T> = JSON.parse(event.data);
+          if (request.id === responseReturn.id) resolve(responseReturn);
+        };
         Socket.socket.onerror = (error) => reject(error);
       });
     } catch (error) {
-      console.error('WebSocket error:', error);
       return {
         id: '0',
         type: TypeSocket.ERROR,

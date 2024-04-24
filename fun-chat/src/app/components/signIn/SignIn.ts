@@ -1,6 +1,6 @@
 import { Component } from '@components/Component/Component';
 import { createElement, createLabel, createInput, createButton } from '@utils/createElement';
-import { User, SocketData, AnswerError } from '@type/type';
+import { User, SocketData, AnswerError, Payload, PayloadUser } from '@type/type';
 import { generateId } from '@utils/generateId';
 import { TypeSocket } from '@app/types/enums';
 import { UserStorage } from '@utils/LocalStorage';
@@ -96,15 +96,15 @@ export class SignIn extends Component {
       user = userInput;
     }
 
-    const request: SocketData = {
+    const request: SocketData<Payload> = {
       id: generateId(),
       type: TypeSocket.USER_LOGIN,
       payload: {
         user,
       },
     };
-
-    let response: AnswerError | SocketData | undefined = await Socket.sendRequest(request);
+    console.log(request);
+    let response: AnswerError | SocketData<PayloadUser> | undefined = await Socket.sendRequest(request);
     console.log(response);
     if (!response) return;
 

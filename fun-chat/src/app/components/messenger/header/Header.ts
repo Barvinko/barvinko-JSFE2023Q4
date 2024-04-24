@@ -2,7 +2,7 @@ import { Component } from '@components/Component/Component';
 import { createElement, createSpans, createButton } from '@utils/createElement';
 import { Spans, TypeSocket } from '@type/enums';
 import { UserStorage } from '@utils/LocalStorage';
-import { SocketData } from '@type/type';
+import { SocketData, PayloadUser } from '@type/type';
 import { generateId } from '@utils/generateId';
 import { AboutEl } from '@components/about/About';
 import { Socket } from '@utils/Socket';
@@ -55,7 +55,7 @@ export class Header extends Component {
     const userLocal = UserStorage.getData();
     if (!userLocal) return;
 
-    const userExit: SocketData = {
+    const userExit: SocketData<PayloadUser> = {
       id: generateId(),
       type: TypeSocket.USER_LOGOUT,
       payload: {

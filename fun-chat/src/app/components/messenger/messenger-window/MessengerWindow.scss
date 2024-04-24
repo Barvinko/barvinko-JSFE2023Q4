@@ -1,0 +1,40 @@
+.messenger-window{
+  flex-grow: 1;
+}
+
+.user-list{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  min-width: 150px;
+  max-width: 200px;
+
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.user-list__list{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.user-list__user{
+  position: relative;
+  width: 100%;
+
+  padding: 0.3rem;  
+  padding-left: 14px;
+
+  cursor: pointer;
+}
+.user-list__name::before{
+  position: absolute;
+  left: 0;
+  content: '\25CF';
+  color: black;
+}
+.user-list__name-active::before{
+  color: green;
+}

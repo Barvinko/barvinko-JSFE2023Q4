@@ -12,6 +12,14 @@ export type UserLogin = {
 
 export type TypeSocketData = User | UserLogin;
 
+export type PayloadUserLogin = { user: UserLogin };
+
+export type PayloadUser = { user: User };
+
+export type PayloadUsers = { users: UserLogin[] };
+
+export type Payload = null | PayloadUser | PayloadUsers | PayloadUserLogin;
+
 export type AnswerError = {
   id: string;
   type: TypeSocket.ERROR;
@@ -20,10 +28,29 @@ export type AnswerError = {
   };
 };
 
-export type SocketData = {
+export type SocketData<T> = {
   id: string | null;
   type: TypeSocket;
+  payload: T;
+};
+
+export type Messenge = {
+  id: string;
+  from: string;
+  to: string;
+  text: string;
+  datetime: number;
+  status: {
+    isDelivered: boolean;
+    isReaded: boolean;
+    isEdited: boolean;
+  };
+};
+
+export type Messenges = {
+  id: string;
+  type: TypeSocket.MSG_FROM_USER;
   payload: {
-    user: TypeSocketData;
+    messages: Messenge[];
   };
 };
