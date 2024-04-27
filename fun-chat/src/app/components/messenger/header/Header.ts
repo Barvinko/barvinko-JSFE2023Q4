@@ -17,8 +17,8 @@ export class Header extends Component {
 
   private createheader() {
     const containerNames = createElement('div', 'header__names');
-    this._userName = createSpans('header__userName', `User: `, containerNames, Spans.H3);
-    createSpans('header__userApp', `Fun Chat`, containerNames, Spans.H2);
+    this._userName = createSpans('header__userName', `User: `, containerNames);
+    createSpans('header__userApp', `Fun Chat`, containerNames, Spans.H3);
 
     const oldContainerNames = this._container.querySelector('header__names');
 
@@ -40,7 +40,7 @@ export class Header extends Component {
   private createButtons(): HTMLDivElement {
     const headerButtons = createElement('div', 'header_buttons') as HTMLDivElement;
 
-    const aboutButton = createButton('button header__auto', 'Auto', headerButtons);
+    const aboutButton = createButton('button header__auto', 'About', headerButtons);
     aboutButton.addEventListener('click', () => {
       AboutEl.getContainer().show();
     });
@@ -65,7 +65,7 @@ export class Header extends Component {
         },
       },
     };
-    console.log(await Socket.sendRequest(userExit));
+    await Socket.sendRequest(userExit);
 
     UserStorage.deleteData();
   }

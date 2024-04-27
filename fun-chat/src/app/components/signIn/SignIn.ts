@@ -49,7 +49,7 @@ export class SignIn extends Component {
       fieldError: createElement('span', 'sign-in__error', this._form),
     };
 
-    createLabel('sign-in__label', 'sign-in__password', 'Surname:', this._form) as HTMLLabelElement;
+    createLabel('sign-in__label', 'sign-in__password', 'Password:', this._form) as HTMLLabelElement;
     this._password = {
       input: createInput('sign-in__input sign-in__name', 'Enter surname', this._form) as HTMLInputElement,
       patterns: [
@@ -103,9 +103,7 @@ export class SignIn extends Component {
         user,
       },
     };
-    console.log(request);
     let response: AnswerError | SocketData<PayloadUser> | undefined = await Socket.sendRequest(request);
-    console.log(response);
     if (!response) return;
 
     if (response.type === TypeSocket.ERROR) {

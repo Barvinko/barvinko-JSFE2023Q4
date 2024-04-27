@@ -16,10 +16,8 @@ export class Messenger extends Component {
     super('article', 'article container messenger');
     this._header = new Header();
     this._footer = new Footer();
-    // this._messengerWindow = new MessengerWindow();
     this._container.appendChild(this._header.getContainer());
     createDiv('messenger-window', this._container);
-    // this._container.appendChild(this._messengerWindow.getContainer());
     this._container.appendChild(this._footer.getContainer());
   }
 

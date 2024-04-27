@@ -1,5 +1,5 @@
 import { URL } from '@type/value';
-import { SocketData, AnswerError, PayloadUserLogin } from '@app/types/type';
+import { SocketData, AnswerError, PayloadUserLogin, PayloadMessanger } from '@app/types/type';
 import { TypeSocket } from '@type/enums';
 import { DisconnectEl } from '@components/disconnect/Disconnect';
 import { Payload } from '@type/type';
@@ -76,6 +76,15 @@ export class Socket {
             case TypeSocket.USER_EXTERNAL_LOGOUT:
               user = response as SocketData<PayloadUserLogin>;
               this._messengerWindow.loginOtherUser(user.payload.user);
+              break;
+            case TypeSocket.MSG_FROM_USER:
+              if (!response.payload) return;
+
+              this._messengerWindow.drawMessages(response.payload as PayloadMessanger);
+              break;
+            case TypeSocket.MSG_SEND:
+              console.log(23423);
+              this._messengerWindow.chooseUser();
               break;
             default:
               break;
