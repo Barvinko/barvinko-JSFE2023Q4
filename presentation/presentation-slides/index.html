@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="assets/reset.css">
+		<link rel="stylesheet" href="assets/reveal.css">
+		<link rel="stylesheet" href="assets/theme/beige.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="slide slide-1">
+					<h3>Improvement of the end-to-end encryption algorithm for WEB messaging systems</h3>
+				</section>
+				<section class="slide slide-2">
+					<h5>TYPES OF ENCRYPTION WITH "SERVER"</h5>
+					<img src="./images/sesionEncryption.png" alt="sesion encryption">
+					<img src="./images/end-to-end.png" alt="end-to-end encryption">
+				</section>
+				<section class="slide slide-3">
+					<h4>END-TO-END ENCRYPTION</h4>
+					<img src="./images/END-TO-END-FULL.png" alt="END-TO-END ENCRYPTION">
+				</section>
+				<section class="slide slide-4">
+					<h4>COMBINATION OF SESSION AND END-TO-END ENCRYPTION</h4>
+					<img src="./images/nowEndToEnd.png" alt="COMBINATION OF SESSION AND END-TO-END ENCRYPTION">
+				</section>
+				<section class="slide slide-5">
+					<h4>PROBLEMS OF UNIFICATION</h4>
+					<img src="./images/ProblemsOfUnificayion.png" alt="Problems Of Unificayion">
+				</section>
+				<section class="slide slide-6">
+					<h4>UNIQUE ENCRYPTION FOR EACH MESSAGE</h4>
+					<img src="./images/UEncryptionEachMessage.png" alt="Unique Encryption Each Message">
+				</section>
+				<section class="slide slide-7">
+					<h4>TRANSFER OF ENCRYPTION PROCESSES</h4>
+					<img src="./images/TransferEP1.png" alt="Transfer of encryption processes">
+					<div class="slide-7__container">
+						<div>
+							<h6>CBC</h6>
+							<img src="./images/TransferEP2.png" alt="CBC">
+						</div>
+						<table class="slide-7__table">
+							<tr class="slide-7__title">
+								<th>Text size</th>
+								<th>Encryption time</th>
+							</tr>
+							<tr>
+								<td>256 bits (32 bytes)</td>
+								<td>0.003 seconds</td>
+							</tr>
+							<tr>
+								<td>8 MB</td>
+								<td>0,065 seconds</td>
+							</tr>
+							<tr>
+								<td>16 MB</td>
+								<td>0,129 seconds</td>
+							</tr>
+							<tr>
+								<td>128 MB</td>
+								<td>1,04 seconds</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+				<section class="slide slide-8">
+					<h4>IMPROVEMENTS TO SENDER-SERVER ALGORITHM</h4>
+					<img src="./images/SS.png" alt="Unique Encryption Each Message">
+				</section>
+				<section class="slide slide-9">
+					<h4>IMPROVEMENTS TO THE RECIPIENT-SERVER ALGORITHM</h4>
+					<img class="slide-9__img" src="./images/RS.png" alt="Unique Encryption Each Message">
+				</section>
+				<section class="slide slide-10">
+					<h2>Thank you for your attention!</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="assets/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
