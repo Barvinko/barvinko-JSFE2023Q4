@@ -1,7 +1,6 @@
-import { CarTypeApi } from '@type/type';
 import { RequestMethods } from '@type/enums';
 
-export async function createData(url: string, sendData: CarTypeApi): Promise<number> {
+export async function createData<T>(url: string, sendData: T): Promise<number> {
   const response: Response = await fetch(url, {
     method: RequestMethods.POST,
     headers: {

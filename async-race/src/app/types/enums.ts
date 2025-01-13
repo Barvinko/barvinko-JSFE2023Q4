@@ -29,3 +29,18 @@ export enum EngineStatus {
   STOPPED = 'stopped',
   DRIVE = 'drive',
 }
+
+export enum TypeTableRow {
+  TH = 'th',
+  TD = 'td',
+}
+
+export enum Order {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+export enum TypeDataSort {
+  TIME = 'time',
+  WINS = 'wins',
+}

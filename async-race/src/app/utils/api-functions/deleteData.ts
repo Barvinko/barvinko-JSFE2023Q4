@@ -5,8 +5,8 @@ export async function deleteData(url: string): Promise<number> {
     method: RequestMethods.DELETE,
   });
 
-  if (response.status !== 200) {
-    throw new Error('Failed to create data');
-  }
+  // if (response.status !== 200 && response.status !== 404) {
+  //   throw new Error('Failed to create data');
+  // }
   return response.status;
 }

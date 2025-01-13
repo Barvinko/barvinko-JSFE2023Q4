@@ -1,0 +1,24 @@
+.winners__table{
+  border-color: $mainColor;
+  border-spacing: 0;
+  margin: auto;
+}
+
+.winners__headers{
+  background-color: $mainColor;
+  color: white;
+}
+
+.winners__headers-cell, .winners__row-cell{
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.winners__car-svg{
+  width: 4rem;
+}
+
+.winners__row-cell{
+  background-color: $fonColor;
+  border-bottom: 1px solid $mainColor;
+}

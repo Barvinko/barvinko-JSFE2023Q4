@@ -1,4 +1,4 @@
-import { Spans } from '@type/enums';
+import { Spans, TypeTableRow } from '@type/enums';
 
 export type ElementParamenter = {
   tag: string;
@@ -39,4 +39,18 @@ export function createInput(className: string, type: string, parent?: HTMLElemen
   const input = createElement('input', className, parent) as HTMLInputElement;
   input.type = type;
   return input;
+}
+
+export function createTableRow(
+  className: string,
+  parent?: HTMLElement,
+  tag: TypeTableRow = TypeTableRow.TD,
+): HTMLTableRowElement {
+  const length: number = 5;
+  const row = createElement('tr', className, parent) as HTMLTableRowElement;
+  for (let i = 0; i < length; i += 1) {
+    const cell = createElement(tag, `${className}-cell`) as HTMLTableCellElement;
+    row.appendChild(cell);
+  }
+  return row;
 }

@@ -1,7 +1,7 @@
 import { Component } from '@components/Component/Component';
 import { CarType, EngineAnswer } from '@type/type';
 import { Spans, EngineStatus } from '@type/enums';
-import svgCarImport from '@components/garage/carFleet/car/car-svg.svg';
+import svgCarImport from '@utils/img/car-svg.svg';
 import { setDisabled } from '@utils/setDisabled';
 import { createDiv, createButton, createSpans } from '@app/utils/createElement';
 import { carEngine } from '@app/utils/api-functions/carEngine';
@@ -85,6 +85,11 @@ export class Car extends Component {
       this._carSvg.style.transform = `translateX(${translateX}px)`;
     }
     return data.status;
+  }
+
+  public getTimeCar(): number {
+    const time = this._carSvg.style.transitionDuration;
+    return parseInt(time, 10) / 1000;
   }
 
   public async stopEngine() {
